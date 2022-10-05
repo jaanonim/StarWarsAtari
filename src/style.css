@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    background-color: #000;
+    display: block;
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 100vw;
+}
+
+.global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#fps {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    color: #0f0;
+    z-index: 100;
+}
