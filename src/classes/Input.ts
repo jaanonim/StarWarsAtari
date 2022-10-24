@@ -14,7 +14,7 @@ export default class Input {
     private static gamePad: Gamepad | null;
     private constructor() {}
 
-    public static sensitivity: number = 5;
+    public static sensitivity: number = 1;
     public static dedZone: number = 0.1;
 
     public static init(html: HTMLCanvasElement) {
@@ -38,6 +38,11 @@ export default class Input {
         );
         Input.pos = size.multiply(1 / 2);
         Input.isFire = false;
+    }
+
+    public static center() {
+        const size = new Vector2(Input.html.width, Input.html.height);
+        Input.pos = size.multiply(1 / 2);
     }
 
     private static transformMousePosition(position: Vector2): Vector2 {

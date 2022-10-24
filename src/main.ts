@@ -3,9 +3,9 @@ import ScreenRaycast from "3d-game-engine-canvas/src/tools/Raycasts/ScreenRaycas
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import WireframeMaterial from "3d-game-engine-canvas/src/classes/Materials/WireframeMaterial";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
-import DefaultMeshes from "3d-game-engine-canvas/src/tools/DefaultMeshes";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
+import UiScreen from "3d-game-engine-canvas/src/components/UiScreen";
 import FPSCounter from "3d-game-engine-canvas/src/tools/FPSCounter";
 import Input from "./classes/Input";
 import TieFighter from "./GameObjects/TieFighter";
@@ -13,6 +13,9 @@ import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import VaderFighter from "./GameObjects/VaderFighter";
+import Cursor from "./GameObjects/Cursor";
+import Ship from "./GameObjects/Ship";
+import Laser from "./GameObjects/Laser";
 
 class Rotate extends Component {
     v: number;
@@ -38,24 +41,9 @@ export async function main() {
     const camera = new Camera(renderer, 90, 1, 100);
     renderer.setCamera(camera, 0);
 
-    const obj = Importer.object({
-        name: "o",
-        transform: {
-            position: [9, 6, 10],
-            rotation: [1, 1, 1],
-            scale: [1, 1, 1],
-        },
-        components: [
-            new MeshRenderer(
-                await DefaultMeshes.cube,
-                new WireframeMaterial(Color.white)
-            ),
-        ],
-    });
     Importer.scene({
         name: "scene",
         children: [
-            obj,
             {
                 name: "o",
                 transform: {
@@ -75,21 +63,6 @@ export async function main() {
                 children: [await VaderFighter()],
                 components: [new Rotate(new Vector3(0, 0.3, 0))],
             },
-
-            {
-                name: "o",
-                transform: {
-                    position: [9, 6, 10],
-                    rotation: [1, 1, 0],
-                    scale: [1, 1, 1],
-                },
-                components: [
-                    new MeshRenderer(
-                        await DefaultMeshes.cube,
-                        new WireframeMaterial(Color.white)
-                    ),
-                ],
-            },
             {
                 name: "camera",
                 transform: {
@@ -98,17 +71,14 @@ export async function main() {
                 },
                 components: [camera],
             },
+            {
+                name: "screen",
+                components: [new UiScreen(renderer, 1)],
+                children: [await Cursor(), await Ship(), await Laser()],
+            },
         ],
     });
     Input.init(canvas);
-    // const o = camera.gameObject.getScene().addChildren(new GameObject("ok"));
-    // o.addComponent(
-    //     new MeshRenderer(
-    //         await DefaultMeshes.cube,
-    //         new WireframeMaterial(Color.white)
-    //     )
-    // );
-    // console.log(o);
 
     const fps = new FPSCounter(document.getElementById("fps") as HTMLElement);
     await renderer.startGameLoop(
@@ -133,24 +103,6 @@ export async function main() {
                             Color.red
                         ))
                 );
-            // o.transform.position = Quaternion.euler(v).multiply(
-            //     Vector3.forward
-            // ) as Vector3;
-            // o.transform.position = new Vector3(
-            //     o.transform.position.x,
-            //     o.transform.position.y,
-            //     10
-            // );
-
-            renderer.drawer.ctx.fillStyle = "red";
-            renderer.drawer.ctx.strokeStyle = "red";
-            renderer.drawer.ctx.beginPath();
-            renderer.drawer.ctx.arc(pos.x, pos.y, 5, 0, 2 * Math.PI);
-            if (Input.getFire()) {
-                renderer.drawer.ctx.fill();
-            }
-            renderer.drawer.ctx.closePath();
-            renderer.drawer.ctx.stroke();
         }
     );
 }
