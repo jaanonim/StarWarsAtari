@@ -85,30 +85,10 @@ export async function main() {
     Input.init(canvas);
 
     const fps = new FPSCounter(document.getElementById("fps") as HTMLElement);
-    await renderer.startGameLoop(
-        () => {
-            Input.update();
-            fps.update();
-        },
-        () => {
-            const pos = Input.getPos().roundToInt();
-
-            camera.gameObject
-                .getScene()
-                .getAllComponents<MeshRenderer>(MeshRenderer)
-                .forEach(
-                    (c) => (c.material = new WireframeMaterial(Color.white))
-                );
-            new ScreenRaycast(camera, renderer)
-                .getCollisions(pos)
-                .forEach(
-                    (e) =>
-                        (e.meshRenderer.material = new WireframeMaterial(
-                            Color.red
-                        ))
-                );
-        }
-    );
+    await renderer.startGameLoop(() => {
+        Input.update();
+        fps.update();
+    });
 }
 
 main();
