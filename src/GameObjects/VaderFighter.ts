@@ -4,6 +4,8 @@ import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import { Tie } from "../Components/Tie";
+import { Hittable } from "../Components/Hitable";
 
 export default async function VaderFighter() {
     const wing = new ObjLoader(await FileLoader.load("./wing2.obj")).parse(
@@ -13,6 +15,7 @@ export default async function VaderFighter() {
     const body = new ObjLoader(await FileLoader.load("./body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
+    const tieComp = new Tie();
     return Importer.object({
         name: "VaderFighter",
         children: [
@@ -24,7 +27,10 @@ export default async function VaderFighter() {
 
                     scale: [1, 1, 0.7],
                 },
-                components: [new MeshRenderer(wing, mat)],
+                components: [
+                    new MeshRenderer(wing, mat),
+                    new Hittable(tieComp),
+                ],
             },
             {
                 name: "body",
@@ -32,7 +38,10 @@ export default async function VaderFighter() {
                     position: [0, 0, 0],
                     scale: [1, 0.5, 0.5],
                 },
-                components: [new MeshRenderer(body, mat)],
+                components: [
+                    new MeshRenderer(body, mat),
+                    new Hittable(tieComp),
+                ],
             },
             {
                 name: "wing2",
@@ -41,8 +50,12 @@ export default async function VaderFighter() {
                     rotation: [0, 0, 0],
                     scale: [1, 1, 0.7],
                 },
-                components: [new MeshRenderer(wing, mat)],
+                components: [
+                    new MeshRenderer(wing, mat),
+                    new Hittable(tieComp),
+                ],
             },
         ],
+        components: [tieComp],
     });
 }

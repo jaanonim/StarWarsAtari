@@ -74,7 +74,11 @@ export async function main() {
             {
                 name: "screen",
                 components: [new UiScreen(renderer, 1)],
-                children: [await Cursor(), await Ship(), await Laser()],
+                children: [
+                    await Cursor(),
+                    await Ship(),
+                    await Laser(camera, renderer),
+                ],
             },
         ],
     });
