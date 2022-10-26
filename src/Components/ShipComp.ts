@@ -1,7 +1,7 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Transform from "3d-game-engine-canvas/src/utilities/Transform";
-import Input from "../classes/Input";
+import Input from "../Classes/Input";
 import { map } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 

@@ -3,7 +3,7 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import UiScreen from "3d-game-engine-canvas/src/components/UiScreen";
 import FPSCounter from "3d-game-engine-canvas/src/tools/FPSCounter";
-import Input from "./classes/Input";
+import Input from "./Classes/Input";
 import TieFighter from "./GameObjects/TieFighter";
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
