@@ -6,6 +6,7 @@ import { map } from "3d-game-engine-canvas/src/utilities/math/Math";
 export default class Input {
     private static html: HTMLCanvasElement;
     private static isFire: boolean;
+    private static _lock: boolean;
     private static _isFire: boolean;
     private static pos: Vector2;
     private static move: Vector2;
@@ -36,13 +37,13 @@ export default class Input {
             "gamepaddisconnected",
             Input.disconnectGamePad.bind(this)
         );
-        Input.pos = size.multiply(1 / 2);
+        Input.pos = Input.getCenter();
         Input.isFire = false;
+        Input._lock = false;
     }
 
     public static center() {
-        const size = new Vector2(Input.html.width, Input.html.height);
-        Input.pos = size.multiply(1 / 2);
+        Input.pos = Input.getCenter();
     }
 
     private static transformMousePosition(position: Vector2): Vector2 {
@@ -96,7 +97,26 @@ export default class Input {
         return Input.pos;
     }
 
+    public static getCenter(): Vector2 {
+        const size = new Vector2(Input.html.width, Input.html.height);
+        return size.multiply(1 / 2);
+    }
+
+    public static hasButtonPressed(): boolean {
+        return Object.keys(Input.keys).some((k) => Input.keys[k]);
+    }
+
+    public static lock() {
+        Input._lock = true;
+        Input.center();
+    }
+
+    public static unlock() {
+        Input._lock = false;
+    }
+
     public static update() {
+        if (Input._lock) return;
         Input.move = Vector2.zero;
         Input.isFire = Input._isFire;
         if (Input.keys["w"] === true || Input.keys["ArrowUp"] === true) {

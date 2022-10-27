@@ -12,6 +12,9 @@ import VaderFighter from "./GameObjects/VaderFighter";
 import Cursor from "./GameObjects/Cursor";
 import Ship from "./GameObjects/Ship";
 import Laser from "./GameObjects/Laser";
+import TestGround from "./GameObjects/TestGround";
+import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
+import { PlayerController } from "./Components/PlayerController";
 
 class Rotate extends Component {
     v: number;
@@ -65,8 +68,13 @@ export async function main() {
                     position: [0, 0, 0],
                     rotation: [0, 0, 0],
                 },
-                components: [camera],
+                components: [camera, new PlayerController()],
             },
+            await TestGround(
+                new Vector3(-100, -4, -100),
+                new Vector3(20, 20, 20),
+                new Vector2(10, 10)
+            ),
             {
                 name: "screen",
                 components: [new UiScreen(renderer, 1)],

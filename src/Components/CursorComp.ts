@@ -29,7 +29,10 @@ export class CursorComp extends Component {
             this.timer = 0;
             Input.center();
         }
-        if (this.transform.position.equals(this.last)) {
+        if (
+            this.transform.position.equals(this.last) &&
+            !Input.hasButtonPressed()
+        ) {
             this.timer += Renderer.deltaTime;
         } else {
             this.last = this.transform.position;
