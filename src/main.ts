@@ -7,13 +7,12 @@ import Input from "./Classes/Input";
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
-import VaderFighter from "./GameObjects/VaderFighter";
 import Cursor from "./GameObjects/Cursor";
 import Ship from "./GameObjects/Ship";
 import Laser from "./GameObjects/Laser";
 import { PlayerController } from "./Components/PlayerController";
-import FireballScreen from "./GameObjects/FireballScreen";
 import GameManager from "./Components/GameManager";
+import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
 
 class Rotate extends Component {
     v: number;
@@ -36,7 +35,7 @@ class Rotate extends Component {
 export async function main() {
     const canvas = document.getElementById("root") as HTMLCanvasElement;
     const renderer = new Renderer(canvas, 0.25, false);
-    const camera = new Camera(renderer, 90, 1, 100);
+    const camera = new Camera(renderer, 90, 1, 100, true);
     renderer.setCamera(camera, 0);
     GameManager.getInstance().setRenderer(renderer);
 
@@ -53,9 +52,9 @@ export async function main() {
                     camera,
                     new PlayerController(),
                     GameManager.getInstance(),
+                    new SphereCollider(),
                 ],
             },
-            await VaderFighter(renderer),
             // await TestGround(
             //     new Vector3(-100, -4, -100),
             //     new Vector3(20, 20, 20),

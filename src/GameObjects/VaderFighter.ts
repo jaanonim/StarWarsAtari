@@ -5,7 +5,7 @@ import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { Tie } from "../Components/Tie";
-import { Hittable } from "../Components/Hitable";
+import { Hittable } from "../Components/Hittable";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 
 export default async function VaderFighter(renderer: Renderer) {
@@ -29,7 +29,7 @@ export default async function VaderFighter(renderer: Renderer) {
                     scale: [1, 1, 0.7],
                 },
                 components: [
-                    new MeshRenderer(wing, mat),
+                    new MeshRenderer(wing.copy(), mat),
                     new Hittable(tieComp),
                 ],
             },
@@ -40,7 +40,7 @@ export default async function VaderFighter(renderer: Renderer) {
                     scale: [1, 0.5, 0.5],
                 },
                 components: [
-                    new MeshRenderer(body, mat),
+                    new MeshRenderer(body.copy(), mat),
                     new Hittable(tieComp),
                 ],
             },
@@ -52,7 +52,7 @@ export default async function VaderFighter(renderer: Renderer) {
                     scale: [1, 1, 0.7],
                 },
                 components: [
-                    new MeshRenderer(wing, mat),
+                    new MeshRenderer(wing.copy(), mat),
                     new Hittable(tieComp),
                 ],
             },

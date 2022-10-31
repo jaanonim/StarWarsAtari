@@ -7,7 +7,7 @@ import UiComponent from "3d-game-engine-canvas/src/classes/Components/UiComponen
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import ScreenRaycast from "3d-game-engine-canvas/src/tools/Raycasts/ScreenRaycast";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
-import { Hittable } from "./Hitable";
+import { Hittable } from "./Hittable";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 
 export class LaserComp extends UiComponent {
@@ -106,7 +106,7 @@ export class LaserComp extends UiComponent {
                         Hittable
                     );
                 if (h) {
-                    h.destroy();
+                    h.hit();
                     break;
                 }
             }

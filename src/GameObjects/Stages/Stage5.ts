@@ -1,7 +1,7 @@
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import Stage5Comp from "../../Components/Stages/Stage5Comp";
 
-export default async function Stage3() {
+export default async function Stage5() {
     return Importer.object({
         name: "Stage5",
         children: [],

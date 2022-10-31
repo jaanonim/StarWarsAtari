@@ -1,7 +1,7 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 
 export interface HittableInterface {
-    destroy(): void;
+    hit(): void;
 }
 
 export class Hittable extends Component {
@@ -11,7 +11,7 @@ export class Hittable extends Component {
         this.obj = obj;
     }
 
-    destroy() {
-        this.obj.destroy();
+    hit() {
+        this.obj.hit();
     }
 }

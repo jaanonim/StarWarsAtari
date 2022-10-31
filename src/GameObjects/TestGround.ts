@@ -38,7 +38,7 @@ export default async function TestGround(
                 position: p,
                 rotation: [PI2, 0, 0],
             },
-            components: [new MeshRenderer(plane, i % 2 ? mat : mat2)],
+            components: [new MeshRenderer(plane.copy(), i % 2 ? mat : mat2)],
         })),
 
         components: [new Light(LightType.AMBIENT, 0.2, Color.white)],

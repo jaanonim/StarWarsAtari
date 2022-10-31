@@ -8,7 +8,7 @@ import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import FireballScreen from "../GameObjects/FireballScreen";
 import GameManager from "./GameManager";
-import { HittableInterface } from "./Hitable";
+import { HittableInterface } from "./Hittable";
 import Stage1Comp from "./Stages/Stage1Comp";
 
 export class Tie extends Component implements HittableInterface {
@@ -72,7 +72,7 @@ export class Tie extends Component implements HittableInterface {
         } else this.cooldown = 2000;
     }
 
-    destroy(): void {
+    hit(): void {
         if (!this.isVader) this.gameObject.destroy();
         const c =
             GameManager.getInstance().currentStage.getComponent<Stage1Comp>(
