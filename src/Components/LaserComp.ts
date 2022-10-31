@@ -8,6 +8,7 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import ScreenRaycast from "3d-game-engine-canvas/src/tools/Raycasts/ScreenRaycast";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import { Hittable } from "./Hitable";
+import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 
 export class LaserComp extends UiComponent {
     box!: Box2D;
@@ -81,11 +82,34 @@ export class LaserComp extends UiComponent {
 
     fire() {
         if (this.shoot === null) throw new Error("shoot is null");
+        const screen = this.gameObject.getScene().find("screen");
+        const fireballs = screen.findMany("FireballScreen");
+
+        let found = false;
+        fireballs.forEach((f) => {
+            const c = f.getComponent<UiElement>(UiElement);
+
+            if (!c || this.shoot === null) throw Error();
+
+            if (c.contains(this.shoot) && !found) {
+                found = true;
+                f.destroy();
+            }
+        });
+        if (found) return;
+
         const col = this.raycast.getCollisions(this.shoot);
         if (col.length > 0) {
-            col[0].meshRenderer.gameObject
-                .getComponent<Hittable>(Hittable)
-                ?.destroy();
+            for (let i = 0; i < col.length; i++) {
+                const h =
+                    col[i].meshRenderer.gameObject.getComponent<Hittable>(
+                        Hittable
+                    );
+                if (h) {
+                    h.destroy();
+                    break;
+                }
+            }
         }
     }
 }

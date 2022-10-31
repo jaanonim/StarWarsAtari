@@ -19,16 +19,7 @@ export class PlayerController extends Component {
 
     private mode: Mode = Mode.ROTATION;
 
-    async start() {}
-
     async update() {
-        this.transform.position = this.transform.position.add(
-            this.transform.rotation.multiply(
-                Vector3.forward.multiply(
-                    Renderer.deltaTime * this.movementSpeed
-                )
-            ) as Vector3
-        );
         let move = Input.getPos().subtract(Input.getCenter());
         move = new Vector2(
             sigmoid(move.x / this.controlsSmoothens),
@@ -44,6 +35,13 @@ export class PlayerController extends Component {
                 new Vector3(move.x, -move.y, 0).multiply(
                     Renderer.deltaTime * this.controlMovementSpeed
                 )
+            );
+            this.transform.position = this.transform.position.add(
+                this.transform.rotation.multiply(
+                    Vector3.forward.multiply(
+                        Renderer.deltaTime * this.movementSpeed
+                    )
+                ) as Vector3
             );
         }
     }

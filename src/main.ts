@@ -4,7 +4,6 @@ import Camera from "3d-game-engine-canvas/src/components/Camera";
 import UiScreen from "3d-game-engine-canvas/src/components/UiScreen";
 import FPSCounter from "3d-game-engine-canvas/src/tools/FPSCounter";
 import Input from "./Classes/Input";
-import TieFighter from "./GameObjects/TieFighter";
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
@@ -12,9 +11,9 @@ import VaderFighter from "./GameObjects/VaderFighter";
 import Cursor from "./GameObjects/Cursor";
 import Ship from "./GameObjects/Ship";
 import Laser from "./GameObjects/Laser";
-import TestGround from "./GameObjects/TestGround";
-import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import { PlayerController } from "./Components/PlayerController";
+import GameManager from "./Classes/GameManager";
+import FireballScreen from "./GameObjects/FireballScreen";
 
 class Rotate extends Component {
     v: number;
@@ -39,42 +38,29 @@ export async function main() {
     const renderer = new Renderer(canvas, 0.25, false);
     const camera = new Camera(renderer, 90, 1, 100);
     renderer.setCamera(camera, 0);
+    GameManager.getInstance().setRenderer(renderer);
 
-    Importer.scene({
+    const scene = Importer.scene({
         name: "scene",
         children: [
-            {
-                name: "o",
-                transform: {
-                    position: [5, 0, 10],
-                    scale: [1, 1, 1],
-                },
-                children: [await TieFighter()],
-                components: [new Rotate(new Vector3(0, 1, 0))],
-            },
-
-            {
-                name: "o",
-                transform: {
-                    position: [-5, 0, 10],
-                    scale: [1, 1, 1],
-                },
-                children: [await VaderFighter()],
-                components: [new Rotate(new Vector3(0, 0.3, 0))],
-            },
             {
                 name: "camera",
                 transform: {
                     position: [0, 0, 0],
                     rotation: [0, 0, 0],
                 },
-                components: [camera, new PlayerController()],
+                components: [
+                    camera,
+                    new PlayerController(),
+                    GameManager.getInstance(),
+                ],
             },
-            await TestGround(
-                new Vector3(-100, -4, -100),
-                new Vector3(20, 20, 20),
-                new Vector2(10, 10)
-            ),
+            await VaderFighter(renderer),
+            // await TestGround(
+            //     new Vector3(-100, -4, -100),
+            //     new Vector3(20, 20, 20),
+            //     new Vector2(10, 10)
+            // ),
             {
                 name: "screen",
                 components: [new UiScreen(renderer, 1)],
