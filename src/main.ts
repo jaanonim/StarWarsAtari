@@ -12,8 +12,8 @@ import Cursor from "./GameObjects/Cursor";
 import Ship from "./GameObjects/Ship";
 import Laser from "./GameObjects/Laser";
 import { PlayerController } from "./Components/PlayerController";
-import GameManager from "./Classes/GameManager";
 import FireballScreen from "./GameObjects/FireballScreen";
+import GameManager from "./Components/GameManager";
 
 class Rotate extends Component {
     v: number;

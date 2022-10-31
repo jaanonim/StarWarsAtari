@@ -1,12 +1,12 @@
 import UiComponent from "3d-game-engine-canvas/src/classes/Components/UiComponent";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
-import GameManager from "../Classes/GameManager";
+import GameManager from "./GameManager";
 
 export class FireballScreenComp extends UiComponent {
     public rotationSpeed: number = 0.1;
     public speed: number = 0.05;
-    public maxSize: number = 250;
+    public maxSize: number = 200;
 
     async update() {
         if (this.uiElement.size.x > this.maxSize) {
