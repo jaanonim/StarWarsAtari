@@ -1,7 +1,11 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
+import Camera from "3d-game-engine-canvas/src/components/Camera";
 import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
+import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
+import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import FireballScreen from "../GameObjects/FireballScreen";
 import Stage1 from "../GameObjects/Stages/Stage1";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage5 from "../GameObjects/Stages/Stage5";
@@ -68,6 +72,29 @@ export default class GameManager extends Component {
 
     hit() {
         this.warn("ajc");
+    }
+
+    async fireScreenFireball(v: Vector3) {
+        const cam = this.gameObject.getComponent<Camera>(Camera);
+        if (!cam) throw Error("No camera");
+        const screen = this.gameObject.getScene().find("screen");
+
+        const c = screen.getSizedComponent();
+        if (!c) throw Error();
+        const margin = c.size.divide(10);
+        const box = new Box2D(margin, c.size.subtract(margin));
+
+        const pos = cam.worldToScreenPoint(v, this.renderer);
+
+        if (box.contains(pos)) {
+            const fb = await FireballScreen(
+                v.subtract(this.transform.globalPosition).squareLength()
+            );
+            fb.transform.position = pos.toVector3();
+            screen.addChildren(fb);
+            return true;
+        }
+        return false;
     }
 
     async update() {

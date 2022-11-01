@@ -3,10 +3,8 @@ import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
-import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
-import FireballScreen from "../GameObjects/FireballScreen";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
 import Stage1Comp from "./Stages/Stage1Comp";
@@ -17,14 +15,12 @@ export class Tie extends Component implements HittableInterface {
     private isVader: boolean;
     private cooldown: number = 0;
     private ms!: MeshRenderer;
-    private renderer: Renderer;
 
     public fireCooldown: number = 3000;
 
-    constructor(isVader: boolean, renderer: Renderer) {
+    constructor(isVader: boolean) {
         super();
         this.isVader = isVader;
-        this.renderer = renderer;
     }
 
     async start() {
@@ -65,7 +61,9 @@ export class Tie extends Component implements HittableInterface {
         if (!cam) throw Error("No camera");
         if (this.ms.isOnCamera(cam)) {
             if (this.cooldown > this.fireCooldown) {
-                this.fire(cam);
+                GameManager.getInstance().fireScreenFireball(
+                    this.transform.globalPosition
+                );
                 this.cooldown = 0;
             }
             this.cooldown += Renderer.deltaTime;
@@ -80,25 +78,5 @@ export class Tie extends Component implements HittableInterface {
             );
         if (!c) throw Error();
         c.onTieDestroy(this.isVader);
-    }
-
-    async fire(cam: Camera) {
-        const screen = this.gameObject.getScene().find("screen");
-
-        const c = screen.getSizedComponent();
-        if (!c) throw Error();
-        const margin = c.size.divide(10);
-        const box = new Box2D(margin, c.size.subtract(margin));
-
-        const pos = cam.worldToScreenPoint(
-            this.transform.globalPosition,
-            this.renderer
-        );
-
-        if (box.contains(pos)) {
-            const fb = await FireballScreen();
-            fb.transform.position = pos.toVector3();
-            screen.addChildren(fb);
-        }
     }
 }

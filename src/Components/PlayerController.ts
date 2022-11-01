@@ -18,7 +18,7 @@ export class PlayerController extends Component {
     controlRotationSpeed: number = 0.0002;
     controlMovementSpeed: number = 0.5;
 
-    maxPos: Box = new Box(new Vector3(-10, -3, 0), new Vector3(10, 1, 30));
+    maxPos: Box = new Box(new Vector3(-20, -3, 0), new Vector3(20, 1, 100));
 
     mode: PlayerControllerMode = PlayerControllerMode.POSITION;
 

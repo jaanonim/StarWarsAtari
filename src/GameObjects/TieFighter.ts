@@ -6,16 +6,15 @@ import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { Hittable } from "../Components/Hittable";
 import { Tie } from "../Components/Tie";
-import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 
-export default async function TieFighter(renderer: Renderer) {
+export default async function TieFighter() {
     const wing = new ObjLoader(await FileLoader.load("./wing.obj")).parse(true);
     wing.doubleSided = true;
     const body = new ObjLoader(await FileLoader.load("./body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
     const PI2 = Math.PI / 2;
-    const tieComp = new Tie(false, renderer);
+    const tieComp = new Tie(false);
     return Importer.object({
         name: "TieFighter",
         children: [

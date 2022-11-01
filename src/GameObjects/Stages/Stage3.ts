@@ -10,11 +10,11 @@ export default async function Stage3() {
         let v: Vector3;
         do
             v = new Vector3(
-                Math.random() * 10 - 5,
+                Math.random() * 20 - 10,
                 -2,
-                Math.random() * 25 + 5
+                Math.random() * 50 + 15
             ).roundXYToInt();
-        while (pos.some((e) => v.subtract(e).squareLength() < 8));
+        while (pos.some((e) => v.subtract(e).squareLength() < 25));
         pos.push(v);
     }
 

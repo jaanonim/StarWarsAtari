@@ -6,9 +6,8 @@ import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { Tie } from "../Components/Tie";
 import { Hittable } from "../Components/Hittable";
-import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 
-export default async function VaderFighter(renderer: Renderer) {
+export default async function VaderFighter() {
     const wing = new ObjLoader(await FileLoader.load("./wing2.obj")).parse(
         true
     );
@@ -16,7 +15,7 @@ export default async function VaderFighter(renderer: Renderer) {
     const body = new ObjLoader(await FileLoader.load("./body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
-    const tieComp = new Tie(true, renderer);
+    const tieComp = new Tie(true);
     return Importer.object({
         name: "VaderFighter",
         children: [

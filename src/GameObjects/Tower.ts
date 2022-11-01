@@ -34,7 +34,7 @@ export default async function Tower(position: Vector3) {
                 ],
             },
             {
-                name: "tower",
+                name: "top",
                 transform: {
                     position: position.add(new Vector3(0, 2.2, 0)),
                     rotation: [Math.PI, 0, 0],
