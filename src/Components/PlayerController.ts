@@ -13,7 +13,7 @@ export enum PlayerControllerMode {
 }
 
 export class PlayerController extends Component {
-    movementSpeed: number = 0.002;
+    movementSpeed: number = 0.005; //0.002;
     controlsSmoothens: number = 100;
     controlRotationSpeed: number = 0.0002;
     controlMovementSpeed: number = 0.5;

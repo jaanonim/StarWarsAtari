@@ -15,7 +15,7 @@ export class TowerComp extends Component implements HittableInterface {
 
     public fireCooldown: number = 1000;
     public maxDistance: number = 255;
-    public minDistance: number = 49;
+    public minDistance: number = 25;
 
     async start() {
         this.camGameObject = this.gameObject.getScene().find("camera");

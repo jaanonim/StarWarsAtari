@@ -98,7 +98,7 @@ export class LaserComp extends UiComponent {
         });
         if (found) return;
 
-        const col = this.raycast.getCollisions(this.shoot);
+        const col = this.raycast.getCollisions(this.shoot, 20);
         if (col.length > 0) {
             for (let i = 0; i < col.length; i++) {
                 const h =

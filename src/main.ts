@@ -35,7 +35,7 @@ class Rotate extends Component {
 export async function main() {
     const canvas = document.getElementById("root") as HTMLCanvasElement;
     const renderer = new Renderer(canvas, 0.25, false);
-    const camera = new Camera(renderer, 90, 1, 100, true);
+    const camera = new Camera(renderer, 90, 0.5, 20, true);
     renderer.setCamera(camera, 0);
     GameManager.getInstance().setRenderer(renderer);
 
