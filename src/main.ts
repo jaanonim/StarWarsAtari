@@ -55,11 +55,6 @@ export async function main() {
                     new SphereCollider(),
                 ],
             },
-            // await TestGround(
-            //     new Vector3(-100, -4, -100),
-            //     new Vector3(20, 20, 20),
-            //     new Vector2(10, 10)
-            // ),
             {
                 name: "screen",
                 components: [new UiScreen(renderer, 1)],
