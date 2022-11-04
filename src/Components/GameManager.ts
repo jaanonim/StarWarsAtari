@@ -44,7 +44,7 @@ export default class GameManager extends Component {
                 controls: PlayerControllerMode.POSITION,
                 maxPos: new Box(
                     new Vector3(-1.1, 0, -100),
-                    new Vector3(1.1, 3.5, 100)
+                    new Vector3(1.1, 3.5, 80)
                 ),
             },
         ];
@@ -112,7 +112,11 @@ export default class GameManager extends Component {
     async update() {
         const cols = this.collider.getCollisions();
         if (cols.length > 0) {
-            cols.forEach((c) => c.destroy());
+            cols.forEach((c) => {
+                if (c.gameObject.name === "FireballWord")
+                    c.gameObject.destroy();
+                else c.destroy();
+            });
             this.hit();
         }
     }
