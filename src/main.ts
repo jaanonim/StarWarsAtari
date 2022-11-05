@@ -17,6 +17,7 @@ import {
 } from "3d-game-engine-canvas/src/classes/Components/SizedComponent";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import Shield from "./GameObjects/Shield";
 
 async function loadFont() {
     const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
@@ -55,6 +56,7 @@ export async function main() {
                     await Cursor(),
                     await Ship(),
                     await Laser(camera, renderer),
+                    await Shield(),
                     {
                         name: "text",
                         transform: { position: [0, -100, 0] },
