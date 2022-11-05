@@ -8,9 +8,11 @@ import { Hittable } from "../Components/Hittable";
 import { Tie } from "../Components/Tie";
 
 export default async function TieFighter() {
-    const wing = new ObjLoader(await FileLoader.load("./wing.obj")).parse(true);
+    const wing = new ObjLoader(await FileLoader.load("model/wing.obj")).parse(
+        true
+    );
     wing.doubleSided = true;
-    const body = new ObjLoader(await FileLoader.load("./body.obj")).parse();
+    const body = new ObjLoader(await FileLoader.load("model/body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
     const PI2 = Math.PI / 2;

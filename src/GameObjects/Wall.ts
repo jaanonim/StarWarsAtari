@@ -11,7 +11,7 @@ export default async function Wall(
     zPos: number,
     pattern: [Array<number>, Array<number>]
 ) {
-    const plane = new ObjLoader(await FileLoader.load("./plane.obj")).parse(
+    const plane = new ObjLoader(await FileLoader.load("model/plane.obj")).parse(
         true
     );
     const PI2 = Math.PI / 2;

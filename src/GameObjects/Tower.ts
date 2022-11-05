@@ -10,7 +10,7 @@ import { TowerComp } from "../Components/TowerComp";
 import { Hittable } from "../Components/Hittable";
 
 export default async function Tower(position: Vector3) {
-    const tower = new ObjLoader(await FileLoader.load("./tower.obj")).parse(
+    const tower = new ObjLoader(await FileLoader.load("model/tower.obj")).parse(
         true
     );
     const mat = new WireframeMaterial(Color.yellow);

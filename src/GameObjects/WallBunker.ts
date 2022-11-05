@@ -9,7 +9,7 @@ import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { WallBunkerComp } from "../Components/WallBunkerComp";
 
 export default async function WallBunker(position: Vector3) {
-    const plane = new ObjLoader(await FileLoader.load("./plane.obj")).parse(
+    const plane = new ObjLoader(await FileLoader.load("model/plane.obj")).parse(
         true
     );
     plane.doubleSided = true;

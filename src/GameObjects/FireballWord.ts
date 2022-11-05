@@ -11,7 +11,7 @@ import { Hittable } from "../Components/Hittable";
 
 export default async function FireballWord(position: Vector3) {
     const tex = new TextureLoader(
-        await FileLoader.loadImg("./fireball.png")
+        await FileLoader.loadImg("img/fireball.png")
     ).parse();
     const comp = new FireballWordComp();
 

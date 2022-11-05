@@ -8,11 +8,11 @@ import { Tie } from "../Components/Tie";
 import { Hittable } from "../Components/Hittable";
 
 export default async function VaderFighter() {
-    const wing = new ObjLoader(await FileLoader.load("./wing2.obj")).parse(
+    const wing = new ObjLoader(await FileLoader.load("model/wing2.obj")).parse(
         true
     );
     wing.doubleSided = true;
-    const body = new ObjLoader(await FileLoader.load("./body.obj")).parse();
+    const body = new ObjLoader(await FileLoader.load("model/body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
     const tieComp = new Tie(true);

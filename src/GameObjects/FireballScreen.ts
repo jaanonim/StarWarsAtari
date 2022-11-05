@@ -13,7 +13,7 @@ import { FireballScreenComp } from "../Components/FireballScreenComp";
 
 export default async function FireballScreen(start: number) {
     const tex = new TextureLoader(
-        await FileLoader.loadImg("./fireball.png")
+        await FileLoader.loadImg("img/fireball.png")
     ).parse();
 
     const v = map(clamp(start, 0, 100), 0, 100, 1, 2);

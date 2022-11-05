@@ -40,6 +40,7 @@ export default class Input {
         Input.pos = Input.getCenter();
         Input.isFire = false;
         Input._lock = false;
+        Input.lock();
     }
 
     public static center() {
@@ -67,6 +68,7 @@ export default class Input {
     }
 
     public static updateMouse(e: MouseEvent) {
+        if (Input._lock) return;
         Input.pos = this.transformMousePosition(
             new Vector2(e.clientX, e.clientY)
         );

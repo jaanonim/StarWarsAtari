@@ -8,7 +8,7 @@ import { Hittable } from "../Components/Hittable";
 import { TargetComp } from "../Components/TargetComp";
 
 export default async function Floor(length: number) {
-    const plane = new ObjLoader(await FileLoader.load("./plane.obj")).parse(
+    const plane = new ObjLoader(await FileLoader.load("model/plane.obj")).parse(
         true
     );
     const PI2 = Math.PI / 2;

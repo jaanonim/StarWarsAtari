@@ -11,7 +11,7 @@ import { CursorComp } from "../Components/CursorComp";
 
 export default async function Cursor() {
     const tex = new TextureLoader(
-        await FileLoader.loadImg("./cursor.png")
+        await FileLoader.loadImg("img/cursor.png")
     ).parse();
     return Importer.object({
         name: "Cursor",

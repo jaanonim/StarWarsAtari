@@ -10,10 +10,24 @@ import Laser from "./GameObjects/Laser";
 import { PlayerController } from "./Components/PlayerController";
 import GameManager from "./Components/GameManager";
 import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
+import UiElement from "3d-game-engine-canvas/src/components/UiElement";
+import {
+    PositionType,
+    SizeType,
+} from "3d-game-engine-canvas/src/classes/Components/SizedComponent";
+import Text from "3d-game-engine-canvas/src/components/Text";
+import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+
+async function loadFont() {
+    const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
+    const font = await myFont.load();
+    (document.fonts as any).add(font);
+}
 
 export async function main() {
+    await loadFont();
     const canvas = document.getElementById("root") as HTMLCanvasElement;
-    const renderer = new Renderer(canvas, 0.25, false);
+    const renderer = new Renderer(canvas, 0.25, 2, false);
     const camera = new Camera(renderer, 90, 0.5, 20, true);
     renderer.setCamera(camera, 0);
     GameManager.getInstance().setRenderer(renderer);
@@ -41,6 +55,24 @@ export async function main() {
                     await Cursor(),
                     await Ship(),
                     await Laser(camera, renderer),
+                    {
+                        name: "text",
+                        transform: { position: [0, -100, 0] },
+                        components: [
+                            new UiElement(
+                                undefined,
+                                0,
+                                SizeType.PERCENTAGE,
+                                PositionType.CENTER_CENTER,
+                                undefined
+                            ),
+                            new Text("00001 SCORE", {
+                                font: "pixeled",
+                                fontSize: 20,
+                                color: Color.white,
+                            }),
+                        ],
+                    },
                 ],
             },
         ],

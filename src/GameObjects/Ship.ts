@@ -12,13 +12,13 @@ import { ShipComp } from "../Components/ShipComp";
 
 export default async function Ship() {
     const tex = new TextureLoader(
-        await FileLoader.loadImg("./arm.png")
+        await FileLoader.loadImg("img/arm.png")
     ).parse();
     const tex2 = new TextureLoader(
-        await FileLoader.loadImg("./arm2.png")
+        await FileLoader.loadImg("img/arm2.png")
     ).parse();
     const tex3 = new TextureLoader(
-        await FileLoader.loadImg("./ship.png")
+        await FileLoader.loadImg("img/ship.png")
     ).parse();
 
     return Importer.object({
