@@ -1,7 +1,3 @@
-import {
-    PositionType,
-    SizeType,
-} from "3d-game-engine-canvas/src/classes/Components/SizedComponent";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
@@ -21,12 +17,9 @@ export default async function FireballScreen(start: number) {
     return Importer.object({
         name: "FireballScreen",
         components: [
-            new UiElement(
-                new Vector2(20, 20).multiply(v),
-                undefined,
-                SizeType.PIXEL,
-                PositionType.TOP_LEFT
-            ),
+            new UiElement({
+                size: new Vector2(20, 20).multiply(v),
+            }),
             new FireballScreenComp(),
             new Image(tex),
         ],

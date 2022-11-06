@@ -21,15 +21,11 @@ function ShieldElement(i: number, name: string, t: Texture) {
             position: [-35 * i, (i + 1) * 8, 0],
         },
         components: [
-            new UiElement(
-                new Vector2(35, 16 * (i + 1)),
-                0,
-                undefined,
-                PositionType.TOP_RIGHT,
-                undefined,
-                undefined,
-                false
-            ),
+            new UiElement({
+                size: new Vector2(35, 16 * (i + 1)),
+                positionType: PositionType.TOP_RIGHT,
+                smoothing: false,
+            }),
             new Image(t, Color.red),
         ],
     });
@@ -63,15 +59,11 @@ export default async function Shield() {
                 },
                 children: leftObjs,
                 components: [
-                    new UiElement(
-                        new Vector2(200, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_CENTER,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(200, 100),
+                        positionType: PositionType.TOP_CENTER,
+                        smoothing: false,
+                    }),
                 ],
             },
             {
@@ -81,15 +73,12 @@ export default async function Shield() {
                 },
                 children: rightObjs,
                 components: [
-                    new UiElement(
-                        new Vector2(200, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_CENTER,
-                        undefined,
-                        [true, false],
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(200, 100),
+                        positionType: PositionType.TOP_CENTER,
+                        smoothing: false,
+                        flip: [true, false],
+                    }),
                 ],
             },
             {
@@ -98,15 +87,11 @@ export default async function Shield() {
                     position: [0, 160, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(100, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_CENTER,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(100, 100),
+                        positionType: PositionType.TOP_CENTER,
+                        smoothing: false,
+                    }),
                     valueText,
                 ],
             },
@@ -116,26 +101,21 @@ export default async function Shield() {
                     position: [0, 214, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(500, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_CENTER,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(500, 100),
+                        positionType: PositionType.TOP_CENTER,
+                        smoothing: false,
+                    }),
                     shieldText,
                 ],
             },
         ],
         components: [
-            new UiElement(
-                new Vector2(120, 120),
-                undefined,
-                SizeType.PERCENTAGE,
-                PositionType.CENTER_CENTER
-            ),
+            new UiElement({
+                size: new Vector2(120, 120),
+                sizeType: SizeType.PERCENTAGE,
+                positionType: PositionType.CENTER_CENTER,
+            }),
             new ShieldComp(leftObjs, rightObjs, valueText, shieldText),
         ],
     });

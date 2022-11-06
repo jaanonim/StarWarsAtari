@@ -32,15 +32,10 @@ export default async function Points() {
                     position: [250, 40, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(200, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_LEFT,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(200, 100),
+                        smoothing: false,
+                    }),
                     new Text("SCORE", {
                         font: "pixeled",
                         fontSize: 28,
@@ -54,15 +49,10 @@ export default async function Points() {
                     position: [170, 84, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(300, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_LEFT,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(300, 100),
+                        smoothing: false,
+                    }),
                     vText,
                 ],
             },
@@ -72,26 +62,20 @@ export default async function Points() {
                     position: [170, 128, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(300, 100),
-                        0,
-                        undefined,
-                        PositionType.TOP_LEFT,
-                        undefined,
-                        undefined,
-                        false
-                    ),
+                    new UiElement({
+                        size: new Vector2(300, 100),
+                        smoothing: false,
+                    }),
                     lastText,
                 ],
             },
         ],
         components: [
-            new UiElement(
-                new Vector2(100, 100),
-                undefined,
-                SizeType.PERCENTAGE,
-                PositionType.CENTER_CENTER
-            ),
+            new UiElement({
+                size: new Vector2(100, 100),
+                sizeType: SizeType.PERCENTAGE,
+                positionType: PositionType.CENTER_CENTER,
+            }),
             new PointsComp(vText, lastText),
         ],
     });

@@ -13,12 +13,11 @@ export default async function Laser(camera: Camera, renderer: Renderer) {
     return Importer.object({
         name: "laser",
         components: [
-            new UiElement(
-                new Vector2(100, 100),
-                undefined,
-                SizeType.PERCENTAGE,
-                PositionType.CENTER_CENTER
-            ),
+            new UiElement({
+                size: new Vector2(100, 100),
+                sizeType: SizeType.PERCENTAGE,
+                positionType: PositionType.CENTER_CENTER,
+            }),
             new LaserComp(camera, renderer),
         ],
     });

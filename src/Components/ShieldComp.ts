@@ -60,6 +60,9 @@ export class ShieldComp extends UiComponent {
     }
 
     takeDamage() {
+        if (this.shield <= 1) this.shieldText.text = "SHIELD GONE";
+        else this.shieldText.text = "SHIELD";
+
         this.damageAnim();
         this.shield--;
     }

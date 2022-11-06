@@ -30,12 +30,11 @@ export default async function Ship() {
                     position: [170, -150, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(150, 150),
-                        Math.PI,
-                        undefined,
-                        PositionType.CENTER_LEFT
-                    ),
+                    new UiElement({
+                        size: new Vector2(150, 150),
+                        rotation: Math.PI,
+                        positionType: PositionType.CENTER_LEFT,
+                    }),
                     new Image(tex2),
                 ],
             },
@@ -45,12 +44,11 @@ export default async function Ship() {
                     position: [170, 200, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(150, 150),
-                        Math.PI,
-                        undefined,
-                        PositionType.CENTER_LEFT
-                    ),
+                    new UiElement({
+                        size: new Vector2(150, 150),
+                        rotation: Math.PI,
+                        positionType: PositionType.CENTER_LEFT,
+                    }),
                     new Image(tex),
                 ],
             },
@@ -60,12 +58,10 @@ export default async function Ship() {
                     position: [-170, -150, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(150, 150),
-                        0,
-                        undefined,
-                        PositionType.CENTER_RIGHT
-                    ),
+                    new UiElement({
+                        size: new Vector2(150, 150),
+                        positionType: PositionType.CENTER_RIGHT,
+                    }),
                     new Image(tex),
                 ],
             },
@@ -75,12 +71,10 @@ export default async function Ship() {
                     position: [-170, 200, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(150, 150),
-                        0,
-                        undefined,
-                        PositionType.CENTER_RIGHT
-                    ),
+                    new UiElement({
+                        size: new Vector2(150, 150),
+                        positionType: PositionType.CENTER_RIGHT,
+                    }),
                     new Image(tex2),
                 ],
             },
@@ -90,23 +84,20 @@ export default async function Ship() {
                     position: [0, -140, 0],
                 },
                 components: [
-                    new UiElement(
-                        new Vector2(250, 170),
-                        0,
-                        undefined,
-                        PositionType.BOTTOM_CENTER
-                    ),
+                    new UiElement({
+                        size: new Vector2(250, 170),
+                        positionType: PositionType.BOTTOM_CENTER,
+                    }),
                     new Image(tex3),
                 ],
             },
         ],
         components: [
-            new UiElement(
-                new Vector2(120, 120),
-                undefined,
-                SizeType.PERCENTAGE,
-                PositionType.CENTER_CENTER
-            ),
+            new UiElement({
+                size: new Vector2(120, 120),
+                sizeType: SizeType.PERCENTAGE,
+                positionType: PositionType.CENTER_CENTER,
+            }),
             new ShipComp(),
         ],
     });
