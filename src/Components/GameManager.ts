@@ -11,6 +11,8 @@ import Stage1 from "../GameObjects/Stages/Stage1";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage5 from "../GameObjects/Stages/Stage5";
 import { PlayerController, PlayerControllerMode } from "./PlayerController";
+import { PointsComp } from "./PointsComp";
+import { ShieldComp } from "./ShieldComp";
 
 export default class GameManager extends Component {
     private static instance: GameManager;
@@ -21,7 +23,10 @@ export default class GameManager extends Component {
         maxPos: Box;
     }>;
     public currentStage!: GameObject;
+    public isIndestructible: boolean = false;
     private collider!: SphereCollider;
+    private shield!: ShieldComp;
+    public points!: PointsComp;
 
     private constructor() {
         super();
@@ -66,7 +71,7 @@ export default class GameManager extends Component {
         if (!col) throw Error();
         this.collider = col;
 
-        const stage = this.stages[2];
+        const stage = this.stages[0]; //! HERE <------------------------------
 
         const pc =
             this.gameObject.getComponent<PlayerController>(PlayerController);
@@ -83,7 +88,12 @@ export default class GameManager extends Component {
     }
 
     hit() {
-        this.warn("ajc");
+        if (this.isIndestructible) return;
+        this.isIndestructible = true;
+        setTimeout(() => {
+            this.isIndestructible = false;
+        }, 1500);
+        this.shield.takeDamage();
     }
 
     async fireScreenFireball(v: Vector3) {
@@ -110,6 +120,25 @@ export default class GameManager extends Component {
     }
 
     async update() {
+        if (!this.shield) {
+            try {
+                this.shield = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("Shield")
+                    .getComponentError<ShieldComp>(ShieldComp);
+            } catch (e) {}
+        }
+        if (!this.points) {
+            try {
+                this.points = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("Points")
+                    .getComponentError<PointsComp>(PointsComp);
+            } catch (e) {}
+        }
+
         const cols = this.collider.getCollisions();
         if (cols.length > 0) {
             cols.forEach((c) => {

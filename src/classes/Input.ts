@@ -40,7 +40,7 @@ export default class Input {
         Input.pos = Input.getCenter();
         Input.isFire = false;
         Input._lock = false;
-        Input.lock();
+        //Input.lock();
     }
 
     public static center() {

@@ -2,6 +2,7 @@ import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import TieFighter from "../../GameObjects/TieFighter";
+import GameManager from "../GameManager";
 
 export default class Stage1Comp extends Component {
     player!: GameObject;
@@ -9,9 +10,9 @@ export default class Stage1Comp extends Component {
 
     onTieDestroy(isVader: boolean) {
         if (isVader) {
-            this.log("Vader");
+            GameManager.getInstance().points.add(2000);
         } else {
-            this.log("New tie");
+            GameManager.getInstance().points.add(1000);
             this.spawnTie();
         }
     }

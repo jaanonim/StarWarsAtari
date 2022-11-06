@@ -5,6 +5,7 @@ import { getRandomElement } from "3d-game-engine-canvas/src/utilities/math/Math"
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import FireballWord from "../../GameObjects/FireballWord";
+import GameManager from "../GameManager";
 export default class Stage5Comp extends Component {
     private cooldown: number = 0;
     public fireCooldown: number = 700;
@@ -55,10 +56,11 @@ export default class Stage5Comp extends Component {
     }
 
     onTargetDestroy() {
+        GameManager.getInstance().points.addSilent(25000);
         this.warn("Jej! you won!");
     }
 
     onWallBunkerDestroy() {
-        this.log("wall bunker broke :-)");
+        GameManager.getInstance().points.add(100);
     }
 }

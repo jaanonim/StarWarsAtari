@@ -3,11 +3,13 @@ import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import ShieldText from "./ShieldText";
 
 export class ShieldComp extends UiComponent {
     leftImgs: Array<Image>;
     rightImgs: Array<Image>;
     text: Text;
+    shieldText: ShieldText;
 
     public defaultColor: Color = Color.red;
     public animColor: Color = Color.white;
@@ -32,11 +34,13 @@ export class ShieldComp extends UiComponent {
     constructor(
         leftObjs: Array<GameObject>,
         rightObjs: Array<GameObject>,
-        text: Text
+        text: Text,
+        shieldText: ShieldText
     ) {
         super();
         this._shield = 8;
         this.text = text;
+        this.shieldText = shieldText;
         this.leftImgs = leftObjs.map((o) => {
             const c = o.getComponent<Image>(Image);
             if (!c) throw Error();
@@ -53,9 +57,6 @@ export class ShieldComp extends UiComponent {
         super.start();
         this.resetColor();
         this.text.options.color = this.defaultColor;
-        setInterval(() => {
-            this.takeDamage();
-        }, 2000);
     }
 
     takeDamage() {
@@ -65,11 +66,15 @@ export class ShieldComp extends UiComponent {
 
     damageAnim() {
         setTimeout(() => {
-            this.damageAnimFrame(Math.min(this._shield, 6));
+            this.damageAnimFrame(Math.min(this._shield, 6), true);
         }, 200);
     }
 
-    damageAnimFrame(n: number) {
+    damageAnimFrame(n: number, anim: boolean) {
+        if (anim && n <= 2) {
+            this.shieldText.startAnim();
+            anim = false;
+        }
         if (n < 1) {
             this.resetColor();
             this.text.options.color = this.animColor;
@@ -80,7 +85,7 @@ export class ShieldComp extends UiComponent {
         }
         this.setColor(n);
         setTimeout(() => {
-            this.damageAnimFrame(n - 1);
+            this.damageAnimFrame(n - 1, anim);
         }, 200);
     }
 

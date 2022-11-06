@@ -12,6 +12,7 @@ import Texture from "3d-game-engine-canvas/src/utilities/Texture";
 import { ShieldComp } from "../Components/ShieldComp";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Text from "3d-game-engine-canvas/src/components/Text";
+import ShieldText from "../Components/ShieldText";
 
 function ShieldElement(i: number, name: string, t: Texture) {
     return Importer.object({
@@ -49,6 +50,7 @@ export default async function Shield() {
         fontSize: 40,
         color: Color.white,
     });
+    const shieldText = new ShieldText();
 
     const v = 100;
     return Importer.object({
@@ -93,7 +95,7 @@ export default async function Shield() {
             {
                 name: "Value",
                 transform: {
-                    position: [0, 170, 0],
+                    position: [0, 160, 0],
                 },
                 components: [
                     new UiElement(
@@ -108,6 +110,24 @@ export default async function Shield() {
                     valueText,
                 ],
             },
+            {
+                name: "ShieldText",
+                transform: {
+                    position: [0, 214, 0],
+                },
+                components: [
+                    new UiElement(
+                        new Vector2(500, 100),
+                        0,
+                        undefined,
+                        PositionType.TOP_CENTER,
+                        undefined,
+                        undefined,
+                        false
+                    ),
+                    shieldText,
+                ],
+            },
         ],
         components: [
             new UiElement(
@@ -116,7 +136,7 @@ export default async function Shield() {
                 SizeType.PERCENTAGE,
                 PositionType.CENTER_CENTER
             ),
-            new ShieldComp(leftObjs, rightObjs, valueText),
+            new ShieldComp(leftObjs, rightObjs, valueText, shieldText),
         ],
     });
 }

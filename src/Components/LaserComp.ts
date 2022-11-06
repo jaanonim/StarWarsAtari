@@ -9,6 +9,7 @@ import ScreenRaycast from "3d-game-engine-canvas/src/tools/Raycasts/ScreenRaycas
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import { Hittable } from "./Hittable";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
+import GameManager from "./GameManager";
 
 export class LaserComp extends UiComponent {
     box!: Box2D;
@@ -93,6 +94,7 @@ export class LaserComp extends UiComponent {
 
             if (c.contains(this.shoot) && !found) {
                 found = true;
+                GameManager.getInstance().points.add(33);
                 f.destroy();
             }
         });
