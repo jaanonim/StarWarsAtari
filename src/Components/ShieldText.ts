@@ -10,7 +10,7 @@ export default class ShieldText extends UiComponent {
         this._text = value;
         this.colors = Array(this.text.length).fill(this.defaultColor);
     }
-    public fontSize = 36;
+    public fontSize = 10;
     public font = "pixeled";
 
     public defaultColor: Color = Color.white;
@@ -45,14 +45,14 @@ export default class ShieldText extends UiComponent {
 
         const y = this.uiElement.realSize.y / 2;
         let x = this.uiElement.realSize.x / 2 - textSize / 2;
-        x += 20;
+        x += 6;
         for (let i = 0; i < this.text.length; i++) {
             const char = this.text.charAt(i);
             ctx.fillStyle = this.colors[i].getStringRGBA();
             ctx.fillText(char, x, y);
-            if (char === "S") x += 4;
-            if (char === "I") x -= 4;
-            x += 36;
+            if (char === "S") x += 1;
+            if (char === "I") x -= 1;
+            x += 10;
         }
     }
 }

@@ -4,6 +4,7 @@ import Transform from "3d-game-engine-canvas/src/utilities/Transform";
 import Input from "../Classes/Input";
 import { map } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import Data from "../Classes/Data";
 
 export class ShipComp extends Component {
     box!: Box2D;
@@ -19,9 +20,21 @@ export class ShipComp extends Component {
     }
 
     async update() {
-        const pos = this.box.clamp(Input.getPos().roundToInt());
-        const x = map(pos.x, this.box.a.x, this.box.b.x, -30, 30);
-        const y = map(pos.y, this.box.a.y, this.box.b.y, -30, 30);
-        this.transform.position = new Vector3(x, y, 0);
+        const pos = this.box.clamp(Input.getScaledPos().roundToInt());
+        const x = map(
+            pos.x,
+            this.box.a.x,
+            this.box.b.x,
+            -Data.moveX,
+            Data.moveX
+        );
+        const y = map(
+            pos.y,
+            this.box.a.y,
+            this.box.b.y,
+            -Data.moveY,
+            Data.moveY
+        );
+        this.transform.position = new Vector3(x, y, 0).roundXYToInt();
     }
 }

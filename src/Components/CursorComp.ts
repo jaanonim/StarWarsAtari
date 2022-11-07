@@ -11,11 +11,12 @@ export class CursorComp extends Component {
     timer: number = 0;
 
     async start() {
+        super.start();
         const p = this.gameObject.transform.parent;
         if (!(p instanceof Transform)) throw Error();
         const c = p.gameObject.getSizedComponent();
         if (!c) throw Error();
-        const margin = c.size.divide(10);
+        const margin = c.size.divide(10).roundToInt();
 
         this.box = new Box2D(margin, c.size.subtract(margin));
         this.last = this.transform.position;
@@ -23,7 +24,8 @@ export class CursorComp extends Component {
     }
 
     async update() {
-        const pos = this.box.clamp(Input.getPos().roundToInt());
+        this.log(this.transform.position);
+        const pos = this.box.clamp(Input.getPos().divide(4).roundToInt());
         this.transform.position = new Vector3(pos.x, pos.y, 0);
         if (this.timer > 3000) {
             this.timer = 0;

@@ -2,6 +2,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import { map } from "3d-game-engine-canvas/src/utilities/math/Math";
+import Data from "./Data";
 
 export default class Input {
     private static html: HTMLCanvasElement;
@@ -97,6 +98,10 @@ export default class Input {
 
     public static getPos(): Vector2 {
         return Input.pos;
+    }
+
+    public static getScaledPos(): Vector2 {
+        return Input.pos.multiply(Data.scale);
     }
 
     public static getCenter(): Vector2 {

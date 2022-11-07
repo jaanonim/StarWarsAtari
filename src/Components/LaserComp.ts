@@ -10,6 +10,7 @@ import Camera from "3d-game-engine-canvas/src/components/Camera";
 import { Hittable } from "./Hittable";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import GameManager from "./GameManager";
+import Data from "../Classes/Data";
 
 export class LaserComp extends UiComponent {
     box!: Box2D;
@@ -44,14 +45,17 @@ export class LaserComp extends UiComponent {
 
     uiRender(): void {
         super.uiRender();
-        const pos = this.box.clamp(Input.getPos().roundToInt());
-
-        const x = map(pos.x, this.box.a.x, this.box.b.x, -30, 30);
-        const y = map(pos.y, this.box.a.y, this.box.b.y, -30, 30);
+        const pos = this.box.clamp(Input.getScaledPos().roundToInt());
+        const x = Math.round(
+            map(pos.x, this.box.a.x, this.box.b.x, -Data.moveX, Data.moveX)
+        );
+        const y = Math.round(
+            map(pos.y, this.box.a.y, this.box.b.y, -Data.moveY, Data.moveY)
+        );
 
         const ctx = this.uiElement.canvas.ctx;
         ctx.strokeStyle = "red";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 1;
 
         if (this.shoot != null) {
             if (this.cooldown > 100) {
@@ -60,14 +64,14 @@ export class LaserComp extends UiComponent {
                 ctx.beginPath();
 
                 if (this.side) {
-                    ctx.moveTo(x + 90, y + 305);
+                    ctx.moveTo(x + 20, y + 64);
                     ctx.lineTo(this.shoot.x, this.shoot.y);
-                    ctx.moveTo(x + 90, y + 640);
+                    ctx.moveTo(x + 20, y + 181);
                     ctx.lineTo(this.shoot.x, this.shoot.y);
                 } else {
-                    ctx.moveTo(x + 1250, y + 305);
+                    ctx.moveTo(x + 316, y + 64);
                     ctx.lineTo(this.shoot.x, this.shoot.y);
-                    ctx.moveTo(x + 1250, y + 640);
+                    ctx.moveTo(x + 316, y + 181);
                     ctx.lineTo(this.shoot.x, this.shoot.y);
                 }
                 ctx.stroke();
@@ -100,7 +104,10 @@ export class LaserComp extends UiComponent {
         });
         if (found) return;
 
-        const col = this.raycast.getCollisions(this.shoot, 20);
+        const col = this.raycast.getCollisions(
+            this.shoot.multiply(1 / Data.scale),
+            20
+        );
         if (col.length > 0) {
             for (let i = 0; i < col.length; i++) {
                 const h =

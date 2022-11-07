@@ -9,13 +9,11 @@ import TextureLoader from "3d-game-engine-canvas/src/tools/TextureLoader";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import { ShipComp } from "../Components/ShipComp";
+import Data from "../Classes/Data";
 
 export default async function Ship() {
     const tex = new TextureLoader(
         await FileLoader.loadImg("img/arm.png")
-    ).parse();
-    const tex2 = new TextureLoader(
-        await FileLoader.loadImg("img/arm2.png")
     ).parse();
     const tex3 = new TextureLoader(
         await FileLoader.loadImg("img/ship.png")
@@ -27,66 +25,80 @@ export default async function Ship() {
             {
                 name: "arm",
                 transform: {
-                    position: [170, -150, 0],
+                    position: [25, -40, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(150, 150),
-                        rotation: Math.PI,
+                        size: new Vector2(25, 18),
+                        rotation: 0,
                         positionType: PositionType.CENTER_LEFT,
-                    }),
-                    new Image(tex2),
-                ],
-            },
-            {
-                name: "arm",
-                transform: {
-                    position: [170, 200, 0],
-                },
-                components: [
-                    new UiElement({
-                        size: new Vector2(150, 150),
-                        rotation: Math.PI,
-                        positionType: PositionType.CENTER_LEFT,
+                        anchor: new Vector2(0, 0),
+                        flip: [true, true],
                     }),
                     new Image(tex),
                 ],
             },
+
             {
                 name: "arm",
                 transform: {
-                    position: [-170, -150, 0],
+                    position: [25, 60, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(150, 150),
-                        positionType: PositionType.CENTER_RIGHT,
+                        size: new Vector2(25, 18),
+                        rotation: 0,
+                        positionType: PositionType.CENTER_LEFT,
+                        anchor: new Vector2(0, 0),
+                        flip: [true, false],
                     }),
                     new Image(tex),
                 ],
             },
+
             {
                 name: "arm",
                 transform: {
-                    position: [-170, 200, 0],
+                    position: [-25, -40, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(150, 150),
+                        size: new Vector2(25, 18),
+                        rotation: 0,
                         positionType: PositionType.CENTER_RIGHT,
+                        anchor: new Vector2(0, 0),
+                        flip: [false, true],
                     }),
-                    new Image(tex2),
+                    new Image(tex),
+                ],
+            },
+
+            {
+                name: "arm",
+                transform: {
+                    position: [-25, 60, 0],
+                },
+                components: [
+                    new UiElement({
+                        size: new Vector2(25, 18),
+                        rotation: 0,
+                        positionType: PositionType.CENTER_RIGHT,
+                        anchor: new Vector2(0, 0),
+                        flip: [false, false],
+                    }),
+                    new Image(tex),
                 ],
             },
             {
                 name: "ship",
                 transform: {
-                    position: [0, -140, 0],
+                    position: [0, -16, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(250, 170),
+                        size: new Vector2(58, 16),
                         positionType: PositionType.BOTTOM_CENTER,
+                        anchor: new Vector2(0.5, 0),
                     }),
                     new Image(tex3),
                 ],
@@ -94,8 +106,8 @@ export default async function Ship() {
         ],
         components: [
             new UiElement({
-                size: new Vector2(120, 120),
-                sizeType: SizeType.PERCENTAGE,
+                size: new Vector2(Data.width + 10, Data.height + 10),
+                sizeType: SizeType.PIXEL,
                 positionType: PositionType.CENTER_CENTER,
             }),
             new ShipComp(),

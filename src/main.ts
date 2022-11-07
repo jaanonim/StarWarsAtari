@@ -45,7 +45,7 @@ export async function main() {
             },
             {
                 name: "screen",
-                components: [new UiScreen(renderer, 1)],
+                components: [new UiScreen(renderer, 0.25, 1, false)],
                 children: [
                     await Cursor(),
                     await Ship(),

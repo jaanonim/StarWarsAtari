@@ -49,7 +49,7 @@ export default class GameManager extends Component {
                 controls: PlayerControllerMode.POSITION,
                 maxPos: new Box(
                     new Vector3(-1.1, 0, -100),
-                    new Vector3(1.1, 3.5, 80)
+                    new Vector3(1.1, 3.5, 160)
                 ),
             },
         ];
@@ -71,7 +71,7 @@ export default class GameManager extends Component {
         if (!col) throw Error();
         this.collider = col;
 
-        const stage = this.stages[0]; //! HERE <------------------------------
+        const stage = this.stages[2]; //! HERE <------------------------------
 
         const pc =
             this.gameObject.getComponent<PlayerController>(PlayerController);

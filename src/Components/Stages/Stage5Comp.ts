@@ -28,13 +28,13 @@ export default class Stage5Comp extends Component {
             new Vector2(-1, 3.5),
         ];
         const z = this.camGameObject.transform.position.z + 6;
-        const maxZ = 40 * 2 - 12; // 12 - end save zone; 40 - length
+        const maxZ = 80 * 2 - 12; // 12 - end save zone; 40 - length
         if (this.camGameObject.transform.position.z > maxZ) return;
 
         if (this.cooldown > this.fireCooldown) {
             this.cooldown = 0;
             let pos;
-            if (Math.random() > 0.5) {
+            if (Math.random() > 0.2) {
                 pos = getRandomElement(POS);
                 this.gameObject
                     .getScene()

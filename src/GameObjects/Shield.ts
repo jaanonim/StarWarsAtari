@@ -18,11 +18,11 @@ function ShieldElement(i: number, name: string, t: Texture) {
     return Importer.object({
         name: name + i,
         transform: {
-            position: [-35 * i, (i + 1) * 8, 0],
+            position: [-8 * i, (i + 1) * 2, 0],
         },
         components: [
             new UiElement({
-                size: new Vector2(35, 16 * (i + 1)),
+                size: new Vector2(8, 4 * (i + 1)),
                 positionType: PositionType.TOP_RIGHT,
                 smoothing: false,
             }),
@@ -43,52 +43,47 @@ export default async function Shield() {
     const rightObjs = tex.map((t, i) => ShieldElement(i, "right", t));
     const valueText = new Text("8", {
         font: "pixeled",
-        fontSize: 40,
+        fontSize: 10,
         color: Color.white,
     });
     const shieldText = new ShieldText();
 
-    const v = 100;
     return Importer.object({
         name: "Shield",
         children: [
             {
                 name: "left",
-                transform: {
-                    position: [-v, 140, 0],
-                },
                 children: leftObjs,
                 components: [
                     new UiElement({
-                        size: new Vector2(200, 100),
+                        size: new Vector2(50, 26),
                         positionType: PositionType.TOP_CENTER,
                         smoothing: false,
+                        anchor: new Vector2(1, 0),
                     }),
                 ],
             },
             {
                 name: "right",
-                transform: {
-                    position: [v, 140, 0],
-                },
                 children: rightObjs,
                 components: [
                     new UiElement({
-                        size: new Vector2(200, 100),
+                        size: new Vector2(50, 26),
                         positionType: PositionType.TOP_CENTER,
                         smoothing: false,
                         flip: [true, false],
+                        anchor: new Vector2(1, 0),
                     }),
                 ],
             },
             {
                 name: "Value",
                 transform: {
-                    position: [0, 160, 0],
+                    position: [0, 20, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(100, 100),
+                        size: new Vector2(50, 40),
                         positionType: PositionType.TOP_CENTER,
                         smoothing: false,
                     }),
@@ -98,7 +93,7 @@ export default async function Shield() {
             {
                 name: "ShieldText",
                 transform: {
-                    position: [0, 214, 0],
+                    position: [0, 34, 0],
                 },
                 components: [
                     new UiElement({
@@ -112,7 +107,7 @@ export default async function Shield() {
         ],
         components: [
             new UiElement({
-                size: new Vector2(120, 120),
+                size: new Vector2(100, 100),
                 sizeType: SizeType.PERCENTAGE,
                 positionType: PositionType.CENTER_CENTER,
             }),

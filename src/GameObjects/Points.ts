@@ -12,13 +12,13 @@ import { PointsComp } from "../Components/PointsComp";
 export default async function Points() {
     const vText = new Text("1234567890", {
         font: "pixeled",
-        fontSize: 28,
+        fontSize: 8,
         color: Color.white,
         textAlign: "right",
     });
     const lastText = new Text("1234567890", {
         font: "pixeled",
-        fontSize: 28,
+        fontSize: 8,
         color: Color.white,
         textAlign: "right",
     });
@@ -29,16 +29,16 @@ export default async function Points() {
             {
                 name: "SCORE",
                 transform: {
-                    position: [250, 40, 0],
+                    position: [60, 12, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(200, 100),
+                        size: new Vector2(60, 40),
                         smoothing: false,
                     }),
                     new Text("SCORE", {
                         font: "pixeled",
-                        fontSize: 28,
+                        fontSize: 8,
                         color: Color.white,
                     }),
                 ],
@@ -46,11 +46,11 @@ export default async function Points() {
             {
                 name: "value",
                 transform: {
-                    position: [170, 84, 0],
+                    position: [50, 26, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(300, 100),
+                        size: new Vector2(60, 40),
                         smoothing: false,
                     }),
                     vText,
@@ -59,11 +59,11 @@ export default async function Points() {
             {
                 name: "lastValue",
                 transform: {
-                    position: [170, 128, 0],
+                    position: [50, 38, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(300, 100),
+                        size: new Vector2(60, 40),
                         smoothing: false,
                     }),
                     lastText,

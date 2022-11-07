@@ -5,7 +5,7 @@ import Floor from "../Floor";
 import Wall from "../Wall";
 
 export default async function Stage5() {
-    const len = 40;
+    const len = 80;
     const PATTERNS = [
         [[0], [0]],
         [[1], [1]],
