@@ -5,6 +5,7 @@ import { sigmoid } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import Data from "../Classes/Data";
 import Input from "../Classes/Input";
 
 export enum PlayerControllerMode {
@@ -13,7 +14,7 @@ export enum PlayerControllerMode {
 }
 
 export class PlayerController extends Component {
-    movementSpeed: number = 0.005; //0.002;
+    movementSpeed: number = Data.player.movementSpeed;
     controlsSmoothens: number = 100;
     controlRotationSpeed: number = 0.0002;
     controlMovementSpeed: number = 0.5;
