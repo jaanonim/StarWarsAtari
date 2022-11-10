@@ -6,10 +6,12 @@ import SphereCollider from "3d-game-engine-canvas/src/components/colliders/Spher
 import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import Input from "../Classes/Input";
 import FireballScreen from "../GameObjects/FireballScreen";
 import Stage1 from "../GameObjects/Stages/Stage1";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage5 from "../GameObjects/Stages/Stage5";
+import { DeathScreenComp } from "./DeathScreenComp";
 import { PlayerController, PlayerControllerMode } from "./PlayerController";
 import { PointsComp } from "./PointsComp";
 import { ShieldComp } from "./ShieldComp";
@@ -27,9 +29,12 @@ export default class GameManager extends Component {
     private collider!: SphereCollider;
     private shield!: ShieldComp;
     public points!: PointsComp;
+    private deathScreen!: DeathScreenComp;
+    private _lock: boolean;
 
     private constructor() {
         super();
+        this._lock = false;
         this.stages = [
             {
                 func: Stage1,
@@ -53,6 +58,7 @@ export default class GameManager extends Component {
                 ),
             },
         ];
+        this.unlock();
     }
 
     public static getInstance(): GameManager {
@@ -94,6 +100,24 @@ export default class GameManager extends Component {
             this.isIndestructible = false;
         }, 1500);
         this.shield.takeDamage();
+        if (this.shield.shield <= 0) {
+            this.lock();
+            this.deathScreen.show();
+        }
+    }
+
+    lock() {
+        this._lock = true;
+        Input.lock();
+    }
+
+    unlock() {
+        this._lock = false;
+        Input.unlock();
+    }
+
+    isLocked() {
+        return this._lock;
     }
 
     async fireScreenFireball(v: Vector3) {
@@ -136,6 +160,15 @@ export default class GameManager extends Component {
                     .find("screen")
                     .find("Points")
                     .getComponentError<PointsComp>(PointsComp);
+            } catch (e) {}
+        }
+        if (!this.deathScreen) {
+            try {
+                this.deathScreen = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("DeathScreen")
+                    .getComponentError<DeathScreenComp>(DeathScreenComp);
             } catch (e) {}
         }
 

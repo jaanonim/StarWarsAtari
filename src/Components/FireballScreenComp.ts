@@ -9,6 +9,8 @@ export class FireballScreenComp extends UiComponent {
     public maxSize: number = 200;
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
+
         if (this.uiElement.size.x > this.maxSize) {
             GameManager.getInstance().hit();
             this.gameObject.destroy();

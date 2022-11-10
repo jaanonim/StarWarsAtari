@@ -14,6 +14,7 @@ import Shield from "./GameObjects/Shield";
 import Points from "./GameObjects/Points";
 import WaveInfo from "./GameObjects/WaveInfo";
 import Hint from "./GameObjects/Hint";
+import DeathScreen from "./GameObjects/DeathScreen";
 
 async function loadFont() {
     const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
@@ -56,6 +57,7 @@ export async function main() {
                     await Points(),
                     await WaveInfo(),
                     await Hint(),
+                    await DeathScreen(),
                 ],
             },
         ],

@@ -10,7 +10,7 @@ export default async function Cursor() {
     const tex = new TextureLoader(
         await FileLoader.loadImg("img/cursor.png")
     ).parse();
-    console.log(tex.canvas);
+
     return Importer.object({
         name: "Cursor",
         transform: {

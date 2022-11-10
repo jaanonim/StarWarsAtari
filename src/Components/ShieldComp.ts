@@ -39,7 +39,7 @@ export class ShieldComp extends UiComponent {
         shieldText: ShieldText
     ) {
         super();
-        this._shield = 8;
+        this._shield = 0;
         this.text = text;
         this.shieldText = shieldText;
         this.leftImgs = leftObjs.map((o) => {
@@ -52,6 +52,7 @@ export class ShieldComp extends UiComponent {
             if (!c) throw Error();
             return c;
         });
+        this.shield = Data.player.startShield;
     }
 
     async start() {

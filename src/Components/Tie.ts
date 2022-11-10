@@ -33,6 +33,7 @@ export class Tie extends Component implements HittableInterface {
     }
 
     async update(): Promise<void> {
+        if (GameManager.getInstance().isLocked()) return;
         this.transform.rotation = this.camGameObject.transform.rotation;
         if (this.target === null) {
             this.target = Quaternion.euler(

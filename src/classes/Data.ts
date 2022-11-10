@@ -8,9 +8,11 @@ export default {
     moveX: 5,
     player: {
         movementSpeed: 0.005, //0.002,
+        startShield: 8,
     },
     UI: {
         accentColor: Color.red,
         mainColor: Color.white,
     },
+    lengthOfTrench: 40,
 };

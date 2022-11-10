@@ -27,6 +27,8 @@ export class TowerComp extends Component implements HittableInterface {
     }
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
+
         if (!this.hasShoot) {
             const dist = this.transform.position
                 .subtract(this.camGameObject.transform.position)

@@ -7,6 +7,7 @@ import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import Data from "../Classes/Data";
 import Input from "../Classes/Input";
+import GameManager from "./GameManager";
 
 export enum PlayerControllerMode {
     POSITION,
@@ -24,6 +25,7 @@ export class PlayerController extends Component {
     mode: PlayerControllerMode = PlayerControllerMode.POSITION;
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
         let move = Input.getPos().subtract(Input.getCenter());
         move = new Vector2(
             sigmoid(move.x / this.controlsSmoothens),

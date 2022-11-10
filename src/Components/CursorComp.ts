@@ -24,7 +24,6 @@ export class CursorComp extends Component {
     }
 
     async update() {
-        this.log(this.transform.position);
         const pos = this.box.clamp(Input.getPos().divide(4).roundToInt());
         this.transform.position = new Vector3(pos.x, pos.y, 0);
         if (this.timer > 3000) {
