@@ -13,6 +13,7 @@ import { ShieldComp } from "../Components/ShieldComp";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import ShieldText from "../Components/ShieldText";
+import Data from "../Classes/Data";
 
 function ShieldElement(i: number, name: string, t: Texture) {
     return Importer.object({
@@ -44,7 +45,7 @@ export default async function Shield() {
     const valueText = new Text("8", {
         font: "pixeled",
         fontSize: 10,
-        color: Color.white,
+        color: Data.UI.mainColor,
     });
     const shieldText = new ShieldText();
 

@@ -1,5 +1,6 @@
 import UiComponent from "3d-game-engine-canvas/src/classes/Components/UiComponent";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import Data from "../Classes/Data";
 
 export default class ShieldText extends UiComponent {
     private _text: string = "SHIELD";
@@ -13,8 +14,9 @@ export default class ShieldText extends UiComponent {
     public fontSize = 10;
     public font = "pixeled";
 
-    public defaultColor: Color = Color.white;
-    public animColor: Color = Color.red;
+    public defaultColor: Color = Data.UI.mainColor;
+    public animColor: Color = Data.UI.accentColor;
+
     public colors: Array<Color> = Array(this.text.length).fill(
         this.defaultColor
     );

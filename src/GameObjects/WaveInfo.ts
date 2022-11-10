@@ -6,67 +6,69 @@ import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Text from "3d-game-engine-canvas/src/components/Text";
-import { PointsComp } from "../Components/PointsComp";
 import Data from "../Classes/Data";
+import WaveInfoComp from "../Components/WaveInfoComp";
 
-export default async function Points() {
-    const vText = new Text("1234567890", {
+export default async function WaveInfo() {
+    const wave = new Text("5  WAVE", {
         font: "pixeled",
         fontSize: 8,
-        color: Data.UI.accentColor,
-        textAlign: "right",
+        color: Data.UI.mainColor,
     });
-    const lastText = new Text("1234567890", {
+    const info1 = new Text("TOWERS", {
         font: "pixeled",
         fontSize: 8,
         color: Data.UI.accentColor,
-        textAlign: "right",
+    });
+    const info2 = new Text("16", {
+        font: "pixeled",
+        fontSize: 8,
+        color: Data.UI.accentColor,
     });
 
     return Importer.object({
-        name: "Points",
+        name: "WaveInfo",
         children: [
             {
-                name: "SCORE",
+                name: "Wave",
                 transform: {
-                    position: [60, 12, 0],
+                    position: [-50, 12, 0],
                 },
                 components: [
                     new UiElement({
                         size: new Vector2(60, 40),
+                        positionType: PositionType.TOP_RIGHT,
                         smoothing: false,
                     }),
-                    new Text("SCORE", {
-                        font: "pixeled",
-                        fontSize: 8,
-                        color: Data.UI.mainColor,
-                    }),
+                    wave,
                 ],
             },
             {
-                name: "value",
+                name: "Info1",
                 transform: {
-                    position: [50, 26, 0],
+                    position: [-50, 26, 0],
                 },
                 components: [
                     new UiElement({
                         size: new Vector2(60, 40),
+                        positionType: PositionType.TOP_RIGHT,
                         smoothing: false,
                     }),
-                    vText,
+                    info1,
                 ],
             },
             {
-                name: "lastValue",
+                name: "Info2",
                 transform: {
-                    position: [50, 38, 0],
+                    position: [-50, 38, 0],
                 },
                 components: [
                     new UiElement({
                         size: new Vector2(60, 40),
+                        positionType: PositionType.TOP_RIGHT,
                         smoothing: false,
                     }),
-                    lastText,
+                    info2,
                 ],
             },
         ],
@@ -76,7 +78,7 @@ export default async function Points() {
                 sizeType: SizeType.PERCENTAGE,
                 positionType: PositionType.CENTER_CENTER,
             }),
-            new PointsComp(vText, lastText),
+            new WaveInfoComp(wave, info1, info2),
         ],
     });
 }

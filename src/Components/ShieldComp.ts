@@ -3,6 +3,7 @@ import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import Data from "../Classes/Data";
 import ShieldText from "./ShieldText";
 
 export class ShieldComp extends UiComponent {
@@ -11,8 +12,8 @@ export class ShieldComp extends UiComponent {
     text: Text;
     shieldText: ShieldText;
 
-    public defaultColor: Color = Color.red;
-    public animColor: Color = Color.white;
+    public defaultColor: Color = Data.UI.accentColor;
+    public animColor: Color = Data.UI.mainColor;
 
     private _shield: number;
     public get shield(): number {
@@ -60,8 +61,12 @@ export class ShieldComp extends UiComponent {
     }
 
     takeDamage() {
-        if (this.shield <= 1) this.shieldText.text = "SHIELD GONE";
-        else this.shieldText.text = "SHIELD";
+        if (this.shield <= 1) {
+            const b = this.shieldText.defaultColor;
+            this.shieldText.defaultColor = this.shieldText.animColor;
+            this.shieldText.animColor = b;
+            this.shieldText.text = "SHIELD GONE";
+        } else this.shieldText.text = "SHIELD";
 
         this.damageAnim();
         this.shield--;

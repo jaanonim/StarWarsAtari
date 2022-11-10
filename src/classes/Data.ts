@@ -1,3 +1,5 @@
+import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+
 export default {
     width: 336,
     height: 224,
@@ -6,5 +8,9 @@ export default {
     moveX: 5,
     player: {
         movementSpeed: 0.005, //0.002,
+    },
+    UI: {
+        accentColor: Color.red,
+        mainColor: Color.white,
     },
 };

@@ -12,6 +12,8 @@ import GameManager from "./Components/GameManager";
 import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
 import Shield from "./GameObjects/Shield";
 import Points from "./GameObjects/Points";
+import WaveInfo from "./GameObjects/WaveInfo";
+import Hint from "./GameObjects/Hint";
 
 async function loadFont() {
     const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
@@ -52,6 +54,8 @@ export async function main() {
                     await Laser(camera, renderer),
                     await Shield(),
                     await Points(),
+                    await WaveInfo(),
+                    await Hint(),
                 ],
             },
         ],
