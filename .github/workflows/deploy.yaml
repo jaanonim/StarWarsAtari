@@ -30,10 +30,9 @@ jobs:
         with:
           repository: jaanonim/3d-game-engine-canvas
           path: "./3d-game-engine-canvas"
-      - name: CD
-        run: cd "./StarWarsAtari"
       - name: Build
         run: |
+          cd "./StarWarsAtari"
           npm i
           npm run build
       - name: Setup Pages
