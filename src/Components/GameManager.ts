@@ -6,6 +6,8 @@ import SphereCollider from "3d-game-engine-canvas/src/components/colliders/Spher
 import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import Data from "../Classes/Data";
 import Input from "../Classes/Input";
 import FireballScreen from "../GameObjects/FireballScreen";
 import Stage1 from "../GameObjects/Stages/Stage1";
@@ -15,16 +17,19 @@ import { DeathScreenComp } from "./DeathScreenComp";
 import { PlayerController, PlayerControllerMode } from "./PlayerController";
 import { PointsComp } from "./PointsComp";
 import { ShieldComp } from "./ShieldComp";
+import Stage from "./Stages/Stage";
 
+export interface StageInfo {
+    func: (...args: any) => Promise<GameObject>;
+    controls: PlayerControllerMode;
+    maxPos: Box;
+}
 export default class GameManager extends Component {
     private static instance: GameManager;
     public renderer!: Renderer;
-    public stages: Array<{
-        func: (...args: any) => Promise<GameObject>;
-        controls: PlayerControllerMode;
-        maxPos: Box;
-    }>;
+    public stages: Array<StageInfo>;
     public currentStage!: GameObject;
+    public currentStageId: number;
     public isIndestructible: boolean = false;
     private collider!: SphereCollider;
     private shield!: ShieldComp;
@@ -35,6 +40,7 @@ export default class GameManager extends Component {
     private constructor() {
         super();
         this._lock = false;
+        this.currentStageId = 0;
         this.stages = [
             {
                 func: Stage1,
@@ -71,22 +77,13 @@ export default class GameManager extends Component {
 
     async start() {
         super.start();
-
         const col =
             this.gameObject.getComponent<SphereCollider>(SphereCollider);
         if (!col) throw Error();
         this.collider = col;
 
-        const stage = this.stages[2]; //! HERE <------------------------------
-
-        const pc =
-            this.gameObject.getComponent<PlayerController>(PlayerController);
-        if (!pc) throw Error();
-        pc.mode = stage.controls;
-        pc.maxPos = stage.maxPos;
-        this.currentStage = this.gameObject
-            .getScene()
-            .addChildren(await stage.func());
+        this.currentStageId = 0;
+        this.loadStage();
     }
 
     setRenderer(r: Renderer) {
@@ -130,8 +127,9 @@ export default class GameManager extends Component {
         const margin = c.size.divide(10);
         const box = new Box2D(margin, c.size.subtract(margin));
 
-        const pos = cam.worldToScreenPoint(v, this.renderer);
-
+        const pos = cam
+            .worldToScreenPoint(v, this.renderer)
+            .multiply(Data.scale);
         if (box.contains(pos)) {
             const fb = await FireballScreen(
                 v.subtract(this.transform.globalPosition).squareLength()
@@ -182,4 +180,41 @@ export default class GameManager extends Component {
             this.hit();
         }
     }
+
+    destroyAllFireballs() {
+        const cam = this.gameObject.getComponent<Camera>(Camera);
+        if (!cam) throw Error("No camera");
+        const screen = this.gameObject.getScene().find("screen");
+        screen.findMany("FireballScreen").forEach((f) => {
+            f.destroy();
+        });
+    }
+
+    async loadNextStage() {
+        Input.lock();
+        this.transform.position = Vector3.zero;
+        this.transform.rotation = Quaternion.euler(Vector3.zero);
+        this.destroyAllFireballs();
+        const c = this.currentStage.getComponent<Stage>(Stage);
+        if (!c) throw Error();
+        await c.onUnload();
+        this.currentStageId++;
+        this.loadStage();
+        Input.unlock();
+    }
+
+    async loadStage() {
+        const stage = this.stages[this.currentStageId];
+        const pc =
+            this.gameObject.getComponent<PlayerController>(PlayerController);
+        if (!pc) throw Error();
+        pc.mode = stage.controls;
+        pc.maxPos = stage.maxPos;
+
+        this.currentStage = this.gameObject
+            .getScene()
+            .addChildren(await stage.func());
+    }
+
+    setWin() {}
 }

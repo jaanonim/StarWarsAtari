@@ -1,4 +1,3 @@
-import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import { getRandomElement } from "3d-game-engine-canvas/src/utilities/math/Math";
@@ -7,7 +6,8 @@ import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Data from "../../Classes/Data";
 import FireballWord from "../../GameObjects/FireballWord";
 import GameManager from "../GameManager";
-export default class Stage5Comp extends Component {
+import Stage from "./Stage";
+export default class Stage5Comp extends Stage {
     private cooldown: number = 0;
     public fireCooldown: number = 700;
     private camGameObject!: GameObject;
@@ -69,10 +69,14 @@ export default class Stage5Comp extends Component {
 
     onTargetDestroy() {
         GameManager.getInstance().points.addSilent(25000);
-        this.warn("Jej! you won!");
+        GameManager.getInstance().setWin();
     }
 
     onWallBunkerDestroy() {
         GameManager.getInstance().points.add(100);
+    }
+
+    async onUnload() {
+        this.gameObject.destroy();
     }
 }

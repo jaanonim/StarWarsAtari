@@ -5,8 +5,8 @@ import GameManager from "./GameManager";
 
 export class FireballScreenComp extends UiComponent {
     public rotationSpeed: number = 0.1;
-    public speed: number = 0.05;
-    public maxSize: number = 200;
+    public speed: number = 0.0125;
+    public maxSize: number = 50;
 
     async update() {
         if (GameManager.getInstance().isLocked()) return;

@@ -15,4 +15,12 @@ export default {
         mainColor: Color.white,
     },
     lengthOfTrench: 40,
+    stage1: {
+        time: 60000,
+    },
+    stage3: {
+        width: 20,
+        length: 50,
+        margin: 15,
+    },
 };

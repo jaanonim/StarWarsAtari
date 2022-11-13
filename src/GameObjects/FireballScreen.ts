@@ -18,7 +18,7 @@ export default async function FireballScreen(start: number) {
         name: "FireballScreen",
         components: [
             new UiElement({
-                size: new Vector2(20, 20).multiply(v),
+                size: new Vector2(5, 5).multiply(v),
             }),
             new FireballScreenComp(),
             new Image(tex),

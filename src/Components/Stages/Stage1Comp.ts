@@ -1,12 +1,15 @@
-import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
+import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import Data from "../../Classes/Data";
 import TieFighter from "../../GameObjects/TieFighter";
 import GameManager from "../GameManager";
+import Stage from "./Stage";
 
-export default class Stage1Comp extends Component {
+export default class Stage1Comp extends Stage {
     player!: GameObject;
     tieCount: number = 5;
+    timer: number = 0;
 
     onTieDestroy(isVader: boolean) {
         if (isVader) {
@@ -22,6 +25,15 @@ export default class Stage1Comp extends Component {
         for (let _ = 0; _ < this.tieCount; _++) {
             this.spawnTie();
         }
+        this.timer = 0;
+    }
+
+    async update() {
+        if (GameManager.getInstance().isLocked()) return;
+        if (this.timer >= Data.stage1.time) {
+            this.timer = 0;
+            GameManager.getInstance().loadNextStage();
+        } else this.timer += Renderer.deltaTime;
     }
 
     async spawnTie() {
@@ -32,5 +44,9 @@ export default class Stage1Comp extends Component {
             )
         );
         this.gameObject.addChildren(tie);
+    }
+
+    async onUnload() {
+        this.gameObject.destroy();
     }
 }
