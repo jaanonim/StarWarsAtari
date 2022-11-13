@@ -1,4 +1,4 @@
-name: Deploy static docs content to Pages
+name: Deploy and build page
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
         run: cd "./StarWarsAtari"
       - name: Build
         run: |
-          npm ci
+          npm i
           npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v2
