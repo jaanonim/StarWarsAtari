@@ -21,13 +21,17 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout StarWarsAtari
         uses: actions/checkout@v3
-      - name: Checkout
+        with:
+          path: "./StarWarsAtari"
+      - name: Checkout 3d-game-engine-canvas
         uses: actions/checkout@v3
         with:
           repository: jaanonim/3d-game-engine-canvas
-          path: "../3d-game-engine-canvas"
+          path: "./3d-game-engine-canvas"
+      - name: CD
+        run: cd "./StarWarsAtari"
       - name: Build
         run: |
           npm ci
