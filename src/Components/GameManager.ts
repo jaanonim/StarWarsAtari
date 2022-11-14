@@ -109,10 +109,12 @@ export default class GameManager extends Component {
         setTimeout(() => {
             this.isIndestructible = false;
         }, 1500);
-        this.shield.takeDamage();
         if (this.shield.shield <= 0) {
             this.lock();
             this.deathScreen.show();
+            this.shield.ded();
+        } else {
+            this.shield.takeDamage();
         }
     }
 

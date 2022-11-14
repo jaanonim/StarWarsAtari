@@ -19,13 +19,13 @@ export default async function VaderFighter() {
     const tieComp = new TieComp(true, []);
     return Importer.object({
         name: "VaderFighter",
+        transform: { position: [0, 0, -5] },
         children: [
             {
                 name: "wing2",
                 transform: {
                     position: [1, 0, 0],
                     rotation: [0, 0, Math.PI],
-
                     scale: [1, 1, 0.7],
                 },
                 components: [

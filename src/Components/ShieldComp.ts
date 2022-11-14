@@ -73,6 +73,10 @@ export class ShieldComp extends UiComponent {
         this.shield--;
     }
 
+    ded() {
+        this.damageAnim();
+    }
+
     damageAnim() {
         setTimeout(() => {
             this.damageAnimFrame(Math.min(this._shield, 6), true);
