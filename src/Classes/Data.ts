@@ -16,7 +16,7 @@ export default {
     },
     lengthOfTrench: 40,
     stage1: {
-        time: 60000,
+        time: 10000, //60000,
     },
     stage3: {
         width: 20,
