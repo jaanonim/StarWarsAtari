@@ -4,7 +4,7 @@ export interface HittableInterface {
     hit(): void;
 }
 
-export class Hittable extends Component {
+export default class Hittable extends Component {
     obj: HittableInterface;
     constructor(obj: HittableInterface) {
         super();

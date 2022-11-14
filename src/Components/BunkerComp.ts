@@ -4,19 +4,20 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
-import Stage3Comp from "./Stages/Stage3Comp";
+import Stage2Comp from "./Stages/Stage2Comp";
 
-export class TowerComp extends Component implements HittableInterface {
+export class BunkerComp extends Component implements HittableInterface {
     private camGameObject!: GameObject;
     private cooldown: number = 0;
     private ms!: MeshRenderer;
     private hasShoot: boolean = false;
     private isDestroyed = false;
 
-    public fireCooldown: number = 1000;
+    public fireCooldown: number = 1500;
     public maxDistance: number = 255;
     public minDistance: number = 25;
 
@@ -41,7 +42,7 @@ export class TowerComp extends Component implements HittableInterface {
                 if (!cam) throw Error("No camera");
                 if (this.ms.isOnCamera(cam)) {
                     if (this.cooldown > this.fireCooldown) {
-                        if (Math.random() > 0.75)
+                        if (Math.random() > 0.5)
                             this.hasShoot =
                                 await GameManager.getInstance().fireScreenFireball(
                                     this.transform.globalPosition
@@ -58,18 +59,20 @@ export class TowerComp extends Component implements HittableInterface {
         if (this.isDestroyed) return;
 
         const c =
-            GameManager.getInstance().currentStage.getComponent<Stage3Comp>(
-                Stage3Comp
+            GameManager.getInstance().currentStage.getComponent<Stage2Comp>(
+                Stage2Comp
             );
         if (!c) throw Error();
-        c.onTowerDestroy();
+        c.onBunkerDestroy();
 
         const f = async () => {
             this.isDestroyed = true;
             this.gameObject.getComponentError<MeshRenderer>(
                 MeshRenderer
             ).isActive = false;
-            this.gameObject.addChildren(await Scrap(Color.yellow));
+            this.gameObject.addChildren(
+                await Scrap(Color.red, new Vector3(0.8, 0.5, 1))
+            );
             setTimeout(() => {
                 this.gameObject.destroy();
             }, 1000);

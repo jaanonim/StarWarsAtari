@@ -7,12 +7,13 @@ import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import BoxCollider from "3d-game-engine-canvas/src/components/colliders/BoxCollider";
 import { TowerComp } from "../Components/TowerComp";
-import { Hittable } from "../Components/Hittable";
+import Hittable from "../Components/Hittable";
 
 export default async function Tower(position: Vector3) {
     const tower = new ObjLoader(await FileLoader.load("model/tower.obj")).parse(
         true
     );
+
     const mat = new WireframeMaterial(Color.yellow);
     const towerComp = new TowerComp();
     return Importer.object({

@@ -5,7 +5,7 @@ import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import TieComp from "../Components/TieComp";
-import { Hittable } from "../Components/Hittable";
+import Hittable from "../Components/Hittable";
 
 export default async function VaderFighter() {
     const wing = new ObjLoader(await FileLoader.load("model/wing2.obj")).parse(

@@ -5,17 +5,14 @@ import TextureLoader from "3d-game-engine-canvas/src/tools/TextureLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { StarComp } from "../Components/StarComp";
-export default async function Star(v: Vector3) {
+export default async function Star(pos: Vector3, dir: Vector3, color: Color) {
     const tex = new TextureLoader(
         await FileLoader.loadImg("img/nothing.png")
     ).parse();
 
     return Importer.object({
         name: "star",
-        transform: { position: v, scale: [0.1, 0.1, 0.1] },
-        components: [
-            new SpriteRenderer(tex, new Color(255, 255, 255, 255)),
-            new StarComp(v),
-        ],
+        transform: { position: pos, scale: [0.1, 0.1, 0.1] },
+        components: [new SpriteRenderer(tex, color), new StarComp(dir)],
     });
 }

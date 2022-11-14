@@ -11,6 +11,7 @@ import Data from "../Classes/Data";
 import Input from "../Classes/Input";
 import FireballScreen from "../GameObjects/FireballScreen";
 import Stage1 from "../GameObjects/Stages/Stage1";
+import Stage2 from "../GameObjects/Stages/Stage2";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage5 from "../GameObjects/Stages/Stage5";
 import { DeathScreenComp } from "./DeathScreenComp";
@@ -52,6 +53,14 @@ export default class GameManager extends Component {
                 maxPos: new Box(Vector3.zero, Vector3.zero),
             },
             {
+                func: Stage2,
+                controls: PlayerControllerMode.POSITION,
+                maxPos: new Box(
+                    new Vector3(-20, -1, 0),
+                    new Vector3(20, 0.5, 100)
+                ),
+            },
+            {
                 func: Stage3,
                 controls: PlayerControllerMode.POSITION,
                 maxPos: new Box(
@@ -86,7 +95,7 @@ export default class GameManager extends Component {
         if (!col) throw Error();
         this.collider = col;
 
-        this.currentStageId = 0;
+        this.currentStageId = 1;
         this.loadStage();
     }
 

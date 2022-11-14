@@ -4,30 +4,28 @@ import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
-import Hittable from "../Components/Hittable";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import { WallBunkerComp } from "../Components/WallBunkerComp";
+import Hittable from "../Components/Hittable";
+import { BunkerComp } from "../Components/BunkerComp";
 
-export default async function WallBunker(position: Vector3) {
-    const plane = new ObjLoader(await FileLoader.load("model/plane.obj")).parse(
-        true
-    );
-    plane.doubleSided = true;
-    const PI2 = Math.PI / 2;
+export default async function Bunker(position: Vector3) {
+    const tower = new ObjLoader(
+        await FileLoader.load("model/bunker.obj")
+    ).parse(true);
     const mat = new WireframeMaterial(Color.red);
-    const wal = new WallBunkerComp();
+    const comp = new BunkerComp();
 
     return Importer.object({
-        name: "WallBunker",
+        name: "Bunker",
         transform: {
             position: position,
-            rotation: [0, PI2, 0],
-            scale: [0.3, 0.3, 0.3],
+            rotation: [0, Math.PI, 0],
+            scale: [0.5, 0.3, 0.5],
         },
         components: [
-            new MeshRenderer(plane.copy(), mat),
-            new Hittable(wal),
-            wal,
+            new MeshRenderer(tower.copy(), mat),
+            new Hittable(comp),
+            comp,
         ],
     });
 }

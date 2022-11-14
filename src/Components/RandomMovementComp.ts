@@ -7,6 +7,11 @@ export class RandomMovementComp extends Component {
     public rotationSpeed = 0.001;
     public isEnabled = false;
 
+    constructor(isEnabled = false) {
+        super();
+        this.isEnabled = isEnabled;
+    }
+
     public direction = Vector3.random
         .subtract(Vector3.one.divide(2))
         .normalize();

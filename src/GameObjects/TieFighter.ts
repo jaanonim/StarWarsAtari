@@ -4,7 +4,7 @@ import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
-import { Hittable } from "../Components/Hittable";
+import Hittable from "../Components/Hittable";
 import TieComp from "../Components/TieComp";
 import { RandomMovementComp } from "../Components/RandomMovementComp";
 

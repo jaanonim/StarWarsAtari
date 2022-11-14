@@ -6,7 +6,7 @@ import TextureLoader from "3d-game-engine-canvas/src/tools/TextureLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { FireballWordComp } from "../Components/FireballWordComp";
-import { Hittable } from "../Components/Hittable";
+import Hittable  from "../Components/Hittable";
 
 export default async function FireballWord(position: Vector3) {
     const tex = new TextureLoader(

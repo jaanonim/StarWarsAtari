@@ -15,8 +15,15 @@ export default {
         mainColor: Color.white,
     },
     lengthOfTrench: 40,
+    groundRange: 30,
     stage1: {
-        time: 10000, //60000,
+        time: 1000, //60000,
+    },
+    stage2: {
+        width: 20,
+        length: 60,
+        margin: 10,
+        numberOfBunkers: 24,
     },
     stage3: {
         width: 20,
