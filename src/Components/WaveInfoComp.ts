@@ -18,6 +18,11 @@ export default class WaveInfoComp extends UiComponent {
         this.info2Text = info2Text;
     }
 
+    async start(): Promise<void> {
+        super.start();
+        this.resetInfo();
+    }
+
     setWave(n: number) {
         this._waveNumber = n;
         this.waveText.text = `${this._waveNumber}  WAVE`;
@@ -26,5 +31,9 @@ export default class WaveInfoComp extends UiComponent {
     setInfo(line1: string, line2: string) {
         this.info1Text.text = line1;
         this.info2Text.text = line2;
+    }
+
+    resetInfo() {
+        this.setInfo("", "");
     }
 }

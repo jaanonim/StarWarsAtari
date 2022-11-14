@@ -115,6 +115,7 @@ export default class Input {
 
     public static lock() {
         Input._lock = true;
+        Input.isFire = false;
         Input.center();
     }
 

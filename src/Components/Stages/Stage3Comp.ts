@@ -4,13 +4,23 @@ import GameManager from "../GameManager";
 import Stage from "./Stage";
 export default class Stage3Comp extends Stage {
     private camGameObject!: GameObject;
+    public numberOfTowers: number = Data.stage3.numberOfTowers;
 
     onTowerDestroy() {
         GameManager.getInstance().points.add(200);
+        this.numberOfTowers--;
+        GameManager.getInstance().waveInfo.setInfo(
+            "TOWERS",
+            "" + this.numberOfTowers
+        );
     }
 
     async start() {
         this.camGameObject = this.gameObject.getScene().find("camera");
+        GameManager.getInstance().waveInfo.setInfo(
+            "TOWERS",
+            "" + this.numberOfTowers
+        );
     }
 
     async update() {

@@ -12,7 +12,7 @@ import { HittableInterface } from "./Hittable";
 import { RandomMovementComp } from "./RandomMovementComp";
 import Stage1Comp from "./Stages/Stage1Comp";
 
-export class Tie extends Component implements HittableInterface {
+export default class TieComp extends Component implements HittableInterface {
     private camGameObject!: GameObject;
     private target: Vector3 | null = null;
     private isVader: boolean;
@@ -88,7 +88,7 @@ export class Tie extends Component implements HittableInterface {
                 );
             }
         }
-        if (!this.isDamage) {
+        if (!this.isDamage && !this.stage.inTransition) {
             const cam = this.camGameObject.getComponent<Camera>(Camera);
             if (!cam) throw Error("No camera");
             if (this.ms.isOnCamera(cam)) {

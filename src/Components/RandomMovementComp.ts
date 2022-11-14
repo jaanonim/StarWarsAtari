@@ -4,6 +4,7 @@ import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 export class RandomMovementComp extends Component {
     public speed = 0.002;
+    public rotationSpeed = 0.001;
     public isEnabled = false;
 
     public direction = Vector3.random
@@ -15,7 +16,13 @@ export class RandomMovementComp extends Component {
 
     async update() {
         if (this.isEnabled) {
-            this.transform.rotation = Quaternion.euler(this.rotation);
+            this.transform.rotation = this.transform.rotation.multiply(
+                Quaternion.euler(
+                    this.rotation.multiply(
+                        Renderer.deltaTime * this.rotationSpeed
+                    )
+                )
+            );
 
             this.transform.position = this.transform.position.add(
                 this.direction.multiply(Renderer.deltaTime * this.speed)

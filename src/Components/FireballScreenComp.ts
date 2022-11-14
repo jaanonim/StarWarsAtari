@@ -4,7 +4,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import GameManager from "./GameManager";
 
 export class FireballScreenComp extends UiComponent {
-    public rotationSpeed: number = 0.1;
+    public rotationSpeed: number = 0.005;
     public speed: number = 0.0125;
     public maxSize: number = 50;
 

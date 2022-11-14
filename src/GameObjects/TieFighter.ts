@@ -5,7 +5,7 @@ import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { Hittable } from "../Components/Hittable";
-import { Tie } from "../Components/Tie";
+import TieComp from "../Components/TieComp";
 import { RandomMovementComp } from "../Components/RandomMovementComp";
 
 export default async function TieFighter() {
@@ -19,7 +19,7 @@ export default async function TieFighter() {
     const PI2 = Math.PI / 2;
     const ele1 = new RandomMovementComp();
     const ele2 = new RandomMovementComp();
-    const tieComp = new Tie(false, [ele1, ele2]);
+    const tieComp = new TieComp(false, [ele1, ele2]);
     return Importer.object({
         name: "TieFighter",
         children: [

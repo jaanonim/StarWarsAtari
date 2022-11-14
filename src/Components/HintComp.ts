@@ -10,8 +10,17 @@ export default class HintComp extends UiComponent {
         this.text = text;
     }
 
+    async start(): Promise<void> {
+        super.start();
+        this.resetHint();
+    }
+
     setHint(text: string, color: Color) {
         this.text.text = text;
         this.text.options.color = color;
+    }
+
+    resetHint() {
+        this.setHint("", Color.white);
     }
 }

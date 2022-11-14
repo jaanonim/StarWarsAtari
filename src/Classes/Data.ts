@@ -22,5 +22,6 @@ export default {
         width: 20,
         length: 50,
         margin: 15,
+        numberOfTowers: 16,
     },
 };

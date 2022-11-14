@@ -14,10 +14,12 @@ import Stage1 from "../GameObjects/Stages/Stage1";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage5 from "../GameObjects/Stages/Stage5";
 import { DeathScreenComp } from "./DeathScreenComp";
+import HintComp from "./HintComp";
 import { PlayerController, PlayerControllerMode } from "./PlayerController";
 import { PointsComp } from "./PointsComp";
 import { ShieldComp } from "./ShieldComp";
 import Stage from "./Stages/Stage";
+import WaveInfoComp from "./WaveInfoComp";
 
 export interface StageInfo {
     func: (...args: any) => Promise<GameObject>;
@@ -34,6 +36,8 @@ export default class GameManager extends Component {
     private collider!: SphereCollider;
     private shield!: ShieldComp;
     public points!: PointsComp;
+    public hint!: HintComp;
+    public waveInfo!: WaveInfoComp;
     private deathScreen!: DeathScreenComp;
     private _lock: boolean;
 
@@ -169,6 +173,24 @@ export default class GameManager extends Component {
                     .getComponentError<DeathScreenComp>(DeathScreenComp);
             } catch (e) {}
         }
+        if (!this.waveInfo) {
+            try {
+                this.waveInfo = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("WaveInfo")
+                    .getComponentError<WaveInfoComp>(WaveInfoComp);
+            } catch (e) {}
+        }
+        if (!this.hint) {
+            try {
+                this.hint = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("Hint")
+                    .getComponentError<HintComp>(HintComp);
+            } catch (e) {}
+        }
 
         const cols = this.collider.getCollisions();
         if (cols.length > 0) {
@@ -192,15 +214,21 @@ export default class GameManager extends Component {
 
     async loadNextStage() {
         Input.lock();
-        this.transform.position = Vector3.zero;
-        this.transform.rotation = Quaternion.euler(Vector3.zero);
-        this.destroyAllFireballs();
+        await this.resetBeforeLoad();
         const c = this.currentStage.getComponent<Stage>(Stage);
         if (!c) throw Error();
         await c.onUnload();
         this.currentStageId++;
         this.loadStage();
         Input.unlock();
+    }
+
+    async resetBeforeLoad() {
+        this.transform.position = Vector3.zero;
+        this.transform.rotation = Quaternion.euler(Vector3.zero);
+        this.destroyAllFireballs();
+        this.hint.resetHint();
+        this.waveInfo.resetInfo();
     }
 
     async loadStage() {

@@ -24,7 +24,7 @@ export class DeathStarComp extends Component {
         this.transform.rotation = this.camGameObject.transform.rotation;
         if (this.onAnimEnds !== null) {
             const move = this.transform.position.subtract(
-                this.camGameObject.transform.apply(new Vector3(0, 0, 2))
+                this.camGameObject.transform.apply(new Vector3(0, 0, 1.5))
             );
 
             if (move.squareLength() < 100 && !this.isBigger) {
