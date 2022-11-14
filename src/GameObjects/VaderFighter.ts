@@ -15,7 +15,8 @@ export default async function VaderFighter() {
     const body = new ObjLoader(await FileLoader.load("model/body.obj")).parse();
     body.doubleSided = true;
     const mat = new WireframeMaterial(Color.blue);
-    const tieComp = new Tie(true);
+
+    const tieComp = new Tie(true, []);
     return Importer.object({
         name: "VaderFighter",
         children: [
