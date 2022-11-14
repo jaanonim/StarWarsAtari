@@ -6,6 +6,7 @@ export default {
     scale: 0.25,
     moveY: 5,
     moveX: 5,
+    start: 0,
     player: {
         movementSpeed: 0.005, //0.002,
         startShield: 8,
@@ -17,7 +18,7 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 1000, //60000,
+        time: 60000,
     },
     stage2: {
         width: 20,

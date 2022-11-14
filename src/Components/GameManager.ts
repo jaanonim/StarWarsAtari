@@ -95,7 +95,7 @@ export default class GameManager extends Component {
         if (!col) throw Error();
         this.collider = col;
 
-        this.currentStageId = 1;
+        this.currentStageId = Data.start;
         this.loadStage();
     }
 
