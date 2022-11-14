@@ -32,6 +32,7 @@ export class DeathStarComp extends Component {
                 const tex = new TextureLoader(
                     await FileLoader.loadImg("img/deathStar.png")
                 ).parse();
+                tex.bilinearFiltering = false;
                 this.gameObject.getComponentError<SpriteRenderer>(
                     SpriteRenderer
                 ).material = new BasicMaterial(Color.white, tex);
