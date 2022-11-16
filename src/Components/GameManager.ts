@@ -40,6 +40,7 @@ export default class GameManager extends Component {
     public hint!: HintComp;
     public waveInfo!: WaveInfoComp;
     private deathScreen!: DeathScreenComp;
+    private flash!: DeathScreenComp;
     private _lock: boolean;
 
     private constructor() {
@@ -109,6 +110,10 @@ export default class GameManager extends Component {
         setTimeout(() => {
             this.isIndestructible = false;
         }, 1500);
+        this.flash.show();
+        setTimeout(() => {
+            this.flash.hide();
+        }, 50);
         if (this.shield.shield <= 0) {
             this.lock();
             this.deathScreen.show();
@@ -200,6 +205,15 @@ export default class GameManager extends Component {
                     .find("screen")
                     .find("Hint")
                     .getComponentError<HintComp>(HintComp);
+            } catch (e) {}
+        }
+        if (!this.flash) {
+            try {
+                this.flash = this.gameObject
+                    .getScene()
+                    .find("screen")
+                    .find("Flash")
+                    .getComponentError<DeathScreenComp>(DeathScreenComp);
             } catch (e) {}
         }
 
