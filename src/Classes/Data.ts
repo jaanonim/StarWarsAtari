@@ -6,7 +6,7 @@ export default {
     scale: 0.25,
     moveY: 5,
     moveX: 5,
-    start: 0,
+    start: 4,
     player: {
         movementSpeed: 0.005, //0.002,
         startShield: 8,

@@ -6,10 +6,13 @@ import ObjLoader from "3d-game-engine-canvas/src/tools/ObjLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import WallBunker from "./WallBunker";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import Obstacle from "./Obstacle";
 
 export default async function Wall(
     zPos: number,
-    pattern: [Array<number>, Array<number>]
+    bunkerPattern: [Array<number>, Array<number>],
+    obstaclePattern: [Array<number>, Array<number>],
+    obstacleColor: Color = Color.white
 ) {
     const plane = new ObjLoader(await FileLoader.load("model/plane.obj")).parse(
         true
@@ -40,10 +43,24 @@ export default async function Wall(
                 components: [new MeshRenderer(plane.copy(), mat)],
             },
             ...(await Promise.all(
-                pattern[0].map((y) => WallBunker(new Vector3(-2, POS[y], zPos)))
+                bunkerPattern[0].map((y) =>
+                    WallBunker(new Vector3(-2, POS[y], zPos))
+                )
             )),
             ...(await Promise.all(
-                pattern[1].map((y) => WallBunker(new Vector3(2, POS[y], zPos)))
+                bunkerPattern[1].map((y) =>
+                    WallBunker(new Vector3(2, POS[y], zPos))
+                )
+            )),
+            ...(await Promise.all(
+                obstaclePattern[0].map((y) =>
+                    Obstacle(new Vector3(-1, POS[y], zPos), obstacleColor)
+                )
+            )),
+            ...(await Promise.all(
+                obstaclePattern[1].map((y) =>
+                    Obstacle(new Vector3(1, POS[y], zPos), obstacleColor)
+                )
             )),
         ],
         components: [],
