@@ -21,6 +21,10 @@ export default class WaveSystem {
 
     public currentStage!: GameObject;
     public currentStageIndex: number = 0;
+    private _stageData: any;
+    public get stageData(): any {
+        return this._stageData;
+    }
 
     public currentWaveIndex = 0;
     public get currentWaveName() {
@@ -52,12 +56,12 @@ export default class WaveSystem {
     }
 
     async loadStage() {
-        const stage =
-            WaveInfo.stages[
-                WaveInfo.waves[this.currentWaveIndex].stages[
-                    this.currentStageIndex
-                ]
+        const stageInfo =
+            WaveInfo.waves[this.currentWaveIndex].stages[
+                this.currentStageIndex
             ];
+        const stage = WaveInfo.stages[stageInfo.id];
+        this._stageData = { ...stage.data, ...stageInfo.data };
         const pc =
             GameManager.getInstance().gameObject.getComponent<PlayerController>(
                 PlayerController

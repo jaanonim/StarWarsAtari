@@ -21,7 +21,7 @@ export default class TieComp extends Component implements HittableInterface {
     private ms!: MeshRenderer;
     private stage!: Stage1Comp;
 
-    public fireCooldown: number = 3000;
+    public fireCooldown: number;
 
     public normalColor = Color.blue;
     public dmgColor = Color.white;
@@ -34,6 +34,7 @@ export default class TieComp extends Component implements HittableInterface {
         super();
         this.isVader = isVader;
         this.elements = elements;
+        this.fireCooldown = WaveSystem.getInstance().stageData.fireCooldown;
     }
 
     async start() {
@@ -100,7 +101,7 @@ export default class TieComp extends Component implements HittableInterface {
                     this.cooldown = 0;
                 }
                 this.cooldown += Renderer.deltaTime;
-            } else this.cooldown = 2000;
+            } else this.cooldown = this.fireCooldown - 1000;
         }
     }
 

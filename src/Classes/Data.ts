@@ -7,8 +7,8 @@ export default {
     moveY: 5,
     moveX: 5,
     start: {
-        stage: 2,
-        wave: 3,
+        stage: 0,
+        wave: 0,
     },
     player: {
         movementSpeed: 0.005, //0.002,
@@ -21,18 +21,6 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 6000,
-    },
-    stage2: {
-        width: 20,
-        length: 60,
-        margin: 10,
-        numberOfBunkers: 24,
-    },
-    stage3: {
-        width: 20,
-        length: 50,
-        margin: 15,
-        numberOfTowers: 16,
+        time: 10, //60,
     },
 };

@@ -14,12 +14,17 @@ import Stage from "./Stage";
 export default class Stage1Comp extends Stage {
     player!: GameObject;
     screen!: GameObject;
-    tieCount: number = 5;
+    tieCount: number;
     timer: number = 0;
 
     private stars!: GameObject;
     private deathStar!: GameObject;
     public inTransition = false;
+
+    constructor() {
+        super();
+        this.tieCount = WaveSystem.getInstance().stageData.tieCount;
+    }
 
     onTieDestroy(isVader: boolean) {
         if (isVader) {
@@ -47,7 +52,7 @@ export default class Stage1Comp extends Stage {
 
     async update() {
         if (GameManager.getInstance().isLocked()) return;
-        if (this.timer >= Data.stage1.time) {
+        if (this.timer >= Data.stage1.time * 1000) {
             this.timer = 0;
             Input.lock();
             GameManager.getInstance().destroyAllFireballs();

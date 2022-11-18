@@ -1,19 +1,25 @@
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Data from "../../Classes/Data";
+import WaveSystem from "../../Classes/WaveSystem";
 import Stage3Comp from "../../Components/Stages/Stage3Comp";
 import Tower from "../Tower";
 
 export default async function Stage3() {
     const pos: Array<Vector3> = [];
 
-    for (let i = 0; i < Data.stage3.numberOfTowers; i++) {
+    for (
+        let i = 0;
+        i < WaveSystem.getInstance().stageData.numberOfTowers;
+        i++
+    ) {
         let v: Vector3;
         do
             v = new Vector3(
-                Math.random() * Data.stage3.width - Data.stage3.width / 2,
+                Math.random() * WaveSystem.getInstance().stageData.width -
+                    WaveSystem.getInstance().stageData.width / 2,
                 -2,
-                Math.random() * Data.stage3.length + Data.stage3.margin
+                Math.random() * WaveSystem.getInstance().stageData.length +
+                    WaveSystem.getInstance().stageData.margin
             ).roundXYToInt();
         while (pos.some((e) => v.subtract(e).squareLength() < 25));
         pos.push(v);

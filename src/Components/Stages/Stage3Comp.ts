@@ -1,5 +1,4 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
-import Data from "../../Classes/Data";
 import WaveSystem from "../../Classes/WaveSystem";
 import Ground from "../../GameObjects/Ground";
 import GameManager from "../GameManager";
@@ -7,7 +6,12 @@ import Stage from "./Stage";
 export default class Stage3Comp extends Stage {
     private player!: GameObject;
     private ground!: GameObject;
-    public numberOfTowers: number = Data.stage3.numberOfTowers;
+    public numberOfTowers: number;
+
+    constructor() {
+        super();
+        this.numberOfTowers = WaveSystem.getInstance().stageData.numberOfTowers;
+    }
 
     onTowerDestroy() {
         GameManager.getInstance().points.add(200);
@@ -32,7 +36,8 @@ export default class Stage3Comp extends Stage {
     async update() {
         if (
             this.player.transform.position.z >=
-            Data.stage3.length + Data.stage3.margin
+            WaveSystem.getInstance().stageData.length +
+                WaveSystem.getInstance().stageData.margin
         )
             WaveSystem.getInstance().loadNextStage();
     }

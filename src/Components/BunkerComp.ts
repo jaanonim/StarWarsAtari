@@ -18,9 +18,19 @@ export class BunkerComp extends Component implements HittableInterface {
     private hasShoot: boolean = false;
     private isDestroyed = false;
 
-    public fireCooldown: number = 1500;
-    public maxDistance: number = 255;
-    public minDistance: number = 25;
+    public fireCooldown: number;
+    public maxDistance: number;
+    public minDistance: number;
+    public chanceOfShooting: number;
+
+    constructor() {
+        super();
+        this.fireCooldown = WaveSystem.getInstance().stageData.fireCooldown;
+        this.maxDistance = WaveSystem.getInstance().stageData.maxDistance;
+        this.minDistance = WaveSystem.getInstance().stageData.minDistance;
+        this.chanceOfShooting =
+            WaveSystem.getInstance().stageData.chanceOfShooting;
+    }
 
     async start() {
         this.camGameObject = this.gameObject.getScene().find("camera");
@@ -43,7 +53,7 @@ export class BunkerComp extends Component implements HittableInterface {
                 if (!cam) throw Error("No camera");
                 if (this.ms.isOnCamera(cam)) {
                     if (this.cooldown > this.fireCooldown) {
-                        if (Math.random() > 0.5)
+                        if (Math.random() < this.chanceOfShooting)
                             this.hasShoot =
                                 await GameManager.getInstance().fireScreenFireball(
                                     this.transform.globalPosition
