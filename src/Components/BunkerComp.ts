@@ -5,6 +5,7 @@ import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import WaveSystem from "../Classes/WaveSystem";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
@@ -59,7 +60,7 @@ export class BunkerComp extends Component implements HittableInterface {
         if (this.isDestroyed) return;
 
         const c =
-            GameManager.getInstance().currentStage.getComponent<Stage2Comp>(
+            WaveSystem.getInstance().currentStage.getComponent<Stage2Comp>(
                 Stage2Comp
             );
         if (!c) throw Error();

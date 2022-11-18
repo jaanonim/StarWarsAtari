@@ -1,5 +1,6 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Data from "../../Classes/Data";
+import WaveSystem from "../../Classes/WaveSystem";
 import Ground from "../../GameObjects/Ground";
 import GameManager from "../GameManager";
 import Stage from "./Stage";
@@ -33,7 +34,7 @@ export default class Stage3Comp extends Stage {
             this.player.transform.position.z >=
             Data.stage3.length + Data.stage3.margin
         )
-            GameManager.getInstance().loadNextStage();
+            WaveSystem.getInstance().loadNextStage();
     }
 
     async onUnload() {

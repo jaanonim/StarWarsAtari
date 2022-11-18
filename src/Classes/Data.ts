@@ -6,10 +6,13 @@ export default {
     scale: 0.25,
     moveY: 5,
     moveX: 5,
-    start: 4,
+    start: {
+        stage: 2,
+        wave: 3,
+    },
     player: {
         movementSpeed: 0.005, //0.002,
-        startShield: 8,
+        startShield: 80,
     },
     UI: {
         accentColor: Color.red,
@@ -18,7 +21,7 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 60000,
+        time: 6000,
     },
     stage2: {
         width: 20,

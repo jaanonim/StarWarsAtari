@@ -7,6 +7,7 @@ import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import WaveSystem from "../Classes/WaveSystem";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
 import { RandomMovementComp } from "./RandomMovementComp";
@@ -45,7 +46,7 @@ export default class TieComp extends Component implements HittableInterface {
         this.ms = ms;
 
         this.stage =
-            GameManager.getInstance().currentStage.getComponentError<Stage1Comp>(
+            WaveSystem.getInstance().currentStage.getComponentError<Stage1Comp>(
                 Stage1Comp
             );
     }

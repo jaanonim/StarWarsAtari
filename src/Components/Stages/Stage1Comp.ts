@@ -3,6 +3,7 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Data from "../../Classes/Data";
 import Input from "../../Classes/Input";
+import WaveSystem from "../../Classes/WaveSystem";
 import DeathStar from "../../GameObjects/DeathStar";
 import Stars from "../../GameObjects/Stars";
 import TieFighter from "../../GameObjects/TieFighter";
@@ -55,7 +56,7 @@ export default class Stage1Comp extends Stage {
                 DeathStarComp
             ).onAnimEnds = () => {
                 setTimeout(() => {
-                    GameManager.getInstance().loadNextStage();
+                    WaveSystem.getInstance().loadNextStage();
                 }, 500);
             };
         } else this.timer += Renderer.deltaTime;

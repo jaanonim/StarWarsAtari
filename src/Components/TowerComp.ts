@@ -4,6 +4,7 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import WaveSystem from "../Classes/WaveSystem";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
@@ -58,7 +59,7 @@ export class TowerComp extends Component implements HittableInterface {
         if (this.isDestroyed) return;
 
         const c =
-            GameManager.getInstance().currentStage.getComponent<Stage3Comp>(
+            WaveSystem.getInstance().currentStage.getComponent<Stage3Comp>(
                 Stage3Comp
             );
         if (!c) throw Error();

@@ -1,39 +1,23 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
-import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
-import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import Data from "../Classes/Data";
 import Input from "../Classes/Input";
+import WaveSystem from "../Classes/WaveSystem";
 import FireballScreen from "../GameObjects/FireballScreen";
-import Stage1 from "../GameObjects/Stages/Stage1";
-import Stage2 from "../GameObjects/Stages/Stage2";
-import Stage3 from "../GameObjects/Stages/Stage3";
-import Stage4 from "../GameObjects/Stages/Stage4";
-import Stage5 from "../GameObjects/Stages/Stage5";
 import { DeathScreenComp } from "./DeathScreenComp";
 import HintComp from "./HintComp";
-import { PlayerController, PlayerControllerMode } from "./PlayerController";
 import { PointsComp } from "./PointsComp";
 import { ShieldComp } from "./ShieldComp";
-import Stage from "./Stages/Stage";
 import WaveInfoComp from "./WaveInfoComp";
 
-export interface StageInfo {
-    func: (...args: any) => Promise<GameObject>;
-    controls: PlayerControllerMode;
-    maxPos: Box;
-}
 export default class GameManager extends Component {
     private static instance: GameManager;
     public renderer!: Renderer;
-    public stages: Array<StageInfo>;
-    public currentStage!: GameObject;
-    public currentStageId: number;
     public isIndestructible: boolean = false;
     private collider!: SphereCollider;
     private shield!: ShieldComp;
@@ -47,46 +31,7 @@ export default class GameManager extends Component {
     private constructor() {
         super();
         this._lock = false;
-        this.currentStageId = 0;
-        this.stages = [
-            {
-                func: Stage1,
-                controls: PlayerControllerMode.ROTATION,
-                maxPos: new Box(Vector3.zero, Vector3.zero),
-            },
-            {
-                func: Stage2,
-                controls: PlayerControllerMode.POSITION,
-                maxPos: new Box(
-                    new Vector3(-20, -1, 0),
-                    new Vector3(20, 0.5, 100)
-                ),
-            },
-            {
-                func: Stage3,
-                controls: PlayerControllerMode.POSITION,
-                maxPos: new Box(
-                    new Vector3(-20, -3, 0),
-                    new Vector3(20, 0.5, 100)
-                ),
-            },
-            {
-                func: Stage4,
-                controls: PlayerControllerMode.POSITION,
-                maxPos: new Box(
-                    new Vector3(-1.1, 0, -100),
-                    new Vector3(1.1, 3.5, 160)
-                ),
-            },
-            {
-                func: Stage5,
-                controls: PlayerControllerMode.POSITION,
-                maxPos: new Box(
-                    new Vector3(-1.1, 0, -100),
-                    new Vector3(1.1, 4, 160)
-                ),
-            },
-        ];
+
         this.unlock();
     }
 
@@ -104,9 +49,7 @@ export default class GameManager extends Component {
             this.gameObject.getComponent<SphereCollider>(SphereCollider);
         if (!col) throw Error();
         this.collider = col;
-
-        this.currentStageId = Data.start;
-        this.loadStage();
+        WaveSystem.getInstance().loadStage();
     }
 
     setRenderer(r: Renderer) {
@@ -246,17 +189,6 @@ export default class GameManager extends Component {
         });
     }
 
-    async loadNextStage() {
-        Input.lock();
-        await this.resetBeforeLoad();
-        const c = this.currentStage.getComponent<Stage>(Stage);
-        if (!c) throw Error();
-        await c.onUnload();
-        this.currentStageId++;
-        this.loadStage();
-        Input.unlock();
-    }
-
     async resetBeforeLoad() {
         this.transform.position = Vector3.zero;
         this.transform.rotation = Quaternion.euler(Vector3.zero);
@@ -265,18 +197,7 @@ export default class GameManager extends Component {
         this.waveInfo.resetInfo();
     }
 
-    async loadStage() {
-        const stage = this.stages[this.currentStageId];
-        const pc =
-            this.gameObject.getComponent<PlayerController>(PlayerController);
-        if (!pc) throw Error();
-        pc.mode = stage.controls;
-        pc.maxPos = stage.maxPos;
-
-        this.currentStage = this.gameObject
-            .getScene()
-            .addChildren(await stage.func());
+    setWin() {
+        WaveSystem.getInstance().loadNextStage();
     }
-
-    setWin() {}
 }
