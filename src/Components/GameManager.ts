@@ -20,7 +20,7 @@ export default class GameManager extends Component {
     public renderer!: Renderer;
     public isIndestructible: boolean = false;
     private collider!: SphereCollider;
-    private shield!: ShieldComp;
+    public shield!: ShieldComp;
     public points!: PointsComp;
     public hint!: HintComp;
     public waveInfo!: WaveInfoComp;

@@ -9,7 +9,12 @@ import { StarComp } from "../Components/StarComp";
 
 let tex: Texture;
 
-export default async function Star(pos: Vector3, dir: Vector3, color: Color) {
+export default async function Star(
+    pos: Vector3,
+    dir: Vector3,
+    color: Color,
+    revers: boolean
+) {
     if (!tex) {
         tex = new TextureLoader(
             await FileLoader.loadImg("img/nothing.png")
@@ -19,6 +24,6 @@ export default async function Star(pos: Vector3, dir: Vector3, color: Color) {
     return Importer.object({
         name: "star",
         transform: { position: pos, scale: [0.1, 0.1, 0.1] },
-        components: [new SpriteRenderer(tex, color), new StarComp(dir)],
+        components: [new SpriteRenderer(tex, color), new StarComp(dir, revers)],
     });
 }

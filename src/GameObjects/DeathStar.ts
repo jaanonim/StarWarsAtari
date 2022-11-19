@@ -5,7 +5,7 @@ import TextureLoader from "3d-game-engine-canvas/src/tools/TextureLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { DeathStarComp } from "../Components/DeathStarComp";
 
-export default async function DeathStar() {
+export default async function DeathStar(revers: boolean = false) {
     const tex = new TextureLoader(
         await FileLoader.loadImg("img/smallDeathStar.png")
     ).parse();
@@ -16,7 +16,7 @@ export default async function DeathStar() {
         transform: { position: [0, 0, 19.8] },
         components: [
             new SpriteRenderer(tex, new Color(255, 255, 255, 255)),
-            new DeathStarComp(),
+            new DeathStarComp(revers),
         ],
     });
 }

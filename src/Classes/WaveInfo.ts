@@ -6,6 +6,7 @@ import Stage5 from "../GameObjects/Stages/Stage5";
 import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { PlayerControllerMode } from "../Components/PlayerController";
+import Finish from "../GameObjects/Stages/Finish";
 
 export default class {
     static readonly stages = [
@@ -104,6 +105,15 @@ export default class {
                 ],
             },
         },
+        {
+            func: Finish,
+            controls: PlayerControllerMode.POSITION,
+            maxPos: new Box(
+                new Vector3(0, 0, 0),
+                new Vector3(0, 0, 0)
+            ),
+            data: { },
+        },
     ];
 
     // 8
@@ -111,11 +121,15 @@ export default class {
         {
             stages: [
                 {
+                    id: 5,
+                    data: {},
+                },
+                {
                     id: 0,
                     data: {},
                 },
                 {
-                    id: 4,
+                    id: 3,
                     data: {},
                 },
             ],
