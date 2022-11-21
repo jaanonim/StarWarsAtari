@@ -108,11 +108,8 @@ export default class {
         {
             func: Finish,
             controls: PlayerControllerMode.POSITION,
-            maxPos: new Box(
-                new Vector3(0, 0, 0),
-                new Vector3(0, 0, 0)
-            ),
-            data: { },
+            maxPos: new Box(new Vector3(0, 0, 0), new Vector3(0, 0, 0)),
+            data: {},
         },
     ];
 
@@ -121,15 +118,15 @@ export default class {
         {
             stages: [
                 {
-                    id: 5,
-                    data: {},
-                },
-                {
                     id: 0,
                     data: {},
                 },
                 {
                     id: 3,
+                    data: {},
+                },
+                {
+                    id: 5,
                     data: {},
                 },
             ],
@@ -148,6 +145,10 @@ export default class {
                 },
                 {
                     id: 4,
+                    data: {},
+                },
+                {
+                    id: 5,
                     data: {},
                 },
             ],
@@ -192,6 +193,10 @@ export default class {
                             ],
                         ],
                     },
+                },
+                {
+                    id: 5,
+                    data: {},
                 },
             ],
         },
@@ -241,6 +246,10 @@ export default class {
                             [[], [0, 1, 2, 3]],
                         ],
                     },
+                },
+                {
+                    id: 5,
+                    data: {},
                 },
             ],
         },
@@ -299,6 +308,10 @@ export default class {
                             [[], [0, 1, 2, 3]],
                         ],
                     },
+                },
+                {
+                    id: 5,
+                    data: {},
                 },
             ],
         },
@@ -418,6 +431,10 @@ export default class {
                             ],
                         ],
                     },
+                },
+                {
+                    id: 5,
+                    data: {},
                 },
             ],
         },
@@ -539,6 +556,10 @@ export default class {
                             ],
                         ],
                     },
+                },
+                {
+                    id: 5,
+                    data: {},
                 },
             ],
         },
@@ -672,6 +693,10 @@ export default class {
                     },
                 },
             ],
+        },
+        {
+            id: 5,
+            data: {},
         },
     ];
 }

@@ -12,7 +12,7 @@ export default {
     },
     player: {
         movementSpeed: 0.005, //0.002,
-        startShield: 80,
+        startShield: 8,
     },
     UI: {
         accentColor: Color.red,
@@ -21,6 +21,6 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 10, //60,
+        time: 60,
     },
 };

@@ -16,6 +16,7 @@ import WaveInfo from "./GameObjects/WaveInfo";
 import Hint from "./GameObjects/Hint";
 import DeathScreen from "./GameObjects/DeathScreen";
 import Flash from "./GameObjects/Flash";
+import Explosion from "./GameObjects/Explosion";
 
 async function loadFont() {
     const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
@@ -51,6 +52,7 @@ export async function main() {
                 name: "screen",
                 components: [new UiScreen(renderer, 0.25, 1, false)],
                 children: [
+                    await Explosion(),
                     await Cursor(),
                     await Ship(),
                     await Laser(camera, renderer),

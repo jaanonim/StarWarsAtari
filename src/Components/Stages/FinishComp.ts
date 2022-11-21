@@ -1,9 +1,11 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
+import WaveSystem from "../../Classes/WaveSystem";
 import DeathStar from "../../GameObjects/DeathStar";
 import FinishText from "../../GameObjects/FinishText";
 import Stars from "../../GameObjects/Stars";
 import { DeathStarComp } from "../DeathStarComp";
+import { ExplosionComp } from "../ExplosionComp";
 import FinishTextComp from "../FinishTextComp";
 import GameManager from "../GameManager";
 import Stage from "./Stage";
@@ -40,9 +42,19 @@ export default class FinishComp extends Stage {
             this.deathStar.getComponentError<DeathStarComp>(DeathStarComp);
         setTimeout(() => {
             comp.onAnimEnds = () => {
-                this.textAnim();
+                this.screen.removeChildren(this.deathStar);
+                this.explodeAnim();
             };
         }, 500);
+    }
+
+    explodeAnim() {
+        const comp = this.screen
+            .find("Explosion")
+            .getComponentError<ExplosionComp>(ExplosionComp);
+        comp.onAnimEnds = () => {
+            this.textAnim();
+        };
     }
 
     textAnim() {
@@ -59,7 +71,7 @@ export default class FinishComp extends Stage {
         setTimeout(() => {
             comp.onAnimEnds = () => {
                 setTimeout(() => {
-                    console.log("ok");
+                    WaveSystem.getInstance().loadNextStage();
                 }, comp.cooldown);
             };
         }, 500);
@@ -79,7 +91,6 @@ export default class FinishComp extends Stage {
 
     async onUnload() {
         this.player.removeChildren(this.stars);
-        this.screen.removeChildren(this.deathStar);
         this.screen.removeChildren(this.finishText);
         await this.gameObject.destroy();
     }
