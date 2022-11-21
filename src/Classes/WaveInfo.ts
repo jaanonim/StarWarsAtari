@@ -692,11 +692,11 @@ export default class {
                         ],
                     },
                 },
+                {
+                    id: 5,
+                    data: {},
+                },
             ],
-        },
-        {
-            id: 5,
-            data: {},
         },
     ];
 }

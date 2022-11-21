@@ -21,7 +21,8 @@ export default class GroundComp extends Component {
                     const star = await Star(
                         pos,
                         pos.subtract(new Vector3(0, 2, 0)).normalize(),
-                        Color.blue
+                        Color.blue,
+                        false
                     );
                     this.gameObject.addChildren(star);
                 }
