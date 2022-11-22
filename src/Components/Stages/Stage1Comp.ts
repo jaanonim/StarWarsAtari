@@ -3,7 +3,6 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Data from "../../Classes/Data";
-import Input from "../../Classes/Input";
 import WaveSystem from "../../Classes/WaveSystem";
 import DeathStar from "../../GameObjects/DeathStar";
 import Stars from "../../GameObjects/Stars";
@@ -62,7 +61,6 @@ export default class Stage1Comp extends Stage {
         if (GameManager.getInstance().isLocked()) return;
         if (this.timer >= Data.stage1.time * 1000) {
             this.timer = 0;
-            Input.lock();
             GameManager.getInstance().destroyAllFireballs();
             this.inTransition = true;
             this.deathStar.getComponentError<DeathStarComp>(

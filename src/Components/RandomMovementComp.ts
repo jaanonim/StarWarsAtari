@@ -2,6 +2,7 @@ import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import GameManager from "./GameManager";
 export class RandomMovementComp extends Component {
     public speed = 0.002;
     public rotationSpeed = 0.001;
@@ -20,6 +21,7 @@ export class RandomMovementComp extends Component {
         .normalize();
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
         if (this.isEnabled) {
             this.transform.rotation = this.transform.rotation.multiply(
                 Quaternion.euler(

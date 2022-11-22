@@ -21,6 +21,7 @@ export class FireballWordComp extends Component implements HittableInterface {
 
     async update() {
         if (GameManager.getInstance().isLocked()) return;
+
         this.gameObject.transform.rotation = Quaternion.euler(
             new Vector3(0, 0, -0.007).multiply(this.v)
         );

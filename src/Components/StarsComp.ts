@@ -4,6 +4,7 @@ import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 
 import Star from "../GameObjects/Star";
+import GameManager from "./GameManager";
 export class StarsComp extends Component {
     private timer: number = 0;
     private revers: boolean;
@@ -25,6 +26,7 @@ export class StarsComp extends Component {
     }
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
         if (this.timer > this.cooldown) {
             for (let _ = 0; _ < this.count; _++)
                 if (Math.random() < this.chance) {

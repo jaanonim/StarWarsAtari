@@ -8,7 +8,7 @@ export default {
     moveX: 5,
     start: {
         stage: 1,
-        wave: 2,
+        wave: 0,
     },
     player: {
         movementSpeed: 0.005, //0.002,
@@ -21,6 +21,6 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 60,
+        time: 6,
     },
 };

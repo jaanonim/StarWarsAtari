@@ -6,7 +6,6 @@ import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import Data from "../Classes/Data";
-import Input from "../Classes/Input";
 import WaveSystem from "../Classes/WaveSystem";
 import FireballScreen from "../GameObjects/FireballScreen";
 import { DeathScreenComp } from "./DeathScreenComp";
@@ -77,16 +76,18 @@ export default class GameManager extends Component {
 
     lock() {
         this._lock = true;
-        Input.lock();
     }
 
     unlock() {
         this._lock = false;
-        Input.unlock();
     }
 
     isLocked() {
         return this._lock;
+    }
+
+    switchLock() {
+        this._lock = !this._lock;
     }
 
     async fireScreenFireball(v: Vector3) {

@@ -3,6 +3,7 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import GameManager from "./GameManager";
 
 export class StarComp extends Component {
     private dir: Vector3;
@@ -33,6 +34,7 @@ export class StarComp extends Component {
     }
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
         if (this.revers) {
             this.transform.position = this.transform.position.add(
                 this.dir.invert().multiply(Renderer.deltaTime * this.speed)

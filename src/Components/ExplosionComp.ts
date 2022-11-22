@@ -14,8 +14,7 @@ export class ExplosionComp extends UiComponent {
     }
 
     uiRender() {
-        if (GameManager.getInstance().isLocked() || this.onAnimEnds === null)
-            return;
+        if (this.onAnimEnds === null) return;
         const width = this.uiElement.canvas.width;
         const height = this.uiElement.canvas.height;
         const timer = Math.round(this.timer);
@@ -58,7 +57,7 @@ export class ExplosionComp extends UiComponent {
             this.onAnimEnds();
             this.onAnimEnds = null;
         }
-
-        this.timer += Renderer.deltaTime / 30;
+        if (!GameManager.getInstance().isLocked())
+            this.timer += Renderer.deltaTime / 30;
     }
 }

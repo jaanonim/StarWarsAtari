@@ -106,7 +106,7 @@ export default class TieComp extends Component implements HittableInterface {
     }
 
     hit(): void {
-        if (this.isDamage) return;
+        if (this.isDamage || this.stage.inTransition) return;
         this.isDamage = true;
         if (!this.isVader) {
             this.elements.forEach((e) => (e.isEnabled = true));

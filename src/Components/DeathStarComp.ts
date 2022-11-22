@@ -7,6 +7,7 @@ import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 import TextureLoader from "3d-game-engine-canvas/src/tools/TextureLoader";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import GameManager from "./GameManager";
 
 export class DeathStarComp extends Component {
     private camGameObject!: GameObject;
@@ -35,6 +36,7 @@ export class DeathStarComp extends Component {
     }
 
     async update(): Promise<void> {
+        if (GameManager.getInstance().isLocked()) return;
         if (!this.camGameObject) return;
 
         this.transform.rotation = this.camGameObject.transform.rotation;

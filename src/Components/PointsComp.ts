@@ -1,6 +1,7 @@
 import UiComponent from "3d-game-engine-canvas/src/classes/Components/UiComponent";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Text from "3d-game-engine-canvas/src/components/Text";
+import GameManager from "./GameManager";
 
 export class PointsComp extends UiComponent {
     private text: Text;
@@ -45,6 +46,7 @@ export class PointsComp extends UiComponent {
     }
 
     async update() {
+        if (GameManager.getInstance().isLocked()) return;
         if (this.timer <= 0) {
             this.resetLast();
         } else {

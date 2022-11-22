@@ -3,6 +3,7 @@ import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import { map } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Data from "./Data";
+import GameManager from "../Components/GameManager";
 
 export default class Input {
     private static html: HTMLCanvasElement;
@@ -12,6 +13,7 @@ export default class Input {
     private static pos: Vector2;
     private static move: Vector2;
     private static keys: { [key: string]: boolean } = {};
+    private static keysLast: { [key: string]: boolean } = {};
     private static cursorBox: Box2D;
     private static gamePad: Gamepad | null;
     private constructor() {}
@@ -142,6 +144,10 @@ export default class Input {
         if (Input.keys[" "] === true) {
             Input.isFire = true;
         }
+        if (Input.keysLast["p"] && !Input.keys["p"]) {
+            GameManager.getInstance().switchLock();
+        }
+        Input.keysLast = JSON.parse(JSON.stringify(Input.keys));
 
         Input.gamePad = navigator.getGamepads()[0];
         if (Input.gamePad) {

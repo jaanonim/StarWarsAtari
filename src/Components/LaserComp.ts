@@ -86,6 +86,7 @@ export class LaserComp extends UiComponent {
     }
 
     fire() {
+        if (GameManager.getInstance().isLocked()) return;
         if (this.shoot === null) throw new Error("shoot is null");
         const screen = this.gameObject.getScene().find("screen");
         const fireballs = screen.findMany("FireballScreen");

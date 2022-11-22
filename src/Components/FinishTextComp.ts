@@ -1,6 +1,7 @@
 import UiComponent from "3d-game-engine-canvas/src/classes/Components/UiComponent";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Text from "3d-game-engine-canvas/src/components/Text";
+import GameManager from "./GameManager";
 
 export default class FinishTextComp extends UiComponent {
     private texts: Array<Text>;
@@ -22,6 +23,8 @@ export default class FinishTextComp extends UiComponent {
     }
 
     async update(): Promise<void> {
+        if (GameManager.getInstance().isLocked()) return;
+
         if (this.onAnimEnds !== null && !this.isCalled) {
             if (this.cooldown < this.timer) {
                 this.texts[this.index].text = this.values[this.index];
