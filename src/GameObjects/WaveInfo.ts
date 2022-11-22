@@ -8,6 +8,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import Data from "../Classes/Data";
 import WaveInfoComp from "../Components/WaveInfoComp";
+import HideInMenuComp from "../Components/HideInMenuComp";
 
 export default async function WaveInfo() {
     const wave = new Text("5  WAVE", {
@@ -79,6 +80,7 @@ export default async function WaveInfo() {
                 positionType: PositionType.CENTER_CENTER,
             }),
             new WaveInfoComp(wave, info1, info2),
+            new HideInMenuComp(),
         ],
     });
 }

@@ -3,6 +3,7 @@ import Stage2 from "../GameObjects/Stages/Stage2";
 import Stage3 from "../GameObjects/Stages/Stage3";
 import Stage4 from "../GameObjects/Stages/Stage4";
 import Stage5 from "../GameObjects/Stages/Stage5";
+import DifficultySelect from "../GameObjects/Stages/DifficultySelect";
 import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { PlayerControllerMode } from "../Components/PlayerController";
@@ -112,6 +113,15 @@ export default class {
             data: {},
         },
     ];
+
+    static readonly menu = [
+        {
+            func: DifficultySelect,
+            controls: PlayerControllerMode.POSITION,
+            maxPos: new Box(new Vector3(0, 0, 0), new Vector3(0, 0, 0)),
+            data: {},
+        }
+    ]
 
     // 8
     static readonly waves = [

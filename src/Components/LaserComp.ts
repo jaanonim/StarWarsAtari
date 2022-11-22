@@ -11,6 +11,7 @@ import Hittable from "./Hittable";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import GameManager from "./GameManager";
 import Data from "../Classes/Data";
+import WaveSystem from "../Classes/WaveSystem";
 
 export class LaserComp extends UiComponent {
     box!: Box2D;
@@ -86,7 +87,11 @@ export class LaserComp extends UiComponent {
     }
 
     fire() {
-        if (GameManager.getInstance().isLocked()) return;
+        if (
+            GameManager.getInstance().isLocked() ||
+            WaveSystem.getInstance().inMenu
+        )
+            return;
         if (this.shoot === null) throw new Error("shoot is null");
         const screen = this.gameObject.getScene().find("screen");
         const fireballs = screen.findMany("FireballScreen");

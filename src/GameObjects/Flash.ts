@@ -26,7 +26,7 @@ export default async function Flash() {
                 smoothing: false,
             }),
             c,
-            new DeathScreenComp(c),
+            new DeathScreenComp(c, false),
         ],
     });
 }

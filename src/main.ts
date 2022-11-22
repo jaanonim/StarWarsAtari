@@ -31,6 +31,7 @@ export async function main() {
     const camera = new Camera(renderer, 90, 0.5, 20, true);
     renderer.setCamera(camera, 0);
     GameManager.getInstance().setRenderer(renderer);
+    Input.init(canvas);
 
     Importer.scene({
         name: "scene",
@@ -66,7 +67,6 @@ export async function main() {
             },
         ],
     });
-    Input.init(canvas);
 
     const fps = new FPSCounter(document.getElementById("fps") as HTMLElement);
     await renderer.startGameLoop(() => {

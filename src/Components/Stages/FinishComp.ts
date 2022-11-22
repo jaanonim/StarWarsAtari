@@ -91,6 +91,7 @@ export default class FinishComp extends Stage {
 
     async onUnload() {
         this.player.removeChildren(this.stars);
+        this.screen.removeChildren(this.deathStar);
         this.screen.removeChildren(this.finishText);
         await this.gameObject.destroy();
     }

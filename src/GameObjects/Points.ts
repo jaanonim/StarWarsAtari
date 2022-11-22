@@ -8,6 +8,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import { PointsComp } from "../Components/PointsComp";
 import Data from "../Classes/Data";
+import HideInMenuComp from "../Components/HideInMenuComp";
 
 export default async function Points() {
     const vText = new Text("1234567890", {
@@ -77,6 +78,7 @@ export default async function Points() {
                 positionType: PositionType.CENTER_CENTER,
             }),
             new PointsComp(vText, lastText),
+            new HideInMenuComp(),
         ],
     });
 }

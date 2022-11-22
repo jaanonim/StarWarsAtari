@@ -8,6 +8,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import HintComp from "../Components/HintComp";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
+import HideInMenuComp from "../Components/HideInMenuComp";
 
 export default async function Hint() {
     const text = new Text("This is hint".toUpperCase(), {
@@ -41,6 +42,7 @@ export default async function Hint() {
                 positionType: PositionType.CENTER_CENTER,
             }),
             new HintComp(text),
+            new HideInMenuComp(),
         ],
     });
 }

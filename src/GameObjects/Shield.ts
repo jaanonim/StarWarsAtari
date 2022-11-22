@@ -14,6 +14,7 @@ import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Text from "3d-game-engine-canvas/src/components/Text";
 import ShieldText from "../Components/ShieldText";
 import Data from "../Classes/Data";
+import HideInMenuComp from "../Components/HideInMenuComp";
 
 function ShieldElement(i: number, name: string, t: Texture) {
     return Importer.object({
@@ -113,6 +114,7 @@ export default async function Shield() {
                 positionType: PositionType.CENTER_CENTER,
             }),
             new ShieldComp(leftObjs, rightObjs, valueText, shieldText),
+            new HideInMenuComp(),
         ],
     });
 }

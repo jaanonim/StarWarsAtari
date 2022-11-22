@@ -48,7 +48,7 @@ export default class GameManager extends Component {
             this.gameObject.getComponent<SphereCollider>(SphereCollider);
         if (!col) throw Error();
         this.collider = col;
-        WaveSystem.getInstance().loadStage();
+        WaveSystem.getInstance().loadMenu();
     }
 
     setRenderer(r: Renderer) {
@@ -193,9 +193,11 @@ export default class GameManager extends Component {
     async resetBeforeLoad() {
         this.transform.position = Vector3.zero;
         this.transform.rotation = Quaternion.euler(Vector3.zero);
-        this.destroyAllFireballs();
-        this.hint.resetHint();
-        this.waveInfo.resetInfo();
+        try {
+            this.destroyAllFireballs();
+            this.hint.resetHint();
+            this.waveInfo.resetInfo();
+        } catch (e) {}
     }
 
     setWin() {

@@ -21,6 +21,10 @@ export default class WaveSystem {
 
     public currentStage!: GameObject;
     public currentStageIndex: number = 0;
+    private _inMenu: boolean = true;
+    public get inMenu(): boolean {
+        return this._inMenu;
+    }
     private _stageData: any;
     public get stageData(): any {
         return this._stageData;
@@ -41,26 +45,39 @@ export default class WaveSystem {
     async loadNextStage() {
         Input.lock();
         await GameManager.getInstance().resetBeforeLoad();
-        const c = this.currentStage.getComponent<Stage>(Stage);
-        if (!c) throw Error();
-        await c.onUnload();
+        if (this.currentStage) {
+            const c = this.currentStage.getComponent<Stage>(Stage);
+            if (c) await c.onUnload();
+        }
         this.currentStageIndex++;
-        if (
-            WaveInfo.waves[this.currentWaveIndex].stages.length <=
-            this.currentStageIndex
-        ) {
-            this.nextWave();
+        if (this._inMenu) {
+            if (WaveInfo.menu.length <= this.currentStageIndex)
+                this.currentStageIndex = 0;
+        } else {
+            if (
+                WaveInfo.waves[this.currentWaveIndex].stages.length <=
+                this.currentStageIndex
+            ) {
+                this.nextWave();
+            }
         }
         this.loadStage();
         Input.unlock();
     }
 
     async loadStage() {
-        const stageInfo =
-            WaveInfo.waves[this.currentWaveIndex].stages[
-                this.currentStageIndex
-            ];
-        const stage = WaveInfo.stages[stageInfo.id];
+        let stageInfo, stage;
+        if (this._inMenu) {
+            stageInfo = { data: {} };
+            stage = WaveInfo.menu[this.currentStageIndex];
+        } else {
+            stageInfo =
+                WaveInfo.waves[this.currentWaveIndex].stages[
+                    this.currentStageIndex
+                ];
+            stage = WaveInfo.stages[stageInfo.id];
+        }
+
         this._stageData = { ...stage.data, ...stageInfo.data };
         const pc =
             GameManager.getInstance().gameObject.getComponent<PlayerController>(
@@ -73,5 +90,18 @@ export default class WaveSystem {
         this.currentStage = GameManager.getInstance()
             .gameObject.getScene()
             .addChildren(await stage.func());
+    }
+
+    async loadMenu() {
+        this.currentStageIndex = -1;
+        this._inMenu = true;
+        this.loadNextStage();
+    }
+
+    async loadTo(wave: number) {
+        this.currentStageIndex = -1;
+        this.currentWaveIndex = wave;
+        this._inMenu = false;
+        this.loadNextStage();
     }
 }
