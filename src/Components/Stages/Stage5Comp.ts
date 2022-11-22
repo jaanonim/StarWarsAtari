@@ -1,5 +1,6 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
+import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { getRandomElement } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
@@ -26,6 +27,10 @@ export default class Stage5Comp extends Stage {
 
     async start() {
         this.camGameObject = this.gameObject.getScene().find("camera");
+        GameManager.getInstance().hint.setHint({
+            text: "SHOOT FIREBALLS",
+            color: Color.white,
+        });
     }
 
     async update() {

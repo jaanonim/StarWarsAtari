@@ -1,5 +1,6 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
+import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Data from "../../Classes/Data";
 import Input from "../../Classes/Input";
@@ -48,6 +49,13 @@ export default class Stage1Comp extends Stage {
         this.player.addChildren(this.stars);
         this.deathStar = await DeathStar();
         this.screen.addChildren(this.deathStar);
+        GameManager.getInstance().hint.setHints(
+            [
+                { text: "SHOOT FIREBALLS", color: Color.green },
+                { text: "SHOOT TIE FIGHTERS", color: Color.magenta },
+            ],
+            3000
+        );
     }
 
     async update() {

@@ -52,7 +52,7 @@ export class ExplosionComp extends UiComponent {
             );
             this.uiElement.canvas.ctx.stroke();
         }
-        console.log(this.timer);
+
         if (this.timer > 300) {
             this.timer = 0;
             this.onAnimEnds();

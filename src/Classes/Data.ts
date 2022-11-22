@@ -7,8 +7,8 @@ export default {
     moveY: 5,
     moveX: 5,
     start: {
-        stage: 0,
-        wave: 0,
+        stage: 1,
+        wave: 2,
     },
     player: {
         movementSpeed: 0.005, //0.002,
