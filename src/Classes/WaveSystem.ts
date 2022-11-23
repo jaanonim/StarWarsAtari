@@ -61,7 +61,7 @@ export default class WaveSystem {
                 this.nextWave();
             }
         }
-        this.loadStage();
+        await this.loadStage();
         Input.unlock();
     }
 
@@ -102,6 +102,7 @@ export default class WaveSystem {
         this.currentStageIndex = -1;
         this.currentWaveIndex = wave;
         this._inMenu = false;
+        GameManager.getInstance().onStartNewGame();
         this.loadNextStage();
     }
 }

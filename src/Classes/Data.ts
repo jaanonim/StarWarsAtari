@@ -21,6 +21,6 @@ export default {
     lengthOfTrench: 40,
     groundRange: 30,
     stage1: {
-        time: 6,
+        time: 60,
     },
 };

@@ -74,6 +74,11 @@ export default class GameManager extends Component {
         }
     }
 
+    onStartNewGame() {
+        this.shield.reset();
+        this.points.reset();
+    }
+
     lock() {
         this._lock = true;
     }

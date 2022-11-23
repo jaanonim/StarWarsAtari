@@ -1,6 +1,7 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Input from "../Classes/Input";
 import WaveSystem from "../Classes/WaveSystem";
+import GameManager from "./GameManager";
 
 export class DeathScreenComp extends Component {
     public content: Component;
@@ -17,6 +18,7 @@ export class DeathScreenComp extends Component {
     async update(): Promise<void> {
         if (Input.getFire() && this.content.isActive && this.isDeathScreen) {
             WaveSystem.getInstance().loadMenu();
+            GameManager.getInstance().unlock();
             this.hide();
         }
     }

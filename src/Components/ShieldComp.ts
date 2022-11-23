@@ -52,6 +52,10 @@ export class ShieldComp extends UiComponent {
             if (!c) throw Error();
             return c;
         });
+        this.reset();
+    }
+
+    reset() {
         this.shield = Data.player.startShield;
     }
 

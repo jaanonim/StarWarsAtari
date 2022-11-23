@@ -16,6 +16,7 @@ export default class Input {
     private static keysLast: { [key: string]: boolean } = {};
     private static cursorBox: Box2D;
     private static gamePad: Gamepad | null;
+    private static needToReleaseFire = false;
     private constructor() {}
 
     public static sensitivity: number = 1;
@@ -75,7 +76,11 @@ export default class Input {
         Input.pos = this.transformMousePosition(
             new Vector2(e.clientX, e.clientY)
         );
-        Input._isFire = (e.buttons & 1) === 1;
+
+        if (this.needToReleaseFire) {
+            if ((e.buttons & 1) !== 1) this.needToReleaseFire = false;
+            Input._isFire = false;
+        } else Input._isFire = (e.buttons & 1) === 1;
     }
 
     public static updateKeyboardDown(e: KeyboardEvent) {
@@ -117,7 +122,7 @@ export default class Input {
 
     public static lock() {
         Input._lock = true;
-        Input.isFire = false;
+        this.needToReleaseFire = Input._isFire;
         Input.center();
     }
 
@@ -129,6 +134,7 @@ export default class Input {
         if (Input._lock) return;
         Input.move = Vector2.zero;
         Input.isFire = Input._isFire;
+
         if (Input.keys["w"] === true || Input.keys["ArrowUp"] === true) {
             Input.move = Input.move.add(Vector2.down);
         }
