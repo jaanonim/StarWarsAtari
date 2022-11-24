@@ -26,6 +26,7 @@ export default class GameManager extends Component {
     private deathScreen!: DeathScreenComp;
     private flash!: DeathScreenComp;
     private _lock: boolean;
+    private hiddenCursor: boolean = false;
 
     private constructor() {
         super();
@@ -89,6 +90,18 @@ export default class GameManager extends Component {
 
     isLocked() {
         return this._lock;
+    }
+
+    hideCursor() {
+        this.hiddenCursor = true;
+    }
+
+    showCursor() {
+        this.hiddenCursor = false;
+    }
+
+    isHiddenCursor() {
+        return this.hiddenCursor;
     }
 
     switchLock() {

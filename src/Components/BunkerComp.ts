@@ -9,7 +9,7 @@ import WaveSystem from "../Classes/WaveSystem";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
-import Stage2Comp from "./Stages/Stage2Comp";
+import Stage2Comp from "./Stages/Playable/Stage2Comp";
 
 export class BunkerComp extends Component implements HittableInterface {
     private camGameObject!: GameObject;

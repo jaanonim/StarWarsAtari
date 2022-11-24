@@ -1,11 +1,11 @@
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { getRandomElement } from "3d-game-engine-canvas/src/utilities/math/Math";
-import Data from "../../Classes/Data";
-import WaveSystem from "../../Classes/WaveSystem";
-import Stage5Comp from "../../Components/Stages/Stage5Comp";
-import Floor from "../Floor";
-import Wall from "../Wall";
+import Data from "../../../Classes/Data";
+import WaveSystem from "../../../Classes/WaveSystem";
+import Stage5Comp from "../../../Components/Stages/Playable/Stage5Comp";
+import Floor from "../../Floor";
+import Wall from "../../Wall";
 
 export default async function Stage5() {
     const len = Data.lengthOfTrench * 2;

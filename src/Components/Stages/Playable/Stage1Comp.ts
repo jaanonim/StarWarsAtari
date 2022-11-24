@@ -2,16 +2,16 @@ import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Data from "../../Classes/Data";
-import WaveSystem from "../../Classes/WaveSystem";
-import DeathStar from "../../GameObjects/DeathStar";
-import Stars from "../../GameObjects/Stars";
-import TieFighter from "../../GameObjects/TieFighter";
-import { DeathStarComp } from "../DeathStarComp";
-import GameManager from "../GameManager";
-import Stage from "./Stage";
+import Data from "../../../Classes/Data";
+import WaveSystem from "../../../Classes/WaveSystem";
+import DeathStar from "../../../GameObjects/DeathStar";
+import Stars from "../../../GameObjects/Stars";
+import TieFighter from "../../../GameObjects/TieFighter";
+import { DeathStarComp } from "../../DeathStarComp";
+import GameManager from "../../GameManager";
+import StageComp from "../StageComp";
 
-export default class Stage1Comp extends Stage {
+export default class Stage1Comp extends StageComp {
     player!: GameObject;
     screen!: GameObject;
     tieCount: number;

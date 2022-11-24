@@ -8,9 +8,9 @@ import { DeathStarComp } from "../DeathStarComp";
 import { ExplosionComp } from "../ExplosionComp";
 import FinishTextComp from "../FinishTextComp";
 import GameManager from "../GameManager";
-import Stage from "./Stage";
+import StageComp from "./StageComp";
 
-export default class FinishComp extends Stage {
+export default class FinishComp extends StageComp {
     player!: GameObject;
     screen!: GameObject;
     timer: number = 0;

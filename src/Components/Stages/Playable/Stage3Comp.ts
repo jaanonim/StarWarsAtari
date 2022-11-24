@@ -1,10 +1,10 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
-import WaveSystem from "../../Classes/WaveSystem";
-import Ground from "../../GameObjects/Ground";
-import GameManager from "../GameManager";
-import Stage from "./Stage";
-export default class Stage3Comp extends Stage {
+import WaveSystem from "../../../Classes/WaveSystem";
+import Ground from "../../../GameObjects/Ground";
+import GameManager from "../../GameManager";
+import StageComp from "../StageComp";
+export default class Stage3Comp extends StageComp {
     private player!: GameObject;
     private ground!: GameObject;
     public numberOfTowers: number;

@@ -11,7 +11,7 @@ import WaveSystem from "../Classes/WaveSystem";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
 import { RandomMovementComp } from "./RandomMovementComp";
-import Stage1Comp from "./Stages/Stage1Comp";
+import Stage1Comp from "./Stages/Playable/Stage1Comp";
 
 export default class TieComp extends Component implements HittableInterface {
     private camGameObject!: GameObject;

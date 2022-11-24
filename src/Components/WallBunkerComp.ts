@@ -1,8 +1,8 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import WaveSystem from "../Classes/WaveSystem";
 import { HittableInterface } from "./Hittable";
-import Stage4Comp from "./Stages/Stage4Comp";
-import Stage5Comp from "./Stages/Stage5Comp";
+import Stage4Comp from "./Stages/Playable/Stage4Comp";
+import Stage5Comp from "./Stages/Playable/Stage5Comp";
 
 export class WallBunkerComp extends Component implements HittableInterface {
     hit() {

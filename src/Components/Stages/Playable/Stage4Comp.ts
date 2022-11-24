@@ -4,11 +4,11 @@ import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import { getRandomElement } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Data from "../../Classes/Data";
-import FireballWord from "../../GameObjects/FireballWord";
-import GameManager from "../GameManager";
-import Stage from "./Stage";
-export default class Stage4Comp extends Stage {
+import Data from "../../../Classes/Data";
+import FireballWord from "../../../GameObjects/FireballWord";
+import GameManager from "../../GameManager";
+import StageComp from "../StageComp";
+export default class Stage4Comp extends StageComp {
     private cooldown: number = 0;
     public fireCooldown: number = 700;
     private camGameObject!: GameObject;

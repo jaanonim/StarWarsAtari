@@ -1,7 +1,7 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import GameManager from "../Components/GameManager";
 import { PlayerController } from "../Components/PlayerController";
-import Stage from "../Components/Stages/Stage";
+import StageComp from "../Components/Stages/StageComp";
 import Data from "./Data";
 import Input from "./Input";
 import WaveInfo from "./WaveInfo";
@@ -46,7 +46,7 @@ export default class WaveSystem {
         Input.lock();
         await GameManager.getInstance().resetBeforeLoad();
         if (this.currentStage) {
-            const c = this.currentStage.getComponent<Stage>(Stage);
+            const c = this.currentStage.getComponent<StageComp>(StageComp);
             if (c) await c.onUnload();
         }
         this.currentStageIndex++;

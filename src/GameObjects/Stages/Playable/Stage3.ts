@@ -1,15 +1,15 @@
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import WaveSystem from "../../Classes/WaveSystem";
-import Stage2Comp from "../../Components/Stages/Stage2Comp";
-import Bunker from "../Bunker";
+import WaveSystem from "../../../Classes/WaveSystem";
+import Stage3Comp from "../../../Components/Stages/Playable/Stage3Comp";
+import Tower from "../../Tower";
 
-export default async function Stage2() {
+export default async function Stage3() {
     const pos: Array<Vector3> = [];
 
     for (
         let i = 0;
-        i < WaveSystem.getInstance().stageData.numberOfBunkers;
+        i < WaveSystem.getInstance().stageData.numberOfTowers;
         i++
     ) {
         let v: Vector3;
@@ -26,12 +26,12 @@ export default async function Stage2() {
     }
 
     let v = pos.map((pos) => {
-        return Bunker(pos);
+        return Tower(pos);
     });
 
     return Importer.object({
-        name: "Stage2",
+        name: "Stage3",
         children: await Promise.all(v),
-        components: [new Stage2Comp()],
+        components: [new Stage3Comp()],
     });
 }

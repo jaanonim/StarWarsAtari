@@ -8,7 +8,7 @@ import WaveSystem from "../Classes/WaveSystem";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
-import Stage3Comp from "./Stages/Stage3Comp";
+import Stage3Comp from "./Stages/Playable/Stage3Comp";
 
 export class TowerComp extends Component implements HittableInterface {
     private camGameObject!: GameObject;

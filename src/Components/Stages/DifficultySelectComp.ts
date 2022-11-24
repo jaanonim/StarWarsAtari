@@ -1,8 +1,8 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import DifficultySelectScreen from "../../GameObjects/DifficultySelectScreen";
-import Stage from "./Stage";
+import StageComp from "./StageComp";
 
-export default class DifficultySelectComp extends Stage {
+export default class DifficultySelectComp extends StageComp {
     screen!: GameObject;
     difficultySelectScreen!: GameObject;
 
