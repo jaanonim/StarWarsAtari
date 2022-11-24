@@ -8,7 +8,8 @@ import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import { PlayerControllerMode } from "../Components/PlayerController";
 import Finish from "../GameObjects/Stages/Finish";
-import { default as WAVES } from "../Data/waves.json";
+import { default as WAVES } from "../Data/Waves.json";
+import StartText from "../GameObjects/Stages/StartText";
 
 export default class {
     static readonly stages = [
@@ -116,6 +117,12 @@ export default class {
     ];
 
     static readonly menu = [
+        {
+            func: StartText,
+            controls: PlayerControllerMode.POSITION,
+            maxPos: new Box(new Vector3(0, 0, 0), new Vector3(0, 0, 0)),
+            data: {},
+        },
         {
             func: DifficultySelect,
             controls: PlayerControllerMode.POSITION,
