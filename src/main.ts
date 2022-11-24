@@ -22,11 +22,11 @@ import Setup from "./Setup";
 function setupPause() {
     window.addEventListener("focus", function (_event) {
         GameManager.getInstance().unlock();
-        audioCxt.suspend();
+        audioCxt.resume();
     });
     window.addEventListener("blur", function (_event) {
         GameManager.getInstance().lock();
-        audioCxt.resume();
+        audioCxt.suspend();
     });
 }
 

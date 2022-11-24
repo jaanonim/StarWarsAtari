@@ -33,13 +33,17 @@ export default class Setup {
         this.canvas.onclick = () => this.start();
         window.onkeyup = (e) => {
             if (
-                e.altKey ||
-                e.ctrlKey ||
-                e.shiftKey ||
-                e.metaKey ||
-                e.key === "ScrollLock" ||
-                e.key === "CapsLock" ||
-                e.key === "NumLock"
+                [
+                    "ScrollLock",
+                    "CapsLock",
+                    "NumLock",
+                    "Shift",
+                    "Alt",
+                    "Control",
+                    "AltGraph",
+                    "ContextMenu",
+                    "Meta",
+                ].some((i) => i === e.key)
             )
                 return;
             this.start();
@@ -54,6 +58,7 @@ export default class Setup {
                 await this.audioCxt.resume();
             this.main(this.canvas);
         } catch (e) {
+            console.log(e);
             this.setCallbacks();
         }
     }
