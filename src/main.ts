@@ -17,16 +17,31 @@ import Hint from "./GameObjects/Hint";
 import DeathScreen from "./GameObjects/DeathScreen";
 import Flash from "./GameObjects/Flash";
 import Explosion from "./GameObjects/Explosion";
+import Setup from "./setup";
 
-async function loadFont() {
-    const myFont = new FontFace("pixeled", "url(font/Pixeled.ttf)");
-    const font = await myFont.load();
-    (document.fonts as any).add(font);
+function setupPause() {
+    window.addEventListener("focus", function (_event) {
+        GameManager.getInstance().unlock();
+        audioCxt.suspend();
+    });
+    window.addEventListener("blur", function (_event) {
+        GameManager.getInstance().lock();
+        audioCxt.resume();
+    });
 }
 
-export async function main() {
-    await loadFont();
-    const canvas = document.getElementById("root") as HTMLCanvasElement;
+export async function main(canvas: HTMLCanvasElement) {
+    setupPause();
+
+    const audio = new Audio("music/main.mp3");
+
+    audio.oncanplaythrough = async (_event) => {
+        audio.oncanplaythrough = () => {};
+        audio.loop = true;
+        audioCxt.createMediaElementSource(audio).connect(audioCxt.destination);
+        audio.play();
+    };
+
     const renderer = new Renderer(canvas, 0.25, 2, false);
     const camera = new Camera(renderer, 90, 0.5, 20, true);
     renderer.setCamera(camera, 0);
@@ -75,4 +90,7 @@ export async function main() {
     });
 }
 
-main();
+const canvas = document.getElementById("root") as HTMLCanvasElement;
+const audioCxt = new AudioContext();
+
+new Setup(main, canvas, audioCxt).run();
