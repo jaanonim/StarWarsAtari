@@ -5,6 +5,7 @@ import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import { CursorComp } from "../Components/CursorComp";
+import HideOnCursorHiddenComp from "../Components/HideOnCursorHiddenComp";
 
 export default async function Cursor() {
     const tex = new TextureLoader(
@@ -23,6 +24,7 @@ export default async function Cursor() {
             }),
             new Image(tex),
             new CursorComp(),
+            new HideOnCursorHiddenComp(),
         ],
     });
 }

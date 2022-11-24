@@ -10,6 +10,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import { ShipComp } from "../Components/ShipComp";
 import Data from "../Classes/Data";
+import HideOnCursorHiddenComp from "../Components/HideOnCursorHiddenComp";
 
 export default async function Ship() {
     const tex = new TextureLoader(
@@ -111,6 +112,7 @@ export default async function Ship() {
                 positionType: PositionType.CENTER_CENTER,
             }),
             new ShipComp(),
+            new HideOnCursorHiddenComp(),
         ],
     });
 }
