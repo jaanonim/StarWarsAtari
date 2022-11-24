@@ -17,7 +17,7 @@ import Hint from "./GameObjects/Hint";
 import DeathScreen from "./GameObjects/DeathScreen";
 import Flash from "./GameObjects/Flash";
 import Explosion from "./GameObjects/Explosion";
-import Setup from "./setup";
+import Setup from "./Setup";
 
 function setupPause() {
     window.addEventListener("focus", function (_event) {
