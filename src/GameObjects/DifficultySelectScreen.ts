@@ -34,7 +34,7 @@ export default async function DifficultySelectScreen() {
                     {
                         name: "text",
                         transform: {
-                            position: [-7, 47, 0],
+                            position: [-7, 41, 0],
                         },
                         components: [
                             new UiElement({

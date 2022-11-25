@@ -33,14 +33,14 @@ function setupPause() {
 export async function main(canvas: HTMLCanvasElement) {
     setupPause();
 
-    const audio = new Audio("music/main.mp3");
+    //const audio = new Audio("music/main.mp3");
 
-    audio.oncanplaythrough = async (_event) => {
-        audio.oncanplaythrough = () => {};
-        audio.loop = true;
-        audioCxt.createMediaElementSource(audio).connect(audioCxt.destination);
-        audio.play();
-    };
+    // audio.oncanplaythrough = async (_event) => {
+    //     audio.oncanplaythrough = () => {};
+    //     audio.loop = true;
+    //     audioCxt.createMediaElementSource(audio).connect(audioCxt.destination);
+    //     audio.play();
+    // };
 
     const renderer = new Renderer(canvas, 0.25, 2, false);
     const camera = new Camera(renderer, 90, 0.5, 20, true);
@@ -92,5 +92,4 @@ export async function main(canvas: HTMLCanvasElement) {
 
 const canvas = document.getElementById("root") as HTMLCanvasElement;
 const audioCxt = new AudioContext();
-
 new Setup(main, canvas, audioCxt).run();

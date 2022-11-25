@@ -13,20 +13,21 @@ export default class Setup {
 
     async run() {
         await this.loadFont();
+        this.main(this.canvas); //TODO: remove debug
 
-        const ctx = this.canvas.getContext("2d");
-        if (!ctx) throw new Error("No context");
+        // const ctx = this.canvas.getContext("2d");
+        // if (!ctx) throw new Error("No context");
 
-        ctx.fillStyle = "#fff";
-        ctx.textAlign = "center";
-        ctx.font = "30px pixeled";
-        ctx.fillText(
-            "Press any button to start game".toLocaleUpperCase(),
-            this.canvas.width / 2,
-            this.canvas.height / 2
-        );
+        // ctx.fillStyle = "#fff";
+        // ctx.textAlign = "center";
+        // ctx.font = "30px pixeled";
+        // ctx.fillText(
+        //     "Press any button to start game".toLocaleUpperCase(),
+        //     this.canvas.width / 2,
+        //     this.canvas.height / 2
+        // );
 
-        this.setCallbacks();
+        // this.setCallbacks();
     }
 
     private async setCallbacks() {

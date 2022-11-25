@@ -81,7 +81,7 @@ export default async function Shield() {
             {
                 name: "Value",
                 transform: {
-                    position: [0, 20, 0],
+                    position: [0, 12, 0],
                 },
                 components: [
                     new UiElement({

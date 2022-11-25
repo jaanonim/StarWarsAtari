@@ -9,6 +9,7 @@ import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import Image from "3d-game-engine-canvas/src/components/Image";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import WaveSystem from "../Classes/WaveSystem";
+import GameManager from "./GameManager";
 
 export class CursorComp extends Component {
     box!: Box2D;
@@ -41,16 +42,17 @@ export class CursorComp extends Component {
         this.img.color = Color.white;
         if (o) {
             const BUTTONS = [
-                { n: "__easy", v: 0 },
-                { n: "__medium", v: 2 },
-                { n: "__hard", v: 4 },
+                { n: "__easy", v: 0, points: 0 },
+                { n: "__medium", v: 2, points: 40000 },
+                { n: "__hard", v: 4, points: 800000 },
             ];
-            BUTTONS.forEach(({ n, v }) => {
+            BUTTONS.forEach(({ n, v, points }) => {
                 const c = o.find(n).getComponent<UiElement>(UiElement);
                 if (c && c.contains(pos)) {
                     this.img.color = Color.blue;
                     if (Input.getFire()) {
                         WaveSystem.getInstance().loadTo(v);
+                        GameManager.getInstance().points.addSilent(points);
                     }
                 }
             });

@@ -15,13 +15,13 @@ export default async function Points() {
         font: "pixeled",
         fontSize: 8,
         color: Data.UI.accentColor,
-        textAlign: "right",
+        textAlign: PositionType.CENTER_RIGHT,
     });
     const lastText = new Text("1234567890", {
         font: "pixeled",
         fontSize: 8,
         color: Data.UI.accentColor,
-        textAlign: "right",
+        textAlign: PositionType.CENTER_RIGHT,
     });
 
     return Importer.object({
@@ -30,7 +30,7 @@ export default async function Points() {
             {
                 name: "SCORE",
                 transform: {
-                    position: [60, 12, 0],
+                    position: [60, 6, 0],
                 },
                 components: [
                     new UiElement({
@@ -47,7 +47,7 @@ export default async function Points() {
             {
                 name: "value",
                 transform: {
-                    position: [50, 26, 0],
+                    position: [50, 18, 0],
                 },
                 components: [
                     new UiElement({
@@ -60,7 +60,7 @@ export default async function Points() {
             {
                 name: "lastValue",
                 transform: {
-                    position: [50, 38, 0],
+                    position: [50, 32, 0],
                 },
                 components: [
                     new UiElement({

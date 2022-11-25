@@ -33,7 +33,7 @@ export default async function WaveInfo() {
             {
                 name: "Wave",
                 transform: {
-                    position: [-50, 12, 0],
+                    position: [-50, 6, 0],
                 },
                 components: [
                     new UiElement({
@@ -47,7 +47,7 @@ export default async function WaveInfo() {
             {
                 name: "Info1",
                 transform: {
-                    position: [-50, 26, 0],
+                    position: [-50, 18, 0],
                 },
                 components: [
                     new UiElement({
@@ -61,7 +61,7 @@ export default async function WaveInfo() {
             {
                 name: "Info2",
                 transform: {
-                    position: [-50, 38, 0],
+                    position: [-50, 32, 0],
                 },
                 components: [
                     new UiElement({

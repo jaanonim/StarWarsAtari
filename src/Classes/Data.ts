@@ -18,8 +18,10 @@ export default {
         accentColor: Color.red,
         mainColor: Color.white,
     },
+    screenTime: 15000,
     lengthOfTrench: 40,
     groundRange: 30,
+    startTextBackgroundRange: 27,
     stage1: {
         time: 60,
     },

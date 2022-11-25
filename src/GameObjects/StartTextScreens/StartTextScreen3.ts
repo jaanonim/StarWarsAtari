@@ -2,32 +2,33 @@ import {
     PositionType,
     SizeType,
 } from "3d-game-engine-canvas/src/classes/Components/SizedComponent";
+import Text from "3d-game-engine-canvas/src/components/Text";
 import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import Importer from "3d-game-engine-canvas/src/tools/Importer";
-import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
-import Text from "3d-game-engine-canvas/src/components/Text";
-import HintComp from "../Components/HintComp";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
-import HideInMenuComp from "../Components/HideInMenuComp";
+import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
+import { StartTextScreen3Comp } from "../../Components/StartTextScreen3Comp";
 
-export default async function Hint() {
-    const text = new Text("This is hint".toUpperCase(), {
+async function StartTextScreen3() {
+    const text = new Text("FLIGHT INSTRUCTIONS TO RED FIVE\n\n", {
         font: "pixeled",
         fontSize: 6,
-        color: Color.cyan,
+        color: Color.red,
+        textAlign: PositionType.TOP_CENTER,
     });
 
     return Importer.object({
-        name: "Hint",
+        name: "StartTextScreen3",
         children: [
             {
-                name: "text",
+                name: "line",
                 transform: {
-                    position: [0, 42, 0],
+                    position: [0, 20, 0],
                 },
                 components: [
                     new UiElement({
-                        size: new Vector2(200, 40),
+                        size: new Vector2(250, 220),
+                        anchor: new Vector2(0.5, 0),
                         positionType: PositionType.TOP_CENTER,
                         smoothing: false,
                     }),
@@ -37,12 +38,12 @@ export default async function Hint() {
         ],
         components: [
             new UiElement({
-                size: new Vector2(100, 100),
                 sizeType: SizeType.PERCENTAGE,
                 positionType: PositionType.CENTER_CENTER,
+                smoothing: false,
             }),
-            new HintComp(text),
-            new HideInMenuComp(),
+            new StartTextScreen3Comp(text),
         ],
     });
 }
+export default StartTextScreen3;
