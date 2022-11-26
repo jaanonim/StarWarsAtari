@@ -32,6 +32,7 @@ jobs:
           path: "./3d-game-engine-canvas"
       - name: Build
         run: |
+          echo $BASE_URL
           cd "./StarWarsAtari"
           npm i
           npm run build
