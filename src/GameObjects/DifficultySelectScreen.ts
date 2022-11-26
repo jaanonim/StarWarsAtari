@@ -25,7 +25,7 @@ export default async function DifficultySelectScreen() {
         color: Color.fromHex("986d00"),
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "DifficultySelectScreen",
         children: [
             {

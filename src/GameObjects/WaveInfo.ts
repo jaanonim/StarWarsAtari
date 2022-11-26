@@ -27,7 +27,7 @@ export default async function WaveInfo() {
         color: Data.UI.accentColor,
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "WaveInfo",
         children: [
             {

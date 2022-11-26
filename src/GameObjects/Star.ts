@@ -21,7 +21,7 @@ export default async function Star(
         ).parse();
     }
 
-    return Importer.object({
+    return await Importer.object({
         name: "star",
         transform: { position: pos, scale: [0.1, 0.1, 0.1] },
         components: [new SpriteRenderer(tex, color), new StarComp(dir, revers)],

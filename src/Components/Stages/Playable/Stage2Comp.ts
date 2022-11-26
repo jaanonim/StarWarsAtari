@@ -14,7 +14,7 @@ export default class Stage2Comp extends StageComp {
     async start() {
         this.player = this.gameObject.getScene().find("camera");
         this.ground = await Ground();
-        this.player.addChildren(this.ground);
+        await this.player.addChildren(this.ground);
     }
 
     async update() {

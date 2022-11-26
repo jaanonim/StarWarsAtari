@@ -6,7 +6,7 @@ export default class HideInMenuComp extends UiComponent {
     original!: (canvas: VirtualCanvas) => void;
 
     async start() {
-        super.start();
+        await super.start();
         this.original = this.uiElement.uiRender;
     }
 

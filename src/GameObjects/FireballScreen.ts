@@ -14,7 +14,7 @@ export default async function FireballScreen(start: number) {
 
     const v = map(clamp(start, 0, 100), 0, 100, 1, 2);
 
-    return Importer.object({
+    return await Importer.object({
         name: "FireballScreen",
         components: [
             new UiElement({

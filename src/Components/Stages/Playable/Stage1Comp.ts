@@ -45,9 +45,9 @@ export default class Stage1Comp extends StageComp {
         this.timer = 0;
 
         this.stars = await Stars();
-        this.player.addChildren(this.stars);
+        await this.player.addChildren(this.stars);
         this.deathStar = await DeathStar();
-        this.screen.addChildren(this.deathStar);
+        await this.screen.addChildren(this.deathStar);
         GameManager.getInstance().hint.setHints(
             [
                 { text: "SHOOT FIREBALLS", color: Color.green },
@@ -80,7 +80,7 @@ export default class Stage1Comp extends StageComp {
                 Vector3.backward.multiply(5)
             )
         );
-        this.gameObject.addChildren(tie);
+        await this.gameObject.addChildren(tie);
     }
 
     async onUnload() {

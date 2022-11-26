@@ -17,7 +17,7 @@ export default async function VaderFighter() {
     const mat = new WireframeMaterial(Color.blue);
 
     const tieComp = new TieComp(true, []);
-    return Importer.object({
+    return await Importer.object({
         name: "VaderFighter",
         transform: { position: [0, 0, -5] },
         children: [

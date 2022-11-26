@@ -12,7 +12,7 @@ export default async function Scrap(color: Color, scale = Vector3.one) {
         true
     );
     const mat = new WireframeMaterial(color);
-    return Importer.object({
+    return await Importer.object({
         name: "Scrap",
         transform: { scale: scale },
         children: [

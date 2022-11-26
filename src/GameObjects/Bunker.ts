@@ -15,7 +15,7 @@ export default async function Bunker(position: Vector3) {
     const mat = new WireframeMaterial(Color.red);
     const comp = new BunkerComp();
 
-    return Importer.object({
+    return await Importer.object({
         name: "Bunker",
         transform: {
             position: position,

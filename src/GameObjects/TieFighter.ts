@@ -20,7 +20,7 @@ export default async function TieFighter() {
     const ele1 = new RandomMovementComp();
     const ele2 = new RandomMovementComp();
     const tieComp = new TieComp(false, [ele1, ele2]);
-    return Importer.object({
+    return await Importer.object({
         name: "TieFighter",
         children: [
             {

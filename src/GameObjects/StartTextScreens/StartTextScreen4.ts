@@ -10,7 +10,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import { StartTextScreen4Comp } from "../../Components/StartTextScreen4Comp";
 
 async function StartTextScreen4() {
-    return Importer.object({
+    return await Importer.object({
         name: "StartTextScreen4",
         children: [
             {

@@ -10,7 +10,7 @@ import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import TitleImg from "./TitleImg";
 
 async function StartTextScreen2() {
-    return Importer.object({
+    return await Importer.object({
         name: "StartTextScreen2",
         children: [
             await TitleImg(),

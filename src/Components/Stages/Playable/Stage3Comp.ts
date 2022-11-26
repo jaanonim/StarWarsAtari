@@ -44,7 +44,7 @@ export default class Stage3Comp extends StageComp {
         );
 
         this.ground = await Ground();
-        this.player.addChildren(this.ground);
+        await this.player.addChildren(this.ground);
         GameManager.getInstance().hint.setHints(
             [
                 { text: "50000 FOR SHOOTING ALL TOWERS", color: Color.red },

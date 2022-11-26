@@ -12,7 +12,7 @@ export default async function Cursor() {
         await FileLoader.loadImg("img/cursor.png")
     ).parse();
 
-    return Importer.object({
+    return await Importer.object({
         name: "Cursor",
         transform: {
             position: [0, 0, 0],

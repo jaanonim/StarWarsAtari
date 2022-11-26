@@ -20,7 +20,7 @@ export default async function Ship() {
         await FileLoader.loadImg("img/ship.png")
     ).parse();
 
-    return Importer.object({
+    return await Importer.object({
         name: "ship",
         children: [
             {

@@ -60,7 +60,7 @@ export class ShieldComp extends UiComponent {
     }
 
     async start() {
-        super.start();
+        await super.start();
         this.resetColor();
         this.text.options.color = this.defaultColor;
     }

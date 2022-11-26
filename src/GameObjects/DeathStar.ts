@@ -11,7 +11,7 @@ export default async function DeathStar(revers: boolean = false) {
     ).parse();
     tex.bilinearFiltering = false;
 
-    return Importer.object({
+    return await Importer.object({
         name: "DeathStar",
         transform: { position: [0, 0, 19.8] },
         components: [

@@ -3,7 +3,7 @@ import VaderFighter from "../../VaderFighter";
 import Stage1Comp from "../../../Components/Stages/Playable/Stage1Comp";
 
 export default async function Stage1() {
-    return Importer.object({
+    return await Importer.object({
         name: "Stage1",
         children: [await VaderFighter()],
         components: [new Stage1Comp()],

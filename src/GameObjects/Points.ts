@@ -24,7 +24,7 @@ export default async function Points() {
         textAlign: PositionType.CENTER_RIGHT,
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "Points",
         children: [
             {

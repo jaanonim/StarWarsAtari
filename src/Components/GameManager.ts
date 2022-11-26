@@ -45,12 +45,12 @@ export default class GameManager extends Component {
     }
 
     async start() {
-        super.start();
+        await super.start();
         const col =
             this.gameObject.getComponent<SphereCollider>(SphereCollider);
         if (!col) throw Error();
         this.collider = col;
-        WaveSystem.getInstance().loadMenu();
+        await WaveSystem.getInstance().loadMenu();
     }
 
     setRenderer(r: Renderer) {
@@ -144,7 +144,7 @@ export default class GameManager extends Component {
                 v.subtract(this.transform.globalPosition).squareLength()
             );
             fb.transform.position = pos.toVector3();
-            screen.addChildren(fb);
+            await screen.addChildren(fb);
             return true;
         }
         return false;

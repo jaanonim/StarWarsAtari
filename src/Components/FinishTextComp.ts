@@ -18,7 +18,7 @@ export default class FinishTextComp extends UiComponent {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.timer = this.cooldown;
     }
 

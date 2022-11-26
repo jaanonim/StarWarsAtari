@@ -17,7 +17,7 @@ export default async function Hint() {
         color: Color.cyan,
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "Hint",
         children: [
             {

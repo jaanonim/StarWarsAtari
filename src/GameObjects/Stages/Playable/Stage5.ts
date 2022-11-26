@@ -11,7 +11,7 @@ export default async function Stage5() {
     const len = Data.lengthOfTrench * 2;
     const COLORS = [Color.blue, Color.red, Color.green];
 
-    return Importer.object({
+    return await Importer.object({
         name: "Stage5",
         children: [
             await Floor(len),

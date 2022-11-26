@@ -29,7 +29,7 @@ export default async function Stage3() {
         return Tower(pos);
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "Stage3",
         children: await Promise.all(v),
         components: [new Stage3Comp()],

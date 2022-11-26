@@ -17,7 +17,7 @@ export default class DifficultySelectScreenComp extends Component {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.timer = 9999;
         this.text.text = "0" + this._timer;
     }
@@ -26,7 +26,7 @@ export default class DifficultySelectScreenComp extends Component {
         if (GameManager.getInstance().isLocked()) return;
 
         if (this.timer <= 0) {
-            WaveSystem.getInstance().loadTo(2);
+            await WaveSystem.getInstance().loadTo(2);
         } else {
             this.text.text = "0" + this._timer;
         }

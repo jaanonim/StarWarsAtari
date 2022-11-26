@@ -15,7 +15,7 @@ export default class WaveInfoComp extends UiComponent {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.resetInfo();
     }
 

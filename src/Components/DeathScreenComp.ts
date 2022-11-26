@@ -5,6 +5,7 @@ import GameManager from "./GameManager";
 
 export class DeathScreenComp extends Component {
     public content: Component;
+    public wasReleased = false;
 
     constructor(content: Component, private isDeathScreen: boolean = true) {
         super();
@@ -16,8 +17,15 @@ export class DeathScreenComp extends Component {
     }
 
     async update(): Promise<void> {
-        if (Input.getFire() && this.content.isActive && this.isDeathScreen) {
-            WaveSystem.getInstance().loadMenu();
+        if (!Input.getFire() && this.content.isActive && this.isDeathScreen) {
+            this.wasReleased = true;
+        } else if (
+            this.wasReleased &&
+            Input.getFire() &&
+            this.content.isActive &&
+            this.isDeathScreen
+        ) {
+            await WaveSystem.getInstance().loadMenu();
             GameManager.getInstance().unlock();
             this.hide();
         }

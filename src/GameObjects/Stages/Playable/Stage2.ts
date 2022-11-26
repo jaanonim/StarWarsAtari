@@ -29,7 +29,7 @@ export default async function Stage2() {
         return Bunker(pos);
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "Stage2",
         children: await Promise.all(v),
         components: [new Stage2Comp()],

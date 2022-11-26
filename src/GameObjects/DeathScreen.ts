@@ -16,7 +16,7 @@ export default async function DeathScreen() {
     const ratio = 224 / 1127;
     const width = 300;
 
-    return Importer.object({
+    return await Importer.object({
         name: "DeathScreen",
         components: [
             new UiElement({

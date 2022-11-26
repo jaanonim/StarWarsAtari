@@ -89,7 +89,7 @@ export class TowerComp extends Component implements HittableInterface {
             this.gameObject.getComponentError<MeshRenderer>(
                 MeshRenderer
             ).isActive = false;
-            this.gameObject.addChildren(await Scrap(Color.yellow));
+            await this.gameObject.addChildren(await Scrap(Color.yellow));
             setTimeout(() => {
                 this.gameObject.destroy();
             }, 1000);

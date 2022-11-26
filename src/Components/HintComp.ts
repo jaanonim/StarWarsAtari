@@ -24,7 +24,7 @@ export default class HintComp extends UiComponent {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.resetHint();
     }
 

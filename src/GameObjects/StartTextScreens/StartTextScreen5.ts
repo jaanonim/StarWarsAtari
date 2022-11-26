@@ -9,7 +9,7 @@ import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 
 async function StartTextScreen5() {
-    return Importer.object({
+    return await Importer.object({
         name: "StartTextScreen5",
         children: [
             {

@@ -15,7 +15,7 @@ export default async function Floor(length: number) {
     const mat = new WireframeMaterial(Color.green);
     const tar = new TargetComp();
 
-    return Importer.object({
+    return await Importer.object({
         name: "Floor",
         children: [
             {

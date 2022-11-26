@@ -7,10 +7,6 @@ export class StartTextScreen4Comp extends UiComponent {
     private speed: number = 0.05;
     private targetPos: Vector3 = new Vector3(0, 0, 0);
 
-    async start(): Promise<void> {
-        super.start();
-    }
-
     async update() {
         if (GameManager.getInstance().isLocked()) return;
         const dist = this.transform.position.subtract(this.targetPos).invert();

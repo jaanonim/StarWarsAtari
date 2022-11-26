@@ -40,7 +40,7 @@ export default class StartTextBackgroundComp extends Component {
                         getRandomElement(this.COLORS),
                         false
                     );
-                    this.gameObject.addChildren(star);
+                    await this.gameObject.addChildren(star);
                 }
             this.timer = 0;
         } else this.timer += Renderer.deltaTime;

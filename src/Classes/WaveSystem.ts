@@ -87,15 +87,16 @@ export default class WaveSystem {
         pc.mode = stage.controls;
         pc.maxPos = stage.maxPos;
 
-        this.currentStage = GameManager.getInstance()
+        this.currentStage = await stage.func();
+        await GameManager.getInstance()
             .gameObject.getScene()
-            .addChildren(await stage.func());
+            .addChildren(this.currentStage);
     }
 
     async loadMenu() {
         this.currentStageIndex = -1;
         this._inMenu = true;
-        this.loadNextStage();
+        await this.loadNextStage();
     }
 
     async loadTo(wave: number) {
@@ -103,6 +104,6 @@ export default class WaveSystem {
         this.currentWaveIndex = wave;
         this._inMenu = false;
         GameManager.getInstance().onStartNewGame();
-        this.loadNextStage();
+        await this.loadNextStage();
     }
 }

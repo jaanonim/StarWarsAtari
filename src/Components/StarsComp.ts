@@ -34,7 +34,7 @@ export class StarsComp extends Component {
                     pos.z = 0;
                     pos = pos.normalize();
                     const star = await Star(pos, pos, Color.white, this.revers);
-                    this.gameObject.addChildren(star);
+                    await this.gameObject.addChildren(star);
                 }
             this.timer = 0;
         } else this.timer += Renderer.deltaTime;

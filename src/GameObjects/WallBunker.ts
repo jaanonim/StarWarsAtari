@@ -17,7 +17,7 @@ export default async function WallBunker(position: Vector3) {
     const mat = new WireframeMaterial(Color.red);
     const wal = new WallBunkerComp();
 
-    return Importer.object({
+    return await Importer.object({
         name: "WallBunker",
         transform: {
             position: position,

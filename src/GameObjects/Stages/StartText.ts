@@ -3,7 +3,7 @@ import StartTextComp from "../../Components/Stages/StartTextComp";
 import StartTextBackground from "../StartTextBackground";
 
 export default async function StartText() {
-    return Importer.object({
+    return await Importer.object({
         name: "StartText",
         children: [await StartTextBackground()],
         components: [new StartTextComp()],

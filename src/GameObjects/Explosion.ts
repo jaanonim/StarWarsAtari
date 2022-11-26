@@ -7,7 +7,7 @@ import Importer from "3d-game-engine-canvas/src/tools/Importer";
 import { ExplosionComp } from "../Components/ExplosionComp";
 
 export default async function Explosion() {
-    return Importer.object({
+    return await Importer.object({
         name: "Explosion",
         transform: { position: [0, 0, 19.8] },
         components: [

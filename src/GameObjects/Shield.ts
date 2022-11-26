@@ -16,8 +16,8 @@ import ShieldText from "../Components/ShieldText";
 import Data from "../Classes/Data";
 import HideInMenuComp from "../Components/HideInMenuComp";
 
-function ShieldElement(i: number, name: string, t: Texture) {
-    return Importer.object({
+async function ShieldElement(i: number, name: string, t: Texture) {
+    return await Importer.object({
         name: name + i,
         transform: {
             position: [-8 * i, (i + 1) * 2, 0],
@@ -41,8 +41,12 @@ export default async function Shield() {
                 .map((_, i) => FileLoader.loadImg(`img/shield/${i + 1}.png`))
         )
     ).map((e) => new TextureLoader(e).parse());
-    const leftObjs = tex.map((t, i) => ShieldElement(i, "left", t));
-    const rightObjs = tex.map((t, i) => ShieldElement(i, "right", t));
+    const leftObjs = await Promise.all(
+        tex.map((t, i) => ShieldElement(i, "left", t))
+    );
+    const rightObjs = await Promise.all(
+        tex.map((t, i) => ShieldElement(i, "right", t))
+    );
     const valueText = new Text("8", {
         font: "pixeled",
         fontSize: 10,
@@ -50,7 +54,7 @@ export default async function Shield() {
     });
     const shieldText = new ShieldText();
 
-    return Importer.object({
+    return await Importer.object({
         name: "Shield",
         children: [
             {

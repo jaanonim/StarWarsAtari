@@ -11,7 +11,7 @@ import { LaserComp } from "../Components/LaserComp";
 import HideInMenuComp from "../Components/HideInMenuComp";
 
 export default async function Laser(camera: Camera, renderer: Renderer) {
-    return Importer.object({
+    return await Importer.object({
         name: "laser",
         components: [
             new UiElement({

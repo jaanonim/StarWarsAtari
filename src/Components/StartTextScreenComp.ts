@@ -29,18 +29,18 @@ export default class StartTextScreenComp extends Component {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.timer = 0;
         this.index = 0;
         setTimeout(async () => {
             this.currentScreen = await this.SCREENS[this.index]();
-            this.gameObject.addChildren(this.currentScreen);
+            await this.gameObject.addChildren(this.currentScreen);
         });
     }
 
     async update(): Promise<void> {
         if (GameManager.getInstance().isLocked()) return;
-        if (Input.getFire()) WaveSystem.getInstance().loadNextStage();
+        if (Input.getFire()) await WaveSystem.getInstance().loadNextStage();
 
         if (this.timer > this.screenTime) {
             this.timer = 0;
@@ -54,6 +54,6 @@ export default class StartTextScreenComp extends Component {
         this.index++;
         if (this.index >= this.SCREENS.length) this.index = 0;
         this.currentScreen = await this.SCREENS[this.index]();
-        this.gameObject.addChildren(this.currentScreen);
+        await this.gameObject.addChildren(this.currentScreen);
     }
 }

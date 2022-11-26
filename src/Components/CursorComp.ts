@@ -19,7 +19,7 @@ export class CursorComp extends Component {
     img!: Image;
 
     async start() {
-        super.start();
+        await super.start();
         const p = this.gameObject.transform.parent;
         if (!(p instanceof Transform)) throw Error();
         this.screen = p.gameObject;
@@ -46,16 +46,19 @@ export class CursorComp extends Component {
                 { n: "__medium", v: 2, points: 40000 },
                 { n: "__hard", v: 4, points: 800000 },
             ];
-            BUTTONS.forEach(({ n, v, points }) => {
-                const c = o.find(n).getComponent<UiElement>(UiElement);
-                if (c && c.contains(pos)) {
-                    this.img.color = Color.blue;
-                    if (Input.getFire()) {
-                        WaveSystem.getInstance().loadTo(v);
-                        GameManager.getInstance().points.addSilent(points);
+            await Promise.all(
+                BUTTONS.map(({ n, v, points }) => {
+                    const c = o.find(n).getComponent<UiElement>(UiElement);
+                    if (c && c.contains(pos)) {
+                        this.img.color = Color.blue;
+                        if (Input.getFire()) {
+                            GameManager.getInstance().points.addSilent(points);
+                            return WaveSystem.getInstance().loadTo(v);
+                        }
                     }
-                }
-            });
+                    return null;
+                })
+            );
         }
 
         if (this.timer > 3000) {

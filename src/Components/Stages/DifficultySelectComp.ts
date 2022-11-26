@@ -9,7 +9,7 @@ export default class DifficultySelectComp extends StageComp {
     async start() {
         this.screen = this.gameObject.getScene().find("screen");
         this.difficultySelectScreen = await DifficultySelectScreen();
-        this.screen.addChildren(this.difficultySelectScreen, true);
+        await this.screen.addChildren(this.difficultySelectScreen, true);
     }
 
     async onUnload() {

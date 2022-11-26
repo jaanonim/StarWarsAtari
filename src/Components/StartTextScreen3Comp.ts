@@ -21,7 +21,7 @@ export class StartTextScreen3Comp extends UiComponent {
     }
 
     async start(): Promise<void> {
-        super.start();
+        await super.start();
         this.index = 0;
         this.timer = 0;
     }

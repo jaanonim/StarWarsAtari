@@ -14,7 +14,7 @@ async function TitleImg() {
     const ratio = 90 / 731;
     const width = 200;
 
-    return Importer.object({
+    return await Importer.object({
         name: "img",
         transform: {
             position: [0, 30, 0],

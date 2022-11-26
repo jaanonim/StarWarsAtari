@@ -17,7 +17,7 @@ async function StartTextScreen3() {
         textAlign: PositionType.TOP_CENTER,
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "StartTextScreen3",
         children: [
             {

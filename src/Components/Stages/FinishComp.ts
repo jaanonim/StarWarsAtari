@@ -29,11 +29,11 @@ export default class FinishComp extends StageComp {
         this.screen = this.gameObject.getScene().find("screen");
 
         this.stars = await Stars(true);
-        this.player.addChildren(this.stars);
+        await this.player.addChildren(this.stars);
         this.deathStar = await DeathStar(true);
-        this.screen.addChildren(this.deathStar);
+        await this.screen.addChildren(this.deathStar);
         this.finishText = await FinishText();
-        this.screen.addChildren(this.finishText);
+        await this.screen.addChildren(this.finishText);
 
         this.deathStarAnim();
     }

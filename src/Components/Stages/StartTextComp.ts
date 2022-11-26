@@ -8,21 +8,22 @@ export default class StartTextComp extends StageComp {
     screen!: GameObject;
     startTextScreen!: GameObject;
     music!: HTMLAudioElement;
+    timer = 500;
 
     async start() {
         this.screen = this.gameObject.getScene().find("screen");
         this.startTextScreen = await StartTextScreen();
-        this.screen.addChildren(this.startTextScreen, true);
+        await this.screen.addChildren(this.startTextScreen);
         GameManager.getInstance().hideCursor();
         this.music = await SoundsManager.getInstance().getSound(
             "sound/music.mp3",
             true
         );
-        this.music.play();
+        await this.music.play();
     }
 
     async onUnload() {
-        this.music.pause();
+        await this.music.pause();
         GameManager.getInstance().showCursor();
         this.screen.removeChildren(this.startTextScreen);
         await this.gameObject.destroy();

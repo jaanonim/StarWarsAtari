@@ -17,7 +17,7 @@ export default async function Flash() {
 
     const c = new Image(tex, Color.white);
 
-    return Importer.object({
+    return await Importer.object({
         name: "Flash",
         components: [
             new UiElement({

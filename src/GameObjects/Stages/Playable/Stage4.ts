@@ -9,7 +9,7 @@ import Wall from "../../Wall";
 export default async function Stage4() {
     const len = Data.lengthOfTrench * 2;
 
-    return Importer.object({
+    return await Importer.object({
         name: "Stage4",
         children: [
             await Floor(len),

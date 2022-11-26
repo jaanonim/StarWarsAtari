@@ -51,7 +51,7 @@ export default class Stage5Comp extends StageComp {
             let pos;
             if (Math.random() > 0.2) {
                 pos = getRandomElement(this.POS);
-                this.gameObject
+                await this.gameObject
                     .getScene()
                     .addChildren(
                         await FireballWord(new Vector3(pos.x, pos.y, fireballZ))
@@ -60,7 +60,7 @@ export default class Stage5Comp extends StageComp {
             if (Math.random() > 0.5) {
                 pos = getRandomElement(this.POS);
                 if (pos !== pos)
-                    this.gameObject
+                    await this.gameObject
                         .getScene()
                         .addChildren(
                             await FireballWord(

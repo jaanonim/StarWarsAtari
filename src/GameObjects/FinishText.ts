@@ -31,7 +31,7 @@ export default async function FinishText() {
         color: Color.white,
     });
 
-    return Importer.object({
+    return await Importer.object({
         name: "FinishText",
         children: [
             {

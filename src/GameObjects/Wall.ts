@@ -21,7 +21,7 @@ export default async function Wall(
     const mat = new WireframeMaterial(Color.green);
     const POS = [0, 1.25, 2.5, 3.75];
 
-    return Importer.object({
+    return await Importer.object({
         name: "Floor",
         children: [
             {

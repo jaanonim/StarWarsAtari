@@ -14,7 +14,7 @@ export default async function Obstacle(position: Vector3, color: Color) {
 
     const mat = new WireframeMaterial(color);
 
-    return Importer.object({
+    return await Importer.object({
         name: "Obstacle",
         transform: {
             position: position,

@@ -30,7 +30,7 @@ export class LaserComp extends UiComponent {
     }
 
     async start() {
-        super.start();
+        await super.start();
         this.raycast = new ScreenRaycast(this.camera, this.renderer);
         const p = this.gameObject.transform.parent;
         if (!(p instanceof Transform)) throw Error();

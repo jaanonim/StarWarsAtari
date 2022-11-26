@@ -10,7 +10,7 @@ import Text from "3d-game-engine-canvas/src/components/Text";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 
 export default async function StartTextScreen() {
-    return Importer.object({
+    return await Importer.object({
         name: "StartTextScreen",
         children: [
             {

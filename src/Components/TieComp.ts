@@ -46,7 +46,6 @@ export default class TieComp extends Component implements HittableInterface {
             .getComponent<MeshRenderer>(MeshRenderer);
         if (!ms) throw Error();
         this.ms = ms;
-
         this.stage =
             WaveSystem.getInstance().currentStage.getComponentError<Stage1Comp>(
                 Stage1Comp

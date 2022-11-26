@@ -27,7 +27,7 @@ export default class GroundComp extends Component {
                         Color.blue,
                         false
                     );
-                    this.gameObject.addChildren(star);
+                    await this.gameObject.addChildren(star);
                 }
             this.timer = 0;
         } else this.timer += Renderer.deltaTime;

@@ -3,8 +3,14 @@ import FileLoader from "3d-game-engine-canvas/src/tools/FileLoader";
 export default class SoundsManager {
     private static instance: SoundsManager;
 
+    private audioContext: AudioContext;
+    private gainNode: GainNode;
+
     private constructor() {
         this.audioContext = new AudioContext();
+        this.gainNode = this.audioContext.createGain();
+        this.gainNode.connect(this.audioContext.destination);
+        this.gainNode.gain.value = 0;
     }
 
     static getInstance(): SoundsManager {
@@ -12,8 +18,6 @@ export default class SoundsManager {
             SoundsManager.instance = new SoundsManager();
         return SoundsManager.instance;
     }
-
-    private audioContext: AudioContext;
 
     async init() {
         try {
@@ -38,7 +42,7 @@ export default class SoundsManager {
         audio.loop = loop;
         this.audioContext
             .createMediaElementSource(audio)
-            .connect(this.audioContext.destination);
+            .connect(this.gainNode);
         return audio;
     }
 }

@@ -90,7 +90,7 @@ export class BunkerComp extends Component implements HittableInterface {
             this.gameObject.getComponentError<MeshRenderer>(
                 MeshRenderer
             ).isActive = false;
-            this.gameObject.addChildren(
+            await this.gameObject.addChildren(
                 await Scrap(Color.red, new Vector3(0.8, 0.5, 1))
             );
             setTimeout(() => {

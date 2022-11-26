@@ -16,7 +16,7 @@ export default async function Tower(position: Vector3) {
 
     const mat = new WireframeMaterial(Color.yellow);
     const towerComp = new TowerComp();
-    return Importer.object({
+    return await Importer.object({
         name: "Tower",
         children: [
             {
