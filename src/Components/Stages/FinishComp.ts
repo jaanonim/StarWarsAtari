@@ -1,5 +1,6 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
+import SoundsManager from "../../Classes/SoundsManager";
 import WaveSystem from "../../Classes/WaveSystem";
 import DeathStar from "../../GameObjects/DeathStar";
 import FinishText from "../../GameObjects/FinishText";
@@ -49,6 +50,9 @@ export default class FinishComp extends StageComp {
     }
 
     explodeAnim() {
+        SoundsManager.getInstance()
+            .getSound("sound/end.mp3")
+            .then((c) => c.play());
         const comp = this.screen
             .find("Explosion")
             .getComponentError<ExplosionComp>(ExplosionComp);

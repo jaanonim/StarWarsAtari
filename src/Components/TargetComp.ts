@@ -1,4 +1,5 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
+import SoundsManager from "../Classes/SoundsManager";
 import WaveSystem from "../Classes/WaveSystem";
 import { HittableInterface } from "./Hittable";
 import Stage4Comp from "./Stages/Playable/Stage4Comp";
@@ -10,6 +11,9 @@ export class TargetComp extends Component implements HittableInterface {
     }
 
     hit() {
+        SoundsManager.getInstance()
+            .getSound("sound/laser.mp3")
+            .then((s) => s.play());
         const c =
             WaveSystem.getInstance().currentStage.getComponent<Stage5Comp>(
                 Stage5Comp

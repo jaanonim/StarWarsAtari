@@ -1,8 +1,10 @@
+import PreLoader from "./Classes/PreLoader";
+import SoundsManager from "./Classes/SoundsManager";
+
 export default class Setup {
     constructor(
         private main: (canvas: HTMLCanvasElement) => void,
-        private canvas: HTMLCanvasElement,
-        private audioCxt: AudioContext
+        private canvas: HTMLCanvasElement
     ) {}
 
     private async loadFont() {
@@ -13,21 +15,23 @@ export default class Setup {
 
     async run() {
         await this.loadFont();
-        this.main(this.canvas); //TODO: remove debug
+        //this.main(this.canvas); //TODO: remove debug
+        this.drawText("Press any button to start game");
+        this.setCallbacks();
+    }
 
-        // const ctx = this.canvas.getContext("2d");
-        // if (!ctx) throw new Error("No context");
-
-        // ctx.fillStyle = "#fff";
-        // ctx.textAlign = "center";
-        // ctx.font = "30px pixeled";
-        // ctx.fillText(
-        //     "Press any button to start game".toLocaleUpperCase(),
-        //     this.canvas.width / 2,
-        //     this.canvas.height / 2
-        // );
-
-        // this.setCallbacks();
+    drawText(text: string) {
+        const ctx = this.canvas.getContext("2d");
+        if (!ctx) throw new Error("No context");
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.font = "30px pixeled";
+        ctx.fillText(
+            text.toLocaleUpperCase(),
+            this.canvas.width / 2,
+            this.canvas.height / 2
+        );
     }
 
     private async setCallbacks() {
@@ -54,12 +58,14 @@ export default class Setup {
     private async start() {
         this.canvas.onclick = () => {};
         window.onkeyup = () => {};
-        try {
-            if (this.audioCxt.state === "suspended")
-                await this.audioCxt.resume();
+        if (await SoundsManager.getInstance().init()) {
+            this.drawText("Loading...");
+            console.time();
+            await PreLoader.preLoad();
+            console.timeEnd();
+
             this.main(this.canvas);
-        } catch (e) {
-            console.log(e);
+        } else {
             this.setCallbacks();
         }
     }

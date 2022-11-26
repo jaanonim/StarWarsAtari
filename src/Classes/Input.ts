@@ -151,7 +151,7 @@ export default class Input {
             Input.isFire = true;
         }
         if (Input.keysLast["p"] && !Input.keys["p"]) {
-            GameManager.getInstance().switchLock();
+            GameManager.getInstance().switchPause();
         }
         Input.keysLast = JSON.parse(JSON.stringify(Input.keys));
 

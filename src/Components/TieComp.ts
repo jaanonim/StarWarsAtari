@@ -7,6 +7,7 @@ import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import SoundsManager from "../Classes/SoundsManager";
 import WaveSystem from "../Classes/WaveSystem";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
@@ -106,8 +107,16 @@ export default class TieComp extends Component implements HittableInterface {
     }
 
     hit(): void {
-        if (this.isDamage || this.stage.inTransition) return;
+        if (this.isDamage || this.stage.inTransition) {
+            SoundsManager.getInstance()
+                .getSound("sound/laser.mp3")
+                .then((s) => s.play());
+            return;
+        }
         this.isDamage = true;
+        SoundsManager.getInstance()
+            .getSound("sound/tieDmg.mp3")
+            .then((s) => s.play());
         if (!this.isVader) {
             this.elements.forEach((e) => (e.isEnabled = true));
             setTimeout(() => this.gameObject.destroy(), 1000);

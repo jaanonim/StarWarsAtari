@@ -12,6 +12,7 @@ import UiElement from "3d-game-engine-canvas/src/components/UiElement";
 import GameManager from "./GameManager";
 import Data from "../Classes/Data";
 import WaveSystem from "../Classes/WaveSystem";
+import SoundsManager from "../Classes/SoundsManager";
 
 export class LaserComp extends UiComponent {
     box!: Box2D;
@@ -104,6 +105,9 @@ export class LaserComp extends UiComponent {
 
             if (c.contains(this.shoot) && !found) {
                 found = true;
+                SoundsManager.getInstance()
+                    .getSound("sound/fireballDmg.mp3")
+                    .then((s) => s.play());
                 GameManager.getInstance().points.add(33);
                 f.destroy();
             }
@@ -121,10 +125,16 @@ export class LaserComp extends UiComponent {
                         Hittable
                     );
                 if (h) {
+                    found = true;
                     h.hit();
                     break;
                 }
             }
+        }
+        if (!found) {
+            SoundsManager.getInstance()
+                .getSound("sound/laser.mp3")
+                .then((s) => s.play());
         }
     }
 }

@@ -21,26 +21,15 @@ import Setup from "./Setup";
 
 function setupPause() {
     window.addEventListener("focus", function (_event) {
-        GameManager.getInstance().unlock();
-        audioCxt.resume();
+        GameManager.getInstance().unpause();
     });
     window.addEventListener("blur", function (_event) {
-        GameManager.getInstance().lock();
-        audioCxt.suspend();
+        GameManager.getInstance().pause();
     });
 }
 
 export async function main(canvas: HTMLCanvasElement) {
     setupPause();
-
-    //const audio = new Audio("music/main.mp3");
-
-    // audio.oncanplaythrough = async (_event) => {
-    //     audio.oncanplaythrough = () => {};
-    //     audio.loop = true;
-    //     audioCxt.createMediaElementSource(audio).connect(audioCxt.destination);
-    //     audio.play();
-    // };
 
     const renderer = new Renderer(canvas, 0.25, 2, false);
     const camera = new Camera(renderer, 90, 0.5, 20, true);
@@ -91,5 +80,4 @@ export async function main(canvas: HTMLCanvasElement) {
 }
 
 const canvas = document.getElementById("root") as HTMLCanvasElement;
-const audioCxt = new AudioContext();
-new Setup(main, canvas, audioCxt).run();
+new Setup(main, canvas).run();

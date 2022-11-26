@@ -5,6 +5,7 @@ import Camera from "3d-game-engine-canvas/src/components/Camera";
 import MeshRenderer from "3d-game-engine-canvas/src/components/MeshRenderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
+import SoundsManager from "../Classes/SoundsManager";
 import WaveSystem from "../Classes/WaveSystem";
 import Scrap from "../GameObjects/Scrap";
 import GameManager from "./GameManager";
@@ -67,8 +68,16 @@ export class BunkerComp extends Component implements HittableInterface {
     }
 
     hit() {
-        if (this.isDestroyed) return;
+        if (this.isDestroyed) {
+            SoundsManager.getInstance()
+                .getSound("sound/laser.mp3")
+                .then((s) => s.play());
+            return;
+        }
 
+        SoundsManager.getInstance()
+            .getSound("sound/fireballDmg.mp3")
+            .then((s) => s.play());
         const c =
             WaveSystem.getInstance().currentStage.getComponent<Stage2Comp>(
                 Stage2Comp

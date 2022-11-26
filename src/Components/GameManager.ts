@@ -6,6 +6,7 @@ import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
 import Data from "../Classes/Data";
+import SoundsManager from "../Classes/SoundsManager";
 import WaveSystem from "../Classes/WaveSystem";
 import FireballScreen from "../GameObjects/FireballScreen";
 import { DeathScreenComp } from "./DeathScreenComp";
@@ -57,6 +58,9 @@ export default class GameManager extends Component {
     }
 
     hit() {
+        SoundsManager.getInstance()
+            .getSound("sound/shieldDmg.mp3")
+            .then((c) => c.play());
         if (this.isIndestructible) return;
         this.isIndestructible = true;
         setTimeout(() => {
@@ -78,6 +82,24 @@ export default class GameManager extends Component {
     onStartNewGame() {
         this.shield.reset();
         this.points.reset();
+    }
+
+    pause() {
+        this.lock();
+        SoundsManager.getInstance().pause();
+    }
+
+    unpause() {
+        this.unlock();
+        SoundsManager.getInstance().unpause();
+    }
+
+    switchPause() {
+        if (this.isLocked()) {
+            this.unpause();
+        } else {
+            this.pause();
+        }
     }
 
     lock() {
@@ -102,10 +124,6 @@ export default class GameManager extends Component {
 
     isHiddenCursor() {
         return this.hiddenCursor;
-    }
-
-    switchLock() {
-        this._lock = !this._lock;
     }
 
     async fireScreenFireball(v: Vector3) {

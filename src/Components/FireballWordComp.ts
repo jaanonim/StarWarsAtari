@@ -3,6 +3,7 @@ import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import SoundsManager from "../Classes/SoundsManager";
 import GameManager from "./GameManager";
 import { HittableInterface } from "./Hittable";
 
@@ -35,6 +36,9 @@ export class FireballWordComp extends Component implements HittableInterface {
     }
 
     hit() {
+        SoundsManager.getInstance()
+            .getSound("sound/fireballDmg.mp3")
+            .then((s) => s.play());
         GameManager.getInstance().points.add(33);
         this.gameObject.destroy();
     }

@@ -1,4 +1,5 @@
 import GameObject from "3d-game-engine-canvas/src/classes/GameObject";
+import SoundsManager from "../../Classes/SoundsManager";
 import StartTextScreen from "../../GameObjects/StartTextScreen";
 import GameManager from "../GameManager";
 import StageComp from "./StageComp";
@@ -6,15 +7,22 @@ import StageComp from "./StageComp";
 export default class StartTextComp extends StageComp {
     screen!: GameObject;
     startTextScreen!: GameObject;
+    music!: HTMLAudioElement;
 
     async start() {
         this.screen = this.gameObject.getScene().find("screen");
         this.startTextScreen = await StartTextScreen();
         this.screen.addChildren(this.startTextScreen, true);
         GameManager.getInstance().hideCursor();
+        this.music = await SoundsManager.getInstance().getSound(
+            "sound/music.mp3",
+            true
+        );
+        this.music.play();
     }
 
     async onUnload() {
+        this.music.pause();
         GameManager.getInstance().showCursor();
         this.screen.removeChildren(this.startTextScreen);
         await this.gameObject.destroy();
