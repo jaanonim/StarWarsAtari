@@ -12,7 +12,7 @@ export default {
     },
     player: {
         movementSpeed: 0.005, //0.002,
-        startShield: 1,
+        startShield: 8,
     },
     UI: {
         accentColor: Color.red,
