@@ -24,10 +24,6 @@ export default class StartTextScreenComp extends Component {
     ];
     private index: number = 0;
 
-    constructor() {
-        super();
-    }
-
     async start(): Promise<void> {
         await super.start();
         this.timer = 0;
