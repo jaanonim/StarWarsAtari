@@ -30,7 +30,7 @@ export default class StartTextScreenComp extends Component {
         this.index = 0;
         setTimeout(async () => {
             this.currentScreen = await this.SCREENS[this.index]();
-            await this.gameObject.addChildren(this.currentScreen);
+            this.gameObject.addChildren(this.currentScreen);
         });
     }
 
@@ -50,6 +50,6 @@ export default class StartTextScreenComp extends Component {
         this.index++;
         if (this.index >= this.SCREENS.length) this.index = 0;
         this.currentScreen = await this.SCREENS[this.index]();
-        await this.gameObject.addChildren(this.currentScreen);
+        this.gameObject.addChildren(this.currentScreen);
     }
 }

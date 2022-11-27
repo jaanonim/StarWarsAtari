@@ -144,7 +144,7 @@ export default class GameManager extends Component {
                 v.subtract(this.transform.globalPosition).squareLength()
             );
             fb.transform.position = pos.toVector3();
-            await screen.addChildren(fb);
+            screen.addChildren(fb);
             return true;
         }
         return false;

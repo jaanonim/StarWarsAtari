@@ -37,7 +37,7 @@ export async function main(canvas: HTMLCanvasElement) {
     GameManager.getInstance().setRenderer(renderer);
     Input.init(canvas);
 
-    await Importer.scene({
+    Importer.scene({
         name: "scene",
         children: [
             {

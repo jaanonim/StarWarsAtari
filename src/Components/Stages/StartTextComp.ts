@@ -13,7 +13,7 @@ export default class StartTextComp extends StageComp {
     async start() {
         this.screen = this.gameObject.getScene().find("screen");
         this.startTextScreen = await StartTextScreen();
-        await this.screen.addChildren(this.startTextScreen);
+        this.screen.addChildren(this.startTextScreen);
         GameManager.getInstance().hideCursor();
         this.music = await SoundsManager.getInstance().getSound(
             "sound/music.mp3",
@@ -23,7 +23,7 @@ export default class StartTextComp extends StageComp {
     }
 
     async onUnload() {
-        await this.music.pause();
+        this.music.pause();
         GameManager.getInstance().showCursor();
         this.screen.removeChildren(this.startTextScreen);
         await this.gameObject.destroy();

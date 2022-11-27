@@ -88,7 +88,7 @@ export default class WaveSystem {
         pc.maxPos = stage.maxPos;
 
         this.currentStage = await stage.func();
-        await GameManager.getInstance()
+        GameManager.getInstance()
             .gameObject.getScene()
             .addChildren(this.currentStage);
     }
