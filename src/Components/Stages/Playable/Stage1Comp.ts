@@ -3,13 +3,13 @@ import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Color from "3d-game-engine-canvas/src/utilities/math/Color";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
 import Data from "../../../Classes/Data";
-import Input from "../../../Classes/Input";
 import WaveSystem from "../../../Classes/WaveSystem";
 import DeathStar from "../../../GameObjects/DeathStar";
 import Stars from "../../../GameObjects/Stars";
 import TieFighter from "../../../GameObjects/TieFighter";
 import { DeathStarComp } from "../../DeathStarComp";
 import GameManager from "../../GameManager";
+import { PlayerController, PlayerControllerMode } from "../../PlayerController";
 import StageComp from "../StageComp";
 
 export default class Stage1Comp extends StageComp {
@@ -61,18 +61,26 @@ export default class Stage1Comp extends StageComp {
     async update() {
         if (GameManager.getInstance().isLocked()) return;
         if (this.timer >= Data.stage1.time * 1000) {
-            this.timer = 0;
+            const pc =
+                GameManager.getInstance().gameObject.getComponent<PlayerController>(
+                    PlayerController
+                );
+            if (!pc) throw Error();
+            if (pc.mode !== PlayerControllerMode.RESET_ROTATION) {
+                pc.mode = PlayerControllerMode.RESET_ROTATION;
+                pc.onResetEnds = () => {
+                    this.timer = 0;
+                    this.inTransition = true;
+                    this.deathStar.getComponentError<DeathStarComp>(
+                        DeathStarComp
+                    ).onAnimEnds = () => {
+                        setTimeout(() => {
+                            WaveSystem.getInstance().loadNextStage();
+                        }, 500);
+                    };
+                };
+            }
             GameManager.getInstance().destroyAllFireballs();
-            this.inTransition = true;
-            Input.lock();
-            this.deathStar.getComponentError<DeathStarComp>(
-                DeathStarComp
-            ).onAnimEnds = () => {
-                setTimeout(() => {
-                    Input.unlock();
-                    WaveSystem.getInstance().loadNextStage();
-                }, 500);
-            };
         } else this.timer += Renderer.deltaTime;
     }
 

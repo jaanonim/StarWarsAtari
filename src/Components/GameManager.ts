@@ -4,7 +4,7 @@ import Camera from "3d-game-engine-canvas/src/components/Camera";
 import SphereCollider from "3d-game-engine-canvas/src/components/colliders/SphereCollider";
 import Box2D from "3d-game-engine-canvas/src/utilities/math/Box2D";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import Quaternion from "3d-game-engine-canvas/src/utilities/math/Quaternion";
 import Data from "../Classes/Data";
 import SoundsManager from "../Classes/SoundsManager";
 import WaveSystem from "../Classes/WaveSystem";

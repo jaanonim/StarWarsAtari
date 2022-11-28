@@ -1,7 +1,7 @@
 import Component from "3d-game-engine-canvas/src/classes/Components/Component";
 import Renderer from "3d-game-engine-canvas/src/classes/Renderer";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import Quaternion from "3d-game-engine-canvas/src/utilities/math/Quaternion";
 import GameManager from "./GameManager";
 export class RandomMovementComp extends Component {
     public speed = 0.002;

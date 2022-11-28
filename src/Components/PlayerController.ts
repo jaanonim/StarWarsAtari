@@ -4,7 +4,7 @@ import Box from "3d-game-engine-canvas/src/utilities/math/Box";
 import { sigmoid } from "3d-game-engine-canvas/src/utilities/math/Math";
 import Vector2 from "3d-game-engine-canvas/src/utilities/math/Vector2";
 import Vector3 from "3d-game-engine-canvas/src/utilities/math/Vector3";
-import Quaternion from "3d-game-engine-canvas/src/utilities/Quaternion";
+import Quaternion from "3d-game-engine-canvas/src/utilities/math/Quaternion";
 import Data from "../Classes/Data";
 import Input from "../Classes/Input";
 import GameManager from "./GameManager";
@@ -12,6 +12,7 @@ import GameManager from "./GameManager";
 export enum PlayerControllerMode {
     POSITION,
     ROTATION,
+    RESET_ROTATION,
 }
 
 export class PlayerController extends Component {
@@ -21,11 +22,26 @@ export class PlayerController extends Component {
     controlMovementSpeed: number = 0.5;
 
     maxPos: Box = new Box(new Vector3(-20, -3, 0), new Vector3(20, 1, 100));
+    onResetEnds: (() => void) | null = null;
 
     mode: PlayerControllerMode = PlayerControllerMode.POSITION;
 
     async update() {
         if (GameManager.getInstance().isLocked()) return;
+        if (this.mode === PlayerControllerMode.RESET_ROTATION) {
+            const target = Quaternion.euler(Vector3.zero);
+            if (this.onResetEnds === null) return;
+            if (this.transform.rotation.angleTo(target) < 0.009) {
+                this.onResetEnds();
+                this.onResetEnds = null;
+            } else
+                this.transform.rotation = this.transform.rotation.slerp(
+                    target,
+                    0.1
+                );
+            return;
+        }
+
         let move = Input.getPos().subtract(Input.getCenter());
         move = new Vector2(
             sigmoid(move.x / this.controlsSmoothens),
