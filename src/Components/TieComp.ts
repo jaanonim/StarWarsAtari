@@ -106,7 +106,13 @@ export default class TieComp extends Component implements HittableInterface {
     }
 
     hit(): void {
-        if (this.isDamage || this.stage.inTransition) {
+        const cam = this.camGameObject.getComponent<Camera>(Camera);
+        if (!cam) throw Error("No camera");
+        if (
+            this.isDamage ||
+            this.stage.inTransition ||
+            !this.ms.isOnCamera(cam)
+        ) {
             SoundsManager.getInstance()
                 .getSound("sound/laser.mp3")
                 .then((s) => s.play());

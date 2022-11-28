@@ -20,10 +20,15 @@ export class StarComp extends Component {
     }
 
     async start(): Promise<void> {
-        this.cam = this.gameObject
+        const cam = this.gameObject
             .getScene()
             .find("camera")
-            .getComponentError<Camera>(Camera);
+            .getComponent<Camera>(Camera);
+        if (!cam) {
+            this.gameObject.destroy();
+            return;
+        }
+        this.cam = cam;
         this.ms = this.gameObject.getComponentError<MeshRenderer>(MeshRenderer);
         if (this.revers)
             while (this.ms.isOnCamera(this.cam)) {
