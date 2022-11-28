@@ -10,7 +10,10 @@ export default class SoundsManager {
         this.audioContext = new AudioContext();
         this.gainNode = this.audioContext.createGain();
         this.gainNode.connect(this.audioContext.destination);
-        this.gainNode.gain.value = 0;
+    }
+
+    setVolume(v: number) {
+        this.gainNode.gain.value = v;
     }
 
     static getInstance(): SoundsManager {
