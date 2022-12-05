@@ -23,7 +23,7 @@ export default class StartTextComp extends StageComp {
     }
 
     async onUnload() {
-        this.music.pause();
+        if (this.music) this.music.pause();
         GameManager.getInstance().showCursor();
         this.screen.removeChildren(this.startTextScreen);
         await this.gameObject.destroy();

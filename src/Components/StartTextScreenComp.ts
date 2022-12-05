@@ -36,10 +36,11 @@ export default class StartTextScreenComp extends Component {
 
     async update(): Promise<void> {
         if (GameManager.getInstance().isLocked()) return;
-        if (Input.getFire()) await WaveSystem.getInstance().loadNextStage();
+        if (Input.getFire() && this.timer > 100)
+            await WaveSystem.getInstance().loadNextStage();
 
-        if (this.timer > this.screenTime) {
-            this.timer = 0;
+        if (this.timer > this.screenTime + 100) {
+            this.timer = 100;
             this.loadNextScreen();
         }
         this.timer += Renderer.deltaTime;
