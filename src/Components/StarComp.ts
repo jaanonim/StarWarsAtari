@@ -58,7 +58,7 @@ export class StarComp extends Component {
                 this.dir.multiply(Renderer.deltaTime * this.speed)
             );
 
-            if (!this.ms.isOnCamera(this.cam)) {
+            if (!this.ms?.isOnCamera(this.cam)) {
                 this.gameObject.destroy();
             }
         }

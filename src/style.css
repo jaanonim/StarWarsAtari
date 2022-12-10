@@ -7,6 +7,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: pixeled;
+    font-size: 10px;
 }
 
 canvas {
@@ -33,6 +35,46 @@ canvas {
     top: 0;
     left: 0;
     padding: 5px;
+    padding-left: 10px;
     color: #0f0;
     z-index: 100;
+}
+
+#settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    z-index: 100;
+}
+
+button {
+    font-family: pixeled;
+    font-size: 10px;
+    border: #fff 0px solid;
+    border-radius: 0;
+    background-color: #fff;
+}
+
+button:hover {
+    background-color: #aaa;
+}
+
+#pause {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    align-items: center;
+    display: flex;
+    backdrop-filter: blur(10px);
+}
+
+#pause p {
+    font-size: 40px;
+    color: #fff;
+    margin: auto;
 }

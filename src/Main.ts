@@ -18,6 +18,7 @@ import DeathScreen from "./GameObjects/DeathScreen";
 import Flash from "./GameObjects/Flash";
 import Explosion from "./GameObjects/Explosion";
 import Setup from "./Setup";
+import Settings from "./Settings";
 
 function setupPause() {
     window.addEventListener("focus", function (_event) {
@@ -80,4 +81,5 @@ export async function main(canvas: HTMLCanvasElement) {
 }
 
 const canvas = document.getElementById("root") as HTMLCanvasElement;
+Settings.getInstance();
 new Setup(main, canvas).run();

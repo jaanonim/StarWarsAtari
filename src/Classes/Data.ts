@@ -11,7 +11,7 @@ export default {
         wave: 0,
     },
     player: {
-        movementSpeed: 0.005, //0.002,
+        movementSpeed: 0.005,
         startShield: 8,
     },
     UI: {

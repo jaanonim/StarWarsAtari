@@ -15,7 +15,6 @@ export default class Setup {
 
     async run() {
         await this.loadFont();
-        //this.main(this.canvas); //TODO: remove debug
         this.drawText("Press any button to start game");
         this.setCallbacks();
     }

@@ -14,6 +14,7 @@ import HintComp from "./HintComp";
 import { PointsComp } from "./PointsComp";
 import { ShieldComp } from "./ShieldComp";
 import WaveInfoComp from "./WaveInfoComp";
+import Settings from "../Settings";
 
 export default class GameManager extends Component {
     private static instance: GameManager;
@@ -87,11 +88,13 @@ export default class GameManager extends Component {
     pause() {
         this.lock();
         SoundsManager.getInstance().pause();
+        Settings.getInstance().pause();
     }
 
     unpause() {
         this.unlock();
         SoundsManager.getInstance().unpause();
+        Settings.getInstance().unpause();
     }
 
     switchPause() {
