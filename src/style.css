@@ -2,19 +2,22 @@ body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #222;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: pixeled;
     font-size: 10px;
+    overflow-x: hidden;
+    color: #fff;
 }
 
 canvas {
     background-color: #000;
     display: block;
-    margin: 0 auto;
+    margin: 1rem auto;
     max-height: 100vh;
     max-width: 100vw;
     cursor: none;
@@ -36,7 +39,7 @@ canvas {
     left: 0;
     padding: 5px;
     padding-left: 10px;
-    color: #0f0;
+    color: #fff;
     z-index: 100;
 }
 
@@ -77,4 +80,43 @@ button:hover {
     font-size: 40px;
     color: #fff;
     margin: auto;
+}
+
+p {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+footer {
+    background-color: #000;
+    width: 100vw;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+a {
+    color: #f33;
+}
+
+a:visited,
+a:hover,
+a:active,
+a:focus {
+    color: #a33;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
 }
