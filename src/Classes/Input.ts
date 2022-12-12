@@ -85,6 +85,7 @@ export default class Input {
 
     public static updateKeyboardDown(e: KeyboardEvent) {
         Input.keys[e.key] = true;
+        e.preventDefault();
     }
 
     public static updateKeyboardUp(e: KeyboardEvent) {
