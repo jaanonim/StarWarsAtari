@@ -57,6 +57,10 @@ export class ShieldComp extends UiComponent {
 
     reset() {
         this.shield = Data.player.startShield;
+        this.defaultColor = Data.UI.accentColor;
+        this.animColor = Data.UI.mainColor;
+        this.text.options.color = this.defaultColor;
+        this.shieldText.reset();
     }
 
     async start() {

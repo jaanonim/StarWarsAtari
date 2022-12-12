@@ -25,6 +25,13 @@ export default class ShieldText extends UiComponent {
         super();
     }
 
+    reset() {
+        this.text = "SHIELD";
+        this.defaultColor = Data.UI.mainColor;
+        this.animColor = Data.UI.accentColor;
+        this.colors = Array(this.text.length).fill(this.defaultColor);
+    }
+
     startAnim() {
         this.colors = Array(this.text.length).fill(this.animColor);
         this.animFrame(0);
